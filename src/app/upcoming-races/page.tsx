@@ -5,51 +5,9 @@ import Shuffle from "../../components/Shuffle";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Footer from "../../components/Footer";
+import upcomingRacesData from "../../content/upcoming-races.json";
 
-const specData = [
-  {
-    category: "CBR150",
-    championship: "Honda India Talent Cup",
-    years: "2022",
-    details: "Entry-level single-cylinder development class helping young riders master track basics, weight shifts, and corner speed lines.",
-  },
-  {
-    category: "NSF250R",
-    championship: "Honda India Talent Cup (National & International)",
-    years: "2023",
-    details: "High-spec Moto3-specification chassis and engine, demanding extreme throttle control, braking precision, and racecraft.",
-  },
-  {
-    category: "300 Supersport (SSP300)",
-    championship: "Qatar Superbike & Superstock Championship",
-    years: "2024",
-    details: "Production-derived lightweight class. Johann swept a debut weekend clean hat-trick victory at Lusail Circuit.",
-  },
-  {
-    category: "AP250",
-    championship: "Asia Road Racing Championship (ARRC)",
-    years: "2025",
-    details: "Asia's premier production class. Twin-cylinder configurations with advanced fuel control mappings.",
-  },
-  {
-    category: "Supersport 600",
-    championship: "Qatar Superstock / Supersport Championship",
-    years: "2025",
-    details: "High-power 600cc inline-4 platforms, demanding physical conditioning, high mid-corner roll speeds, and tire management.",
-  },
-  {
-    category: "Yamaha R7 Cup",
-    championship: "European Superbike Championship (ESBK Support)",
-    years: "2026",
-    details: "Midweight twin-cylinder spec series run on classic European circuits like Estoril and Jerez.",
-  },
-  {
-    category: "JuniorGP (600cc)",
-    championship: "Junior World Championship Series",
-    years: "2026",
-    details: "The ultimate stepping stone to Moto2/MotoGP, testing riders against the fastest junior grid in the world.",
-  },
-];
+const specData = upcomingRacesData.specData;
 
 export default function UpcomingRacesPage() {
   const shouldReduceMotion = useReducedMotion();
@@ -64,13 +22,13 @@ export default function UpcomingRacesPage() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-zinc-900 bg-zinc-900/10 text-red-500 font-extrabold text-[10px] tracking-widest uppercase">
-                <th className="p-6">Category / Class</th>
-                <th className="p-6">Championship Details</th>
-                <th className="p-6 text-center">Years Contested</th>
+                <th className="p-6">{upcomingRacesData.tableHeaders.category}</th>
+                <th className="p-6">{upcomingRacesData.tableHeaders.championship}</th>
+                <th className="p-6 text-center">{upcomingRacesData.tableHeaders.years}</th>
               </tr>
             </thead>
             <tbody>
-              {specData.map((spec, idx) => (
+              {specData.map((spec: any, idx: number) => (
                 <tr key={idx} className="border-b border-zinc-900 hover:bg-zinc-900/20 transition duration-300">
                   <td className="p-6">
                     <span className="text-white font-black text-lg uppercase block">{spec.category}</span>
@@ -86,20 +44,20 @@ export default function UpcomingRacesPage() {
 
         {/* Mobile Spec Card Grid */}
         <div className="grid gap-6 grid-cols-1 md:hidden mb-12">
-          {specData.map((spec, idx) => (
+          {specData.map((spec: any, idx: number) => (
             <div key={idx} className="p-6 bg-zinc-950 border border-zinc-900 rounded-2xl space-y-4">
               <div>
-                <span className="text-[10px] text-red-500 font-black tracking-widest uppercase block">CLASS</span>
-                <span className="text-xl font-black text-white uppercase block mt-1">{spec.category}</span>
-              </div>
+                 <span className="text-[10px] text-red-500 font-black tracking-widest uppercase block">{upcomingRacesData.mobileCards.classLabel}</span>
+                 <span className="text-xl font-black text-white uppercase block mt-1">{spec.category}</span>
+               </div>
 
-              <div>
-                <span className="text-[10px] text-zinc-600 font-black tracking-widest uppercase block">CHAMPIONSHIP</span>
-                <span className="text-zinc-300 text-sm font-semibold uppercase block mt-1">{spec.championship}</span>
-              </div>
+               <div>
+                 <span className="text-[10px] text-zinc-600 font-black tracking-widest uppercase block">{upcomingRacesData.mobileCards.championshipLabel}</span>
+                 <span className="text-zinc-300 text-sm font-semibold uppercase block mt-1">{spec.championship}</span>
+               </div>
 
-              <div>
-                <span className="text-[10px] text-zinc-600 font-black tracking-widest uppercase block">YEARS</span>
+               <div>
+                 <span className="text-[10px] text-zinc-600 font-black tracking-widest uppercase block">{upcomingRacesData.mobileCards.yearsLabel}</span>
                 <span className="text-red-500 text-sm font-black block mt-1">{spec.years}</span>
               </div>
 
@@ -138,35 +96,35 @@ export default function UpcomingRacesPage() {
             <div className="md:col-span-8 text-center md:text-left space-y-6">
               <div>
                 <div className="hidden md:block">
-                  <Shuffle
-                    text="Official Regulatory Compliance"
-                    tag="h2"
-                    className="text-2xl font-black text-white uppercase tracking-tight mb-4"
-                    textAlign="left"
-                    duration={0.4}
-                  />
-                </div>
-                <div className="md:hidden">
-                  <Shuffle
-                    text="Official Regulatory Compliance"
-                    tag="h2"
-                    className="text-2xl font-black text-white uppercase tracking-tight mb-4"
-                    textAlign="center"
-                    duration={0.4}
-                  />
-                </div>
-                <p className="text-zinc-400 text-sm sm:text-base leading-relaxed text-center md:text-left">
-                  All contested classes are regulated by the FIM, FIM Asia, and respective national motorsport federations. Riders must comply with technical constraints, tire allocations, fuel specifications, and safety gear certifications.
-                </p>
+                   <Shuffle
+                     text={upcomingRacesData.compliance.title}
+                     tag="h2"
+                     className="text-2xl font-black text-white uppercase tracking-tight mb-4"
+                     textAlign="left"
+                     duration={0.4}
+                   />
+                 </div>
+                 <div className="md:hidden">
+                   <Shuffle
+                     text={upcomingRacesData.compliance.title}
+                     tag="h2"
+                     className="text-2xl font-black text-white uppercase tracking-tight mb-4"
+                     textAlign="center"
+                     duration={0.4}
+                   />
+                 </div>
+                 <p className="text-zinc-400 text-sm sm:text-base leading-relaxed text-center md:text-left">
+                   {upcomingRacesData.compliance.paragraph}
+                 </p>
               </div>
               <div className="flex justify-center md:justify-start">
                 <a
-                  href="https://asiaroadracing.com/wp-content/uploads/2026/04/ARRC-2026-03-26.pdf"
+                  href={upcomingRacesData.compliance.buttonHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 hover:border-red-500 hover:bg-red-600 hover:text-white px-8 py-3.5 text-xs font-black uppercase tracking-widest text-zinc-300 transition duration-300"
                 >
-                  Download Official ARRC rulebook
+                  {upcomingRacesData.compliance.buttonText}
                 </a>
               </div>
             </div>

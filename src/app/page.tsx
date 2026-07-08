@@ -12,203 +12,12 @@ import CardSwap, { Card } from "../components/CardSwap";
 import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import homeData from "../content/home.json";
 
-const champions = [
-  {
-    class: "ASB1000",
-    name: "Yuki Kunii",
-    team: "SDG MS Harc-Pro. Honda",
-    country: "Japan",
-    number: "92",
-    image: "/2.jpeg",
-    gradient: "from-purple-950 via-fuchsia-800 to-fuchsia-600",
-    stats: { wins: "12", podiums: "18", lap: "1:35.244", role: "Team Leader" }
-  },
-  {
-    class: "SS600",
-    name: "Apiwath Wongthananon",
-    team: "Yamaha Tekhne Racing Team Asean",
-    country: "Thailand",
-    number: "24",
-    image: "/3.jpeg",
-    gradient: "from-blue-950 via-cyan-800 to-cyan-600",
-    stats: { wins: "8", podiums: "14", lap: "1:38.102", role: "Precision Expert" }
-  },
-  {
-    class: "AP250",
-    name: "Herjun Atna Firdaus",
-    team: "Astra Honda Racing Team",
-    country: "Indonesia",
-    number: "46",
-    image: "/4.jpeg",
-    gradient: "from-emerald-950 via-green-850 to-emerald-600",
-    stats: { wins: "6", podiums: "11", lap: "1:40.312", role: "Rising Star" }
-  },
-  {
-    class: "UB150",
-    name: "Md Akid Aziz",
-    team: "UMA Racing YAMAHA Maju Motor Asia Team",
-    country: "Malaysia",
-    number: "13",
-    image: "/5.jpeg",
-    gradient: "from-indigo-950 via-indigo-850 to-blue-700",
-    stats: { wins: "10", podiums: "16", lap: "1:45.922", role: "Underbone King" }
-  },
-  {
-    class: "TVS ASIA OMC",
-    name: "Hiroki Ono",
-    team: "TVS Racing",
-    country: "Japan",
-    number: "1",
-    image: "/6.jpeg",
-    gradient: "from-red-950 via-red-800 to-orange-600",
-    stats: { wins: "14", podiums: "20", lap: "1:42.155", role: "TVS Champion" }
-  },
-];
-
-const categoriesData = [
-  {
-    id: 1,
-    name: "ASB1000",
-    desc: "The pinnacle of Asian motorsports. High-octane 1000cc superbikes showcasing peak rider precision and manufacturer engineering.",
-    image: "/2.jpeg",
-    championship: "Asia Road Racing Championship",
-    years: "2025/2026"
-  },
-  {
-    id: 2,
-    name: "SS600",
-    desc: "The ultimate proving ground for tactical skill and consistency. Mid-weight supersports demanding perfection.",
-    image: "/3.jpeg",
-    championship: "Qatar Superstock & ARRC",
-    years: "2025/2026"
-  },
-  {
-    id: 3,
-    name: "AP250",
-    desc: "The launchpad for Asia's next racing generation. Fast, competitive production-based racing.",
-    image: "/4.jpeg",
-    championship: "Asia Road Racing Championship",
-    years: "2025/2026"
-  },
-  {
-    id: 4,
-    name: "UB150",
-    desc: "Authentic regional passion and mass-market reach. Ground-level racing featuring highly modified underbone machines.",
-    image: "/5.jpeg",
-    championship: "Asia Road Racing Championship",
-    years: "2025/2026"
-  },
-  {
-    id: 5,
-    name: "TVS ASIA OMC",
-    desc: "A global showcase of mechanical reliability and emerging talent riding uniform race-tuned TVS Apache RR 310s.",
-    image: "/6.jpeg",
-    championship: "TVS Asia One Make Championship",
-    years: "2025/2026"
-  }
-];
-
-const newsItems = [
-  {
-    image: "/5.jpeg",
-    title: "2026 KTM Cup Champion",
-    subtitle: "Johann seals the title in a dominant season finale",
-    handle: "#KTMCup2026",
-    borderColor: "#EF4444",
-    gradient: "linear-gradient(145deg, #EF4444, #000)",
-    url: "/updates"
-  },
-  {
-    image: "/3.jpeg",
-    title: "Qatar Superstock 600 Champion",
-    subtitle: "First Indian rider to win the title, 2025 season",
-    handle: "#QatarSTK600",
-    borderColor: "#F97316",
-    gradient: "linear-gradient(160deg, #F97316, #000)",
-    url: "/updates"
-  },
-  {
-    image: "/5.jpeg",
-    title: "ARRC AP250 Campaign",
-    subtitle: "Backed by Honda Racing India on the Asian stage",
-    handle: "#ARRC2025",
-    borderColor: "#F59E0B",
-    gradient: "linear-gradient(180deg, #F59E0B, #000)",
-    url: "/updates"
-  },
-  {
-    image: "/joh.png",
-    title: "Lusail Lap Record",
-    subtitle: "New SSP300 lap record set in Qatar",
-    handle: "#LusailRecord",
-    borderColor: "#DC2626",
-    gradient: "linear-gradient(200deg, #DC2626, #000)",
-    url: "/updates"
-  },
-  {
-    image: "/5.jpeg",
-    title: "Estoril Wet Race — P4",
-    subtitle: "European Talent Cup standout finish in Portugal",
-    handle: "#EuropeanTalentCup",
-    borderColor: "#EA580C",
-    gradient: "linear-gradient(220deg, #EA580C, #000)",
-    url: "/updates"
-  },
-  {
-    image: "/5.jpeg",
-    title: "Thailand Talent Cup",
-    subtitle: "Selected for the regional development series",
-    handle: "#ThailandTalentCup",
-    borderColor: "#FB923C",
-    gradient: "linear-gradient(240deg, #FB923C, #000)",
-    url: "/updates"
-  }
-];
-
-const scheduleCategories = [
-  {
-    id: "rounds",
-    label: "All Rounds",
-    images: [
-      { src: "/2.jpeg", alt: "Season Schedule", caption: "2026 CALENDAR" },
-      { src: "/3.jpeg", alt: "Sepang International Circuit", caption: "ROUND 1 — SEPANG" },
-      { src: "/4.jpeg", alt: "Chang International Circuit", caption: "ROUND 2 — CHANG" },
-      { src: "/5.jpeg", alt: "Mobility Resort Motegi", caption: "ROUND 3 — MOTEGI" },
-      { src: "/6.jpeg", alt: "Mandalika International Circuit", caption: "ROUND 4 — MANDALIKA" },
-      { src: "/2.jpeg", alt: "Sepang International Circuit", caption: "ROUND 5 — SEPANG" },
-      { src: "/3.jpeg", alt: "Chang International Circuit", caption: "ROUND 6 — CHANG" }
-    ]
-  },
-  {
-    id: "asb1000",
-    label: "ASB1000",
-    images: [
-      { src: "/2.jpeg", alt: "ASB1000 Racer", caption: "YUKI KUNII — SDG MS HARC-PRO" },
-    ]
-  },
-  {
-    id: "ss600",
-    label: "SS600",
-    images: [
-      { src: "/3.jpeg", alt: "SS600 Racer", caption: "APIWATH WONG — YAMAHA TEKHNE" }
-    ]
-  },
-  {
-    id: "ap250",
-    label: "AP250",
-    images: [
-      { src: "/4.jpeg", alt: "AP250 Racer", caption: "HERJUN ATNA — ASTRa HONDA" }
-    ]
-  },
-  {
-    id: "ub150",
-    label: "UB150",
-    images: [
-      { src: "/5.jpeg", alt: "UB150 Racer", caption: "MD AKID AZIZ — UMA RACING" }
-    ]
-  }
-];
+const champions = homeData.champions.items;
+const categoriesData = homeData.categories.items;
+const newsItems = homeData.newsItems;
+const scheduleCategories = homeData.seasonSchedule.categories;
 
 export default function Home() {
   const [sliderIndex, setSliderIndex] = useState(0);
@@ -304,8 +113,7 @@ export default function Home() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.05,
+        staggerChildren: 0,
       },
     },
   };
@@ -495,16 +303,16 @@ export default function Home() {
                 variants={itemVariants}
                 className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold"
               >
-             
+                {homeData.hero.eyebrow}
               </motion.p>
 
               <motion.h1
                 variants={itemVariants}
                 className="text-4xl sm:text-6xl lg:text-8xl font-black leading-none text-white tracking-tight uppercase"
               >
-                JOHANN <br />
+                {homeData.hero.title.line1} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
-                  EMMANUEL
+                  {homeData.hero.title.line2}
                 </span>
               </motion.h1>
 
@@ -512,7 +320,7 @@ export default function Home() {
                 variants={itemVariants}
                 className="text-sm sm:text-lg text-zinc-400 max-w-2xl leading-relaxed"
               >
-                Born April 11, 2006 in Chennai, India; started motorsport at age six; only Indian rider trained across top European and Asian championships.
+                {homeData.hero.subtitle}
               </motion.p>
 
               {/* Highlight strip */}
@@ -533,8 +341,8 @@ export default function Home() {
                   whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                   className="w-full sm:w-auto"
                 >
-                  <Link href="/results" className="px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition transform hover:scale-105 text-center shadow-lg shadow-red-600/25 cursor-pointer block text-[10px] sm:text-xs tracking-widest uppercase">
-                    Career Results
+                  <Link href={homeData.hero.ctaPrimary.href} className="px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition transform hover:scale-105 text-center shadow-lg shadow-red-600/25 cursor-pointer block text-[10px] sm:text-xs tracking-widest uppercase">
+                    {homeData.hero.ctaPrimary.text}
                   </Link>
                 </motion.div>
 
@@ -543,8 +351,8 @@ export default function Home() {
                   whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                   className="w-full sm:w-auto"
                 >
-                  <Link href="/about#contact" className="px-6 sm:px-8 py-3 sm:py-4 border border-zinc-800 hover:border-white text-white font-bold rounded-xl bg-zinc-950/50 hover:bg-white hover:text-black transition transform hover:scale-105 text-center cursor-pointer block text-[10px] sm:text-xs tracking-widest uppercase">
-                    CONTACT
+                  <Link href={homeData.hero.ctaSecondary.href} className="px-6 sm:px-8 py-3 sm:py-4 border border-zinc-800 hover:border-white text-white font-bold rounded-xl bg-zinc-950/50 hover:bg-white hover:text-black transition transform hover:scale-105 text-center cursor-pointer block text-[10px] sm:text-xs tracking-widest uppercase">
+                    {homeData.hero.ctaSecondary.text}
                   </Link>
                 </motion.div>
               </motion.div>
@@ -588,9 +396,9 @@ export default function Home() {
       <section id="champions" className="py-16 sm:py-24 bg-black border-t border-zinc-900 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
           <div className="mb-8 sm:mb-12 text-center">
-            <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold">LEGACY OF SPEED</span>
+            <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold">{homeData.champions.sectionLabel}</span>
             <Shuffle
-              text="2025 Champions"
+              text={homeData.champions.sectionTitle}
               tag="h2"
               className="text-2xl sm:text-4xl font-black mt-2 text-white"
               textAlign="center"
@@ -607,7 +415,7 @@ export default function Home() {
                   transform: `translate3d(calc(-${sliderIndex} * (100% + ${visibleCards > 1 ? '24px' : '16px'}) / ${visibleCards}), 0, 0)`
                 }}
               >
-{champions.map((champion) => (
+{champions.map((champion: any) => (
   <div
     key={champion.class}
     className="flex-shrink-0 max-w-[95vw]"
@@ -630,26 +438,26 @@ export default function Home() {
       secondContent={
         <div className="flex flex-col justify-between h-full p-3 sm:p-4 md:p-6 bg-zinc-950">
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.35em] text-red-200">Telemetry</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.35em] text-red-200">{homeData.champions.cardLabels.telemetry}</p>
             <h3 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-black uppercase tracking-tight text-white">{champion.name}</h3>
             <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-zinc-200">{champion.country} • {champion.team}</p>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm">
             <div className="rounded-2xl border border-white/10 bg-black/20 px-2 sm:px-3 py-2 sm:py-3">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">Wins</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.wins}</p>
               <p className="mt-1 text-lg sm:text-xl font-black text-white">{champion.stats.wins}</p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-black/20 px-2 sm:px-3 py-2 sm:py-3">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">Podiums</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.podiums}</p>
               <p className="mt-1 text-lg sm:text-xl font-black text-white">{champion.stats.podiums}</p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-black/20 px-2 sm:px-3 py-2 sm:py-3 col-span-2">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">Best Lap</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.bestLap}</p>
               <p className="mt-1 text-lg sm:text-xl font-black text-white">{champion.stats.lap}</p>
             </div>
           </div>
           <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-zinc-200">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-400">Role</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-400">{homeData.champions.cardLabels.role}</span>
             <p className="mt-1 font-semibold">{champion.stats.role}</p>
           </div>
         </div>
@@ -672,7 +480,7 @@ export default function Home() {
                 <motion.button
                   onClick={handlePrev}
                   className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/95 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-zinc-800 focus:outline-none cursor-pointer"
-                  aria-label="Previous card"
+                  aria-label={homeData.champions.controls.previousAriaLabel}
                   whileHover={shouldReduceMotion ? {} : { scale: 1.15, backgroundColor: "#000000" }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.92 }}
                 >
@@ -683,7 +491,7 @@ export default function Home() {
                 <motion.button
                   onClick={handleNext}
                   className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/95 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-zinc-800 focus:outline-none cursor-pointer"
-                  aria-label="Next card"
+                  aria-label={homeData.champions.controls.nextAriaLabel}
                   whileHover={shouldReduceMotion ? {} : { scale: 1.15, backgroundColor: "#000000" }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.92 }}
                 >
@@ -703,7 +511,7 @@ export default function Home() {
           <div className="text-center mb-10 sm:mb-16 space-y-2">
             <p className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">THE CATEGORIES</p>
             <Shuffle
-              text="WHERE ASIANS DREAM."
+              text={homeData.categories.sectionTitle}
               tag="h2"
               className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight"
               textAlign="center"
@@ -711,12 +519,12 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 max-w-6xl mx-auto min-h-[320px] sm:min-h-[420px]">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 max-w-6xl mx-auto min-h-[320px] sm:min-h-[420px]">
             {/* Left Column: Category Description Details */}
-            <div className="w-full lg:w-5/12 space-y-4 sm:space-y-6 flex flex-col justify-center text-left min-h-[200px] sm:min-h-[250px] lg:pr-8">
+            <div className="w-full lg:w-5/12 space-y-4 sm:space-y-6 flex flex-col justify-center text-left min-h-[200px] sm:min-h-[250px] lg:pr-8 order-1 lg:order-2">
               <div className="inline-flex items-center gap-3">
-                <span className="text-[10px] sm:text-xs bg-red-600/10 text-red-500 font-black px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-red-500/20 uppercase tracking-widest">
-                  Active Class
+                 <span className="text-[10px] sm:text-xs bg-red-600/10 text-red-500 font-black px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-red-500/20 uppercase tracking-widest">
+                  {homeData.categories.labels.activeClass}
                 </span>
                 <span className="text-zinc-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider">
                   0{categoriesData[activeCategory].id} / 0{categoriesData.length}
@@ -743,20 +551,20 @@ export default function Home() {
 
               {/* Telemetry info for interest */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-zinc-900">
-                <div>
-                  <span className="text-[10px] text-zinc-500 font-extrabold uppercase tracking-widest block">CHAMPIONSHIP</span>
-                  <span className="text-xs sm:text-sm text-zinc-300 font-bold block mt-1">{categoriesData[activeCategory].championship}</span>
-                </div>
-                <div>
-                  <span className="text-[10px] text-zinc-500 font-extrabold uppercase tracking-widest block">SEASON</span>
-                  <span className="text-xs sm:text-sm text-zinc-300 font-bold block mt-1">{categoriesData[activeCategory].years}</span>
-                </div>
+                 <div>
+                   <span className="text-[10px] text-zinc-500 font-extrabold uppercase tracking-widest block">{homeData.categories.labels.championship}</span>
+                   <span className="text-xs sm:text-sm text-zinc-300 font-bold block mt-1">{categoriesData[activeCategory].championship}</span>
+                 </div>
+                 <div>
+                   <span className="text-[10px] text-zinc-500 font-extrabold uppercase tracking-widest block">{homeData.categories.labels.season}</span>
+                   <span className="text-xs sm:text-sm text-zinc-300 font-bold block mt-1">{categoriesData[activeCategory].years}</span>
+                 </div>
               </div>
             </div>
 
             {/* Right Column: CardSwap */}
-            <div className="w-full lg:w-7/12 flex justify-center items-center overflow-visible py-4 sm:py-6">
-              <div style={{ height: cardSwapHeight + 80, position: 'relative', width: '100%', maxWidth: cardSwapWidth + 100 }}>
+            <div className="w-full lg:w-7/12 flex justify-center items-center overflow-visible py-4 sm:py-6 order-2 lg:order-1">
+              <div style={{ minHeight: '420px', height: cardSwapHeight + 80, position: 'relative', width: '100%', maxWidth: cardSwapWidth + 100 }}>
                 <CardSwap
                   width={cardSwapWidth}
                   height={cardSwapHeight}
@@ -768,7 +576,7 @@ export default function Home() {
                   skewAmount={4}
                   easing="elastic"
                 >
-                  {categoriesData.map((cat) => (
+                  {categoriesData.map((cat: any) => (
                     <Card key={cat.name} className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950">
                       <div className="relative w-full h-full">
                         <Image
@@ -809,19 +617,19 @@ export default function Home() {
 
       {/* Season Schedule Section */}
       <SeasonSchedule
-        title="2026 Calendar"
-        subtitle="Season Schedule"
+        title={homeData.seasonSchedule.title}
+        subtitle={homeData.seasonSchedule.subtitle}
         categories={scheduleCategories}
-        defaultCategory="rounds"
+        defaultCategory={homeData.seasonSchedule.defaultCategory}
       />
 
       {/* Latest Updates Section (ChromaGrid) */}
       <section id="updates" className="py-16 sm:py-24 bg-gradient-to-b from-zinc-950 to-black text-white border-t border-zinc-900 overflow-hidden relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="mb-8 sm:mb-12 text-center space-y-2">
-            <span className="text-red-600 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">LATEST STORIES</span>
+            <span className="text-red-600 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">{homeData.latestUpdates.sectionLabel}</span>
             <Shuffle
-              text="Latest Updates"
+              text={homeData.latestUpdates.sectionTitle}
               tag="h2"
               className="text-2xl sm:text-3xl md:text-4xl font-black mt-2 text-white"
               textAlign="center"
@@ -855,14 +663,14 @@ export default function Home() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl relative z-10 text-center">
           <span className="text-red-500 text-[10px] sm:text-xs md:text-sm tracking-[0.3em] font-extrabold uppercase drop-shadow-md">
-            EXPERIENCE THE RACING LEGACY
+            {homeData.bottomHero.sectionLabel}
           </span>
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mt-3 sm:mt-4 tracking-tighter uppercase drop-shadow-lg leading-none">
-            <Shuffle text="BEYOND THE" tag="span" className="block text-white" textAlign="center" duration={0.4} />
-            <Shuffle text="FINISH LINE" tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="center" duration={0.4} />
+            <Shuffle text={homeData.bottomHero.sectionTitle.line1} tag="span" className="block text-white" textAlign="center" duration={0.4} />
+            <Shuffle text={homeData.bottomHero.sectionTitle.line2} tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="center" duration={0.4} />
           </h2>
           <p className="text-zinc-300 text-sm sm:text-base mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed drop-shadow">
-            Feel the raw adrenaline of the Asia Road Racing Championship. Access the latest paddock media highlights, stay up to date with official stories, and review season standings.
+            {homeData.bottomHero.paragraph}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10">
@@ -872,10 +680,10 @@ export default function Home() {
               className="w-full sm:w-auto"
             >
                 <a
-                  href="/gallery"
+                  href={homeData.bottomHero.ctaPrimary.href}
                   className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-red-600/20 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
                 >
-                  EXPLORE GALLERY
+                  {homeData.bottomHero.ctaPrimary.text}
                 </a>
               </motion.div>
 
@@ -885,10 +693,10 @@ export default function Home() {
                 className="w-full sm:w-auto"
               >
                 <a
-                  href="/updates"
+                  href={homeData.bottomHero.ctaSecondary.href}
                   className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 border border-zinc-800 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
                 >
-                  LATEST UPDATES
+                  {homeData.bottomHero.ctaSecondary.text}
                 </a>
               </motion.div>
           </div>

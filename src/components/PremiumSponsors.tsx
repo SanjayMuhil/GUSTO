@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import sponsorsData from "../content/sponsors.json";
+import footerData from "../content/footer.json";
 
 export interface SponsorGroup {
   title: string;
@@ -15,36 +17,7 @@ interface PremiumSponsorsProps {
   className?: string;
 }
 
-const defaultGroups: SponsorGroup[] = [
-  {
-    title: "Series Sponsor",
-    logos: ["/sponsor-series.png"],
-  },
-  {
-    title: "Official Tyre Partner",
-    logos: ["/sponsor-tyre.png"],
-  },
-  {
-    title: "Official Fuel Partner",
-    logos: ["/sponsor-fuel.png"],
-  },
-  {
-    title: "Technology Partner",
-    logos: ["/sponsor-tech.png"],
-  },
-  {
-    title: "Official Entertainment Partner",
-    logos: ["/sponsor-ent.png"],
-  },
-  {
-    title: "Event Partners",
-    logos: ["/sponsor-event-1.png", "/sponsor-event-2.png", "/sponsor-event-3.png"],
-  },
-  {
-    title: "Paddock Service Partners",
-    logos: ["/sponsor-paddock-1.png", "/sponsor-paddock-2.png"],
-  },
-];
+const defaultGroups: SponsorGroup[] = sponsorsData.groups;
 
 const stampVariants = {
   hidden: { opacity: 0, y: 40, scale: 0.85 },
@@ -140,7 +113,7 @@ const PremiumSponsors: React.FC<PremiumSponsorsProps> = ({
         {/* Copyright */}
         <div className="text-center space-y-2">
           <p className="text-[11px] sm:text-xs text-zinc-700 font-medium tracking-wide">
-            &copy; Copyright {year} Two Wheels Motor Racing Sdn Bhd (TWMR). All Rights Reserved.
+            {footerData.copyright}
           </p>
         </div>
       </div>

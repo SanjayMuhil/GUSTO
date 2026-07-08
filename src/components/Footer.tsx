@@ -1,13 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import navigationData from "../content/navigation.json";
+import footerData from "../content/footer.json";
 
-const navItems = [
-  { href: "/about", label: "About" },
-  { href: "/updates", label: "Updates" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/upcoming-races", label: "Upcoming Races" },
-  { href: "/results", label: "Results" },
-];
+const navItems = navigationData.items;
 
 const socialLinks = [
   {
@@ -58,14 +54,14 @@ export default function Footer() {
                 />
               </Link>
               <p className="text-zinc-500 text-xs sm:text-sm leading-relaxed max-w-xs">
-                Asia&apos;s biggest road racing championship. Home of the Asian Champions.
+                {footerData.description}
               </p>
             </div>
 
             {/* Quick Links */}
             <div className="md:col-span-4">
               <h3 className="text-white font-black text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4">
-                Quick Links
+                {footerData.quickLinksTitle}
               </h3>
               <ul className="space-y-2 sm:space-y-3">
                 {navItems.map((item) => (
@@ -84,7 +80,7 @@ export default function Footer() {
             {/* Social Links */}
             <div className="md:col-span-4">
               <h3 className="text-white font-black text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4">
-                Follow Us
+                {footerData.socialLinksTitle}
               </h3>
               <div className="flex items-center gap-3 sm:gap-4">
                 {socialLinks.map((social) => (
@@ -108,14 +104,14 @@ export default function Footer() {
         <div className="border-t border-zinc-900 py-4 sm:py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
             <p className="text-zinc-700 text-[10px] sm:text-xs font-medium tracking-wide text-center sm:text-left">
-              &copy; Copyright 2025 Two Wheels Motor Racing Sdn Bhd (TWMR). All Rights Reserved.
+              {footerData.copyright}
             </p>
             <div className="flex items-center gap-4 sm:gap-6">
               <Link href="/privacy" className="text-zinc-700 hover:text-red-500 text-[10px] sm:text-xs font-medium transition-colors duration-200">
-                Privacy Policy
+                {footerData.links.privacy}
               </Link>
               <Link href="/terms" className="text-zinc-700 hover:text-red-500 text-[10px] sm:text-xs font-medium transition-colors duration-200">
-                Terms of Service
+                {footerData.links.terms}
               </Link>
             </div>
           </div>

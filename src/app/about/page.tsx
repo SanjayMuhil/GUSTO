@@ -7,6 +7,7 @@ import Image from "next/image";
 import { motion, useReducedMotion, useInView } from "framer-motion";
 import CircularGallery from "../../components/CircularGallery";
 import Footer from "../../components/Footer";
+import aboutData from "../../content/about.json";
 
 // High-performance count-up stat counter
 function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
@@ -220,35 +221,35 @@ export default function AboutPage() {
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/5 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-red-500">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                About Johann
+                {aboutData.hero.badge}
               </div>
 
               <div className="space-y-3">
-                <span className="text-zinc-500 font-extrabold text-sm sm:text-base tracking-[0.25em] uppercase block">OFFICIAL PROGRAMME</span>
+                <span className="text-zinc-500 font-extrabold text-sm sm:text-base tracking-[0.25em] uppercase block">{aboutData.hero.eyebrow}</span>
                 <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter uppercase leading-none">
-                  JOHANN <br />
+                  {aboutData.hero.title.line1} <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
-                    EMMANUEL
+                    {aboutData.hero.title.line2}
                   </span>
                 </h1>
               </div>
 
               <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-xl">
-                Join a legacy of high-performance speed. Witness the journey of India's premier racing talent as he campaigns across the European and Asian championships.
+                {aboutData.hero.subtitle}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 pt-3 sm:pt-4">
                 <a
-                  href="#contact"
+                  href={aboutData.hero.ctaPrimary.href}
                   className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-red-600/25 text-center text-[10px] sm:text-xs tracking-widest uppercase cursor-pointer"
                 >
-                  Get In Touch
+                  {aboutData.hero.ctaPrimary.text}
                 </a>
                 <a
-                  href="#profile"
+                  href={aboutData.hero.ctaSecondary.href}
                   className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 border border-zinc-800 text-center text-[10px] sm:text-xs tracking-widest uppercase cursor-pointer"
                 >
-                  Read Proposal
+                  {aboutData.hero.ctaSecondary.text}
                 </a>
               </div>
             </motion.div>
@@ -263,34 +264,28 @@ export default function AboutPage() {
             {/* Left Column - Text */}
             <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
               <div className="space-y-3">
-                <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">RIDER PROFILE</span>
+                <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">{aboutData.profile.sectionLabel}</span>
                 <h2 className="text-4xl sm:text-5xl font-black tracking-tighter text-white uppercase leading-none">
-                  <Shuffle text="THE CHAMPION'S" tag="span" className="block text-white" textAlign="left" duration={0.4} />
-                  <Shuffle text="FOUNDATION" tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="left" duration={0.4} />
+                  <Shuffle text={aboutData.profile.sectionTitle.line1} tag="span" className="block text-white" textAlign="left" duration={0.4} />
+                  <Shuffle text={aboutData.profile.sectionTitle.line2} tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="left" duration={0.4} />
                 </h2>
               </div>
 
               <div className="space-y-4 text-zinc-400 leading-relaxed text-sm sm:text-base">
-                <p>
-                  Born <strong className="text-white">April 11, 2006</strong>, in Chennai, India. Johann's affinity for motorsport was ignited at the age of six, raised in the fast-paced atmosphere of trackside paddocks.
-                </p>
-                <p>
-                  His passion was nurtured by his father, <strong className="text-white">Mr. Emmanuel Jebaraj</strong>, a multiple-time Indian national champion, laying the blueprint for technical discipline and racing IQ.
-                </p>
-                <p>
-                  Today, Johann represents a rare breed of Indian racers competing on the demanding circuits of Europe and Asia. His path is built on consistency, year-round physical training, and a focus on podium results.
-                </p>
+                {aboutData.profile.paragraphs.map((paragraph: string, idx: number) => (
+                  <p key={idx} dangerouslySetInnerHTML={{ __html: paragraph }} />
+                ))}
               </div>
 
               {/* Quick Details Grid */}
               <div className="grid grid-cols-2 gap-4 border-t border-zinc-900 pt-6">
                 <div>
-                  <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-black block">HOMETOWN</span>
-                  <span className="text-white font-extrabold text-sm sm:text-base uppercase mt-1 block">Chennai, India</span>
+                  <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-black block">{aboutData.profile.quickDetails.hometown.label}</span>
+                  <span className="text-white font-extrabold text-sm sm:text-base uppercase mt-1 block">{aboutData.profile.quickDetails.hometown.value}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-black block">AGE</span>
-                  <span className="text-white font-extrabold text-sm sm:text-base uppercase mt-1 block">19 Years</span>
+                  <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-black block">{aboutData.profile.quickDetails.age.label}</span>
+                  <span className="text-white font-extrabold text-sm sm:text-base uppercase mt-1 block">{aboutData.profile.quickDetails.age.value}</span>
                 </div>
               </div>
             </div>
@@ -315,26 +310,17 @@ export default function AboutPage() {
             {/* Right Column - Text */}
             <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2">
               <div className="space-y-3">
-                <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">CAREER PATH</span>
+                <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">{aboutData.careerOverview.sectionLabel}</span>
                 <h2 className="text-4xl sm:text-5xl font-black tracking-tighter text-white uppercase leading-none">
-                  <Shuffle text="BUILDING TO" tag="span" className="block text-white" textAlign="left" duration={0.4} />
-                  <Shuffle text="THE WORLD STAGE" tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="left" duration={0.4} />
+                  <Shuffle text={aboutData.careerOverview.sectionTitle.line1} tag="span" className="block text-white" textAlign="left" duration={0.4} />
+                  <Shuffle text={aboutData.careerOverview.sectionTitle.line2} tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="left" duration={0.4} />
                 </h2>
               </div>
 
               <div className="space-y-4 text-zinc-400 leading-relaxed text-sm sm:text-base">
-                <p>
-                  Johann entered competitive motorsport in <strong className="text-white">2019 at age 13</strong>. His debut race ended with a fractured left humerus, a test of resolve that only deepened his commitment.
-                </p>
-                <p>
-                  Returning in 2020, he secured a <strong className="text-white">podium finish</strong> in the first race he completed. By 2022, his progress earned him a promotion to the highly competitive NSF250R category.
-                </p>
-                <p>
-                  Between 2023 and 2024, he competed in the prestigious <strong className="text-white">European Talent Cup</strong>, standing out as the only Indian rider on the grid. In 2024, he secured a remarkable 4th place in wet weather at Estoril, Portugal, alongside selection for the Thailand Talent Cup.
-                </p>
-                <p>
-                  His breakout moment arrived in late 2024 with a clean sweep debut hat-trick at the <strong className="text-white">Qatar Superbike Championship (Lusail)</strong>, winning all three races in the SSP300 category. In 2025, supported by Honda Racing India, he advanced to the Asia Road Racing Championship (ARRC) AP250 class.
-                </p>
+                {aboutData.careerOverview.paragraphs.map((paragraph: string, idx: number) => (
+                  <p key={idx} dangerouslySetInnerHTML={{ __html: paragraph }} />
+                ))}
               </div>
             </div>
           </div>
@@ -345,9 +331,9 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900 overflow-hidden">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">RECORDS & ACCOLADES</span>
+            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.achievements.sectionLabel}</span>
             <Shuffle
-              text="Key Milestones"
+              text={aboutData.achievements.sectionTitle}
               tag="h2"
               className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
               textAlign="center"
@@ -357,13 +343,7 @@ export default function AboutPage() {
 
           <div className="relative w-full h-[550px] overflow-hidden select-none">
             <CircularGallery
-              items={[
-                { image: "/1.JPG", text: "2026 KTM CUP CHAMPION" },
-                { image: "/2.jpeg", text: "2025 QATAR 600CC CHAMPION" },
-                { image: "/3.jpeg", text: "LUSAIL SSP300 RECORD HOLDER" },
-                { image: "/4.jpeg", text: "QATAR DEBUT SWEEP WINNER" },
-                { image: "/5.jpeg", text: "EUROPE TALENT CUP TOP 10" }
-              ]}
+              items={aboutData.achievements.galleryItems.map((item: any) => ({ image: item.image, text: item.text }))}
               bend={3}
               textColor="#ffffff"
               borderRadius={0.05}
@@ -378,9 +358,9 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 md:py-28 bg-black border-b border-zinc-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div className="text-center mb-10 sm:mb-16 space-y-2">
-            <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">HISTORICAL TRACK</span>
+            <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">{aboutData.timeline.sectionLabel}</span>
             <Shuffle
-              text="Timeline"
+              text={aboutData.timeline.sectionTitle}
               tag="h2"
               className="text-2xl sm:text-4xl md:text-5xl font-black text-white uppercase tracking-tight"
               textAlign="center"
@@ -389,14 +369,7 @@ export default function AboutPage() {
           </div>
 
           <div className="relative border-l border-zinc-900 ml-3 sm:ml-4 md:ml-32 space-y-10 sm:space-y-12">
-            {[
-              { year: "2021", event: "—" },
-              { year: "2022", event: "Honda India Talent Cup (CBR150)" },
-              { year: "2023", event: "Honda India Talent Cup (NSF250R), European Talent Cup" },
-              { year: "2024", event: "Thailand Talent Cup, European Talent Cup" },
-              { year: "2025", event: "ARRC AP250, Qatar STK-600, Indian Superstock" },
-              { year: "2026", event: "(see 2026 Programme section)" }
-            ].map((item, idx) => (
+            {aboutData.timeline.items.map((item: any, idx: number) => (
               <div key={idx} className="relative pl-6 sm:pl-8 md:pl-12 group">
                 {/* Timeline node */}
                 <div className="absolute left-[-5px] top-1 sm:top-1.5 w-[8px] h-[8px] sm:w-[9px] sm:h-[9px] rounded-full bg-zinc-900 group-hover:bg-red-500 border border-zinc-800 transition-colors duration-300" />
@@ -421,29 +394,23 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left text column */}
             <div className="lg:col-span-5 space-y-6">
-              <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">2026 CAMPAIGN</span>
+              <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">{aboutData.programme2026.sectionLabel}</span>
               <h2 className="text-4xl sm:text-5xl font-black tracking-tighter text-white uppercase leading-none">
-                <Shuffle text="RACING" tag="span" className="block text-white" textAlign="left" duration={0.4} />
-                <Shuffle text="PROGRAMME" tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="left" duration={0.4} />
+                <Shuffle text={aboutData.programme2026.sectionTitle.line1} tag="span" className="block text-white" textAlign="left" duration={0.4} />
+                <Shuffle text={aboutData.programme2026.sectionTitle.line2} tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="left" duration={0.4} />
               </h2>
               <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
-                The 2026 calendar targets elite competitiveness across key international and regional grids, designed to build track time and prepare for the ultimate championship progression.
+                {aboutData.programme2026.paragraph}
               </p>
               <div className="border-t border-zinc-900 pt-6">
-                <span className="text-xs text-zinc-500 tracking-wider font-extrabold uppercase">LONG-TERM TARGET</span>
-                <span className="text-white font-black text-lg block mt-1 uppercase">Full-time World Championship by 2028</span>
+                <span className="text-xs text-zinc-500 tracking-wider font-extrabold uppercase">{aboutData.programme2026.longTermTarget.label}</span>
+                <span className="text-white font-black text-lg block mt-1 uppercase">{aboutData.programme2026.longTermTarget.value}</span>
               </div>
             </div>
 
             {/* Right lists column */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { title: "Yamaha R7 Cup", subtitle: "European Superbike Championship Support" },
-                { title: "JuniorGP (600cc)", subtitle: "Junior World Championship Series" },
-                { title: "Qatar Supersport 600", subtitle: "Defending Regional Title" },
-                { title: "Indian National Championship", subtitle: "National Superstock 600 Title Campaign" },
-                { title: "ARRC 600cc Rounds", subtitle: "Selected Asia Road Racing Championship wildcard entry" }
-              ].map((prog, idx) => (
+              {aboutData.programme2026.programs.map((prog: any, idx: number) => (
                 <div key={idx} className="border border-zinc-900 bg-zinc-900/10 p-6 rounded-2xl flex flex-col justify-center">
                   <h3 className="text-lg font-black text-white tracking-tight uppercase">{prog.title}</h3>
                   <p className="text-zinc-500 text-xs sm:text-sm mt-1">{prog.subtitle}</p>
@@ -461,9 +428,9 @@ export default function AboutPage() {
 
         <div className="container mx-auto px-4 max-w-5xl relative z-10 text-center space-y-12">
           <div className="space-y-3">
-            <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">GLOBAL VIEWERSHIP</span>
+            <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">{aboutData.mediaCoverage.sectionLabel}</span>
             <Shuffle
-              text="Media & Broadcast Coverage"
+              text={aboutData.mediaCoverage.sectionTitle}
               tag="h2"
               className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
               textAlign="center"
@@ -472,22 +439,16 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-zinc-950/60 border border-zinc-900 rounded-3xl p-8 hover:border-zinc-800 transition-colors">
-              <Counter value={22} suffix="+" />
-              <span className="text-zinc-500 text-xs sm:text-sm font-extrabold uppercase tracking-widest block mt-3">Race Weekends</span>
-            </div>
-            <div className="bg-zinc-950/60 border border-zinc-900 rounded-3xl p-8 hover:border-zinc-800 transition-colors">
-              <Counter value={27} />
-              <span className="text-zinc-500 text-xs sm:text-sm font-extrabold uppercase tracking-widest block mt-3">Countries Broadcasted</span>
-            </div>
-            <div className="bg-zinc-950/60 border border-zinc-900 rounded-3xl p-8 hover:border-zinc-800 transition-colors">
-              <Counter value={30} suffix="+" />
-              <span className="text-zinc-500 text-xs sm:text-sm font-extrabold uppercase tracking-widest block mt-3">Broadcasting Channels</span>
-            </div>
+            {aboutData.mediaCoverage.stats.map((stat: any, idx: number) => (
+              <div key={idx} className="bg-zinc-950/60 border border-zinc-900 rounded-3xl p-8 hover:border-zinc-800 transition-colors">
+                <Counter value={stat.value} suffix={stat.suffix} />
+                <span className="text-zinc-500 text-xs sm:text-sm font-extrabold uppercase tracking-widest block mt-3">{stat.label}</span>
+              </div>
+            ))}
           </div>
 
           <p className="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed pt-4">
-            In addition to international TV channels, all races are streamed live globally on official YouTube motorsport networks, securing active viewer reach across mobile audiences.
+            {aboutData.mediaCoverage.paragraph}
           </p>
         </div>
       </section>
@@ -496,9 +457,9 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">THE ADVANTAGE</span>
+            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.whyJohann.sectionLabel}</span>
             <Shuffle
-              text="Why Johann?"
+              text={aboutData.whyJohann.sectionTitle}
               tag="h2"
               className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
               textAlign="center"
@@ -507,12 +468,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {[
-              { title: "Spain-Based Training", desc: "Based in Spain since 2023, training year-round in high-performance environments alongside Moto3/Moto2 stars." },
-              { title: "Proven Track Record", desc: "Winner of the Qatar Supersport 600 Championship and competitive runs in the highly technical Asia Road Racing grids." },
-              { title: "Elite Co-Training", desc: "Trains alongside World Championship GP riders, ensuring constant technical adaptation and mental sharpness." },
-              { title: "Structured Roadmap", desc: "Clear step-by-step career path moving from Junior GP towards a target World Championship seat by 2028." }
-            ].map((adv, i) => (
+            {aboutData.whyJohann.items.map((adv: any, i: number) => (
               <div key={i} className="border border-zinc-900 bg-zinc-900/10 p-8 rounded-2xl hover:border-zinc-800 transition-all">
                 <span className="text-red-500 font-extrabold text-sm uppercase block tracking-wider">{adv.title}</span>
                 <p className="text-zinc-400 text-sm sm:text-base mt-3 leading-relaxed">{adv.desc}</p>
@@ -526,9 +482,9 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28 bg-black border-b border-zinc-900">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">CURRENT SPONSORS</span>
+            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.brandPartners.sectionLabel}</span>
             <Shuffle
-              text="Sponsors"
+              text={aboutData.brandPartners.sectionTitle}
               tag="h2"
               className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
               textAlign="center"
@@ -537,13 +493,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
-            {[
-              { name: "KYT Helmets", info: "Designed/developed in Italy, manufactured in Indonesia (PT Tara Citra Kusuma)" },
-              { name: "Honda Racing India", info: "Motorsports participation, developing next-gen Indian riders" },
-              { name: "Sidvin Energy", info: "Czech-based, oil & gas / petrochemical / process industries" },
-              { name: "4SR Moto Suits", info: "Engineering & design for international competition riding gear" },
-              { name: "Voyage Eyewear", info: "Venture of SS Enterprises — stylish, functional sunglasses" }
-            ].map((brand, i) => (
+            {aboutData.brandPartners.items.map((brand: any, i: number) => (
               <div
                 key={i}
                 className="flex flex-col items-center justify-center p-4 sm:p-6 border border-zinc-900 bg-zinc-950/80 rounded-2xl text-center min-h-[100px] sm:min-h-[120px] hover:border-zinc-800 transition duration-300 select-none"
@@ -560,9 +510,9 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">COMMERCIAL REACH</span>
+            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.roiBrandValue.sectionLabel}</span>
             <Shuffle
-              text="ROI & Brand Value"
+              text={aboutData.roiBrandValue.sectionTitle}
               tag="h2"
               className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
               textAlign="center"
@@ -571,18 +521,11 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
-            {[
-              { cat: "Brand Visibility", details: ["Racing bike decals", "Rider leathers & helmet", "Grid bottles & gear bags", "Paddock apparel branding"] },
-              { cat: "Personal Endorsements", details: ["Video testimonials", "Social media partnerships", "Joint PR releases", "Advertorial integrations"] },
-              { cat: "Community Engagement", details: ["Safety awareness programs", "Community message amplification", "Influencing target customer purchasing"] },
-              { cat: "Event Participation", details: ["Dealer launches & exhibits", "Corporate guest interactions", "Product demonstration activations"] },
-              { cat: "Media Exposure", details: ["Global live broadcast audiences", "Paddock press conferences", "Racetrack podcaster reviews", "Magazine features"] },
-              { cat: "Social Media Reach", details: ["Instagram: 9.4K followers", "Annual reach of 9 Million users", "Active link referral conversions"] }
-            ].map((val, idx) => (
+            {aboutData.roiBrandValue.categories.map((val: any, idx: number) => (
               <div key={idx} className="border border-zinc-900 bg-zinc-900/10 p-8 rounded-2xl">
                 <span className="text-white font-extrabold text-lg uppercase block tracking-tight pb-3 border-b border-zinc-900">{val.cat}</span>
                 <ul className="mt-4 space-y-2 text-zinc-400 text-xs sm:text-sm">
-                  {val.details.map((det, dIdx) => (
+                  {val.details.map((det: string, dIdx: number) => (
                     <li key={dIdx} className="flex items-start gap-2">
                       <span className="text-red-500 mt-1">•</span>
                       <span>{det}</span>
@@ -599,9 +542,9 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28 bg-black border-b border-zinc-900">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">BUSINESS OBJECTIVES</span>
+            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.valueStructure.sectionLabel}</span>
             <Shuffle
-              text="Value Structure"
+              text={aboutData.valueStructure.sectionTitle}
               tag="h2"
               className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
               textAlign="center"
@@ -610,56 +553,17 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-            {/* Column 1 */}
-            <div className="space-y-3 sm:space-y-4">
-              <div className="h-1 bg-red-600 w-10 sm:w-12" />
-              <h3 className="text-xl sm:text-2xl font-black uppercase text-white tracking-tight">Providing Value</h3>
-              <ul className="space-y-3 text-zinc-400 text-sm sm:text-base">
-                <li>• Exclusivity in category</li>
-                <li>• On-site signage & branding</li>
-                <li>• Rights to license logo & property content</li>
-                <li>• Presence in digital, social & mobile media</li>
-                <li>• Access to audience & fanbase</li>
-                <li>• Tickets & hospitality</li>
-                <li>• Right to promote co-branded products/services</li>
-                <li>• Access to Johann's IP materials & mailing list</li>
-              </ul>
-            </div>
-
-            {/* Column 2 */}
-            <div className="space-y-4">
-              <div className="h-1 bg-orange-500 w-12" />
-              <h3 className="text-2xl font-black uppercase text-white tracking-tight">Reaching Objectives</h3>
-              <ul className="space-y-3 text-zinc-400 text-sm sm:text-base">
-                <li>• Create brand awareness & visibility</li>
-                <li>• Increase brand loyalty</li>
-                <li>• Showcase community & social responsibility</li>
-                <li>• Change / reinforce brand image</li>
-                <li>• Entertain clients & prospects</li>
-                <li>• Access experiential branding platform</li>
-                <li>• Obtain content for digital, social & other media</li>
-                <li>• Capture database / lead generation</li>
-                <li>• Stimulate sales, trial & usage</li>
-              </ul>
-            </div>
-
-            {/* Column 3 */}
-            <div className="space-y-4">
-              <div className="h-1 bg-zinc-700 w-12" />
-              <h3 className="text-2xl font-black uppercase text-white tracking-tight">Brand Impact</h3>
-              <ul className="space-y-3 text-zinc-400 text-sm sm:text-base">
-                <li>• Social media amplification</li>
-                <li>• On-site interactions</li>
-                <li>• PR & press coverage</li>
-                <li>• Internal communications</li>
-                <li>• Hospitality activations</li>
-                <li>• Digital & mobile promotions</li>
-                <li>• Traditional advertising (magazines)</li>
-                <li>• B2B networking</li>
-                <li>• Sales promotion offers</li>
-                <li>• Direct marketing</li>
-              </ul>
-            </div>
+            {aboutData.valueStructure.columns.map((column: any, idx: number) => (
+              <div key={idx} className="space-y-3 sm:space-y-4">
+                <div className={`h-1 ${idx === 0 ? 'bg-red-600 w-10 sm:w-12' : idx === 1 ? 'bg-orange-500 w-12' : 'bg-zinc-700 w-12'}`} />
+                <h3 className="text-xl sm:text-2xl font-black uppercase text-white tracking-tight">{column.title}</h3>
+                <ul className="space-y-3 text-zinc-400 text-sm sm:text-base">
+                  {column.items.map((item: string, itemIdx: number) => (
+                    <li key={itemIdx}>• {item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -671,9 +575,9 @@ export default function AboutPage() {
 
         <div className="container mx-auto px-4 max-w-4xl relative z-10">
           <div className="text-center mb-12 space-y-2">
-            <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">CONNECT WITH US</span>
+            <span className="text-red-500 text-xs sm:text-sm tracking-[0.3em] font-extrabold uppercase block">{aboutData.contact.sectionLabel}</span>
             <Shuffle
-              text="Get In Touch"
+              text={aboutData.contact.sectionTitle}
               tag="h2"
               className="text-4xl sm:text-6xl font-black text-white uppercase tracking-tighter leading-none"
               textAlign="center"
@@ -685,23 +589,23 @@ export default function AboutPage() {
             {/* Contact Details Column */}
             <div className="md:col-span-5 space-y-4 sm:space-y-6">
               <div className="p-6 bg-zinc-900/40 border border-zinc-900 rounded-2xl">
-                <span className="text-zinc-500 text-[10px] tracking-widest font-black uppercase block">EMAIL</span>
-                <a href="mailto:johannemmanuel.partnerships@gmail.com" className="text-white hover:text-red-500 font-extrabold text-sm sm:text-base mt-1 block break-all">
-                  johannemmanuel.partnerships@gmail.com
+                <span className="text-zinc-500 text-[10px] tracking-widest font-black uppercase block">{aboutData.contact.details.email.label}</span>
+                <a href={aboutData.contact.details.email.href} className="text-white hover:text-red-500 font-extrabold text-sm sm:text-base mt-1 block break-all">
+                  {aboutData.contact.details.email.value}
                 </a>
               </div>
 
               <div className="p-6 bg-zinc-900/40 border border-zinc-900 rounded-2xl">
-                <span className="text-zinc-500 text-[10px] tracking-widest font-black uppercase block">PHONE</span>
-                <a href="tel:+919840911406" className="text-white hover:text-red-500 font-extrabold text-sm sm:text-base mt-1 block">
-                  +91 9840911406
+                <span className="text-zinc-500 text-[10px] tracking-widest font-black uppercase block">{aboutData.contact.details.phone.label}</span>
+                <a href={aboutData.contact.details.phone.href} className="text-white hover:text-red-500 font-extrabold text-sm sm:text-base mt-1 block">
+                  {aboutData.contact.details.phone.value}
                 </a>
               </div>
 
               <div className="p-6 bg-zinc-900/40 border border-zinc-900 rounded-2xl">
-                <span className="text-zinc-500 text-[10px] tracking-widest font-black uppercase block">INSTAGRAM</span>
-                <a href="https://instagram.com/johann_emmanuel11" target="_blank" rel="noreferrer" className="text-white hover:text-red-500 font-extrabold text-sm sm:text-base mt-1 block">
-                  @johann_emmanuel11
+                <span className="text-zinc-500 text-[10px] tracking-widest font-black uppercase block">{aboutData.contact.details.instagram.label}</span>
+                <a href={aboutData.contact.details.instagram.href} target="_blank" rel="noreferrer" className="text-white hover:text-red-500 font-extrabold text-sm sm:text-base mt-1 block">
+                  {aboutData.contact.details.instagram.value}
                 </a>
               </div>
             </div>
@@ -709,30 +613,30 @@ export default function AboutPage() {
             {/* Simple Contact Form Column */}
             <div className="md:col-span-7 bg-zinc-900/20 border border-zinc-900 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 space-y-3 sm:space-y-4">
               <div>
-                <label className="text-[10px] text-zinc-500 font-extrabold tracking-wider uppercase block mb-1">Company / Brand Name</label>
+                <label className="text-[10px] text-zinc-500 font-extrabold tracking-wider uppercase block mb-1">{aboutData.contact.form.companyLabel}</label>
                 <input
                   type="text"
-                  placeholder="e.g. Red Bull Racing"
+                  placeholder={aboutData.contact.form.companyPlaceholder}
                   className="w-full bg-zinc-950 border border-zinc-900 focus:border-red-500 rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 text-sm text-white placeholder-zinc-700 outline-none transition"
                   suppressHydrationWarning
                 />
               </div>
 
               <div>
-                <label className="text-[10px] text-zinc-500 font-extrabold tracking-wider uppercase block mb-1">Contact Person</label>
+                <label className="text-[10px] text-zinc-500 font-extrabold tracking-wider uppercase block mb-1">{aboutData.contact.form.contactLabel}</label>
                 <input
                   type="text"
-                  placeholder="e.g. John Doe"
+                  placeholder={aboutData.contact.form.contactPlaceholder}
                   className="w-full bg-zinc-950 border border-zinc-900 focus:border-red-500 rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 text-sm text-white placeholder-zinc-700 outline-none transition"
                   suppressHydrationWarning
                 />
               </div>
 
               <div>
-                <label className="text-[10px] text-zinc-500 font-extrabold tracking-wider uppercase block mb-1">Sponsorship Interest / Message</label>
+                <label className="text-[10px] text-zinc-500 font-extrabold tracking-wider uppercase block mb-1">{aboutData.contact.form.messageLabel}</label>
                 <textarea
                   rows={4}
-                  placeholder="Tell us about your campaign goals..."
+                  placeholder={aboutData.contact.form.messagePlaceholder}
                   className="w-full bg-zinc-950 border border-zinc-900 focus:border-red-500 rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 text-sm text-white placeholder-zinc-700 outline-none transition resize-none"
                   suppressHydrationWarning
                 />
@@ -740,10 +644,10 @@ export default function AboutPage() {
 
               <button
                 type="button"
-                onClick={() => alert("Thank you for your interest! We will get in touch with you shortly.")}
+                onClick={() => alert(aboutData.contact.form.successMessage)}
                 className="w-full py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl transition duration-300 text-[10px] sm:text-xs tracking-widest uppercase cursor-pointer"
               >
-                Send Proposal Inquiry
+                {aboutData.contact.form.submitText}
               </button>
             </div>
           </div>

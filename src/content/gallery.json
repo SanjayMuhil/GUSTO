@@ -1,0 +1,74 @@
+{
+  "sections": [
+    {
+      "title": "Race Day",
+      "images": [
+        { "src": "/2.jpeg", "alt": "Race Day - Image 1" },
+        { "src": "/2.jpeg", "alt": "Race Day - Image 2" },
+        { "src": "/2.jpeg", "alt": "Race Day - Image 3" },
+        { "src": "/2.jpeg", "alt": "Race Day - Image 4" },
+        { "src": "/2.jpeg", "alt": "Race Day - Image 5" },
+        { "src": "/2.jpeg", "alt": "Race Day - Image 6" }
+      ]
+    },
+    {
+      "title": "Pit Stop",
+      "images": [
+        { "src": "/3.jpeg", "alt": "Pit Stop - Image 1" },
+        { "src": "/3.jpeg", "alt": "Pit Stop - Image 2" },
+        { "src": "/3.jpeg", "alt": "Pit Stop - Image 3" },
+        { "src": "/3.jpeg", "alt": "Pit Stop - Image 4" },
+        { "src": "/3.jpeg", "alt": "Pit Stop - Image 5" },
+        { "src": "/3.jpeg", "alt": "Pit Stop - Image 6" }
+      ]
+    },
+    {
+      "title": "Victory Lap",
+      "images": [
+        { "src": "/4.jpeg", "alt": "Victory Lap - Image 1" },
+        { "src": "/4.jpeg", "alt": "Victory Lap - Image 2" },
+        { "src": "/4.jpeg", "alt": "Victory Lap - Image 3" },
+        { "src": "/4.jpeg", "alt": "Victory Lap - Image 4" },
+        { "src": "/4.jpeg", "alt": "Victory Lap - Image 5" },
+        { "src": "/4.jpeg", "alt": "Victory Lap - Image 6" }
+      ]
+    },
+    {
+      "title": "Paddock",
+      "images": [
+        { "src": "/5.jpeg", "alt": "Paddock - Image 1" },
+        { "src": "/5.jpeg", "alt": "Paddock - Image 2" },
+        { "src": "/5.jpeg", "alt": "Paddock - Image 3" },
+        { "src": "/5.jpeg", "alt": "Paddock - Image 4" },
+        { "src": "/5.jpeg", "alt": "Paddock - Image 5" },
+        { "src": "/5.jpeg", "alt": "Paddock - Image 6" }
+      ]
+    },
+    {
+      "title": "Grid Walk",
+      "images": [
+        { "src": "/6.jpeg", "alt": "Grid Walk - Image 1" },
+        { "src": "/6.jpeg", "alt": "Grid Walk - Image 2" },
+        { "src": "/6.jpeg", "alt": "Grid Walk - Image 3" },
+        { "src": "/6.jpeg", "alt": "Grid Walk - Image 4" },
+        { "src": "/6.jpeg", "alt": "Grid Walk - Image 5" },
+        { "src": "/6.jpeg", "alt": "Grid Walk - Image 6" }
+      ]
+    },
+    {
+      "title": "Highlights",
+      "images": [
+        { "src": "/2.jpeg", "alt": "Highlights - Image 1" },
+        { "src": "/2.jpeg", "alt": "Highlights - Image 2" },
+        { "src": "/2.jpeg", "alt": "Highlights - Image 3" },
+        { "src": "/2.jpeg", "alt": "Highlights - Image 4" },
+        { "src": "/2.jpeg", "alt": "Highlights - Image 5" },
+        { "src": "/2.jpeg", "alt": "Highlights - Image 6" }
+      ]
+    }
+  ],
+  "pagination": {
+    "previous": "Previous Page",
+    "next": "Next Page"
+  }
+}

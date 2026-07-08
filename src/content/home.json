@@ -1,0 +1,286 @@
+{
+  "hero": {
+    "eyebrow": "",
+    "title": {
+      "line1": "JOHANN",
+      "line2": "EMMANUEL"
+    },
+    "subtitle": "Born April 11, 2006 in Chennai, India; started motorsport at age six; only Indian rider trained across top European and Asian championships.",
+    "ctaPrimary": {
+      "text": "Career Results",
+      "href": "/results"
+    },
+    "ctaSecondary": {
+      "text": "CONTACT",
+      "href": "/about#contact"
+    }
+  },
+  "champions": {
+    "sectionLabel": "LEGACY OF SPEED",
+    "sectionTitle": "2025 Champions",
+    "cardLabels": {
+      "telemetry": "Telemetry",
+      "wins": "Wins",
+      "podiums": "Podiums",
+      "bestLap": "Best Lap",
+      "role": "Role"
+    },
+    "controls": {
+      "previousAriaLabel": "Previous card",
+      "nextAriaLabel": "Next card"
+    },
+    "items": [
+      {
+        "class": "ASB1000",
+        "name": "Yuki Kunii",
+        "team": "SDG MS Harc-Pro. Honda",
+        "country": "Japan",
+        "number": "92",
+        "image": "/2.jpeg",
+        "gradient": "from-purple-950 via-fuchsia-800 to-fuchsia-600",
+        "stats": {
+          "wins": "12",
+          "podiums": "18",
+          "lap": "1:35.244",
+          "role": "Team Leader"
+        }
+      },
+      {
+        "class": "SS600",
+        "name": "Apiwath Wongthananon",
+        "team": "Yamaha Tekhne Racing Team Asean",
+        "country": "Thailand",
+        "number": "24",
+        "image": "/3.jpeg",
+        "gradient": "from-blue-950 via-cyan-800 to-cyan-600",
+        "stats": {
+          "wins": "8",
+          "podiums": "14",
+          "lap": "1:38.102",
+          "role": "Precision Expert"
+        }
+      },
+      {
+        "class": "AP250",
+        "name": "Herjun Atna Firdaus",
+        "team": "Astra Honda Racing Team",
+        "country": "Indonesia",
+        "number": "46",
+        "image": "/4.jpeg",
+        "gradient": "from-emerald-950 via-green-850 to-emerald-600",
+        "stats": {
+          "wins": "6",
+          "podiums": "11",
+          "lap": "1:40.312",
+          "role": "Rising Star"
+        }
+      },
+      {
+        "class": "UB150",
+        "name": "Md Akid Aziz",
+        "team": "UMA Racing YAMAHA Maju Motor Asia Team",
+        "country": "Malaysia",
+        "number": "13",
+        "image": "/5.jpeg",
+        "gradient": "from-indigo-950 via-indigo-850 to-blue-700",
+        "stats": {
+          "wins": "10",
+          "podiums": "16",
+          "lap": "1:45.922",
+          "role": "Underbone King"
+        }
+      },
+      {
+        "class": "TVS ASIA OMC",
+        "name": "Hiroki Ono",
+        "team": "TVS Racing",
+        "country": "Japan",
+        "number": "1",
+        "image": "/6.jpeg",
+        "gradient": "from-red-950 via-red-800 to-orange-600",
+        "stats": {
+          "wins": "14",
+          "podiums": "20",
+          "lap": "1:42.155",
+          "role": "TVS Champion"
+        }
+      }
+    ]
+  },
+  "categories": {
+    "sectionLabel": "THE CATEGORIES",
+    "sectionTitle": "WHERE ASIANS DREAM.",
+    "labels": {
+      "activeClass": "Active Class",
+      "championship": "CHAMPIONSHIP",
+      "season": "SEASON"
+    },
+    "items": [
+      {
+        "id": 1,
+        "name": "ASB1000",
+        "desc": "The pinnacle of Asian motorsports. High-octane 1000cc superbikes showcasing peak rider precision and manufacturer engineering.",
+        "image": "/2.jpeg",
+        "championship": "Asia Road Racing Championship",
+        "years": "2025/2026"
+      },
+      {
+        "id": 2,
+        "name": "SS600",
+        "desc": "The ultimate proving ground for tactical skill and consistency. Mid-weight supersports demanding perfection.",
+        "image": "/3.jpeg",
+        "championship": "Qatar Superstock & ARRC",
+        "years": "2025/2026"
+      },
+      {
+        "id": 3,
+        "name": "AP250",
+        "desc": "The launchpad for Asia's next racing generation. Fast, competitive production-based racing.",
+        "image": "/4.jpeg",
+        "championship": "Asia Road Racing Championship",
+        "years": "2025/2026"
+      },
+      {
+        "id": 4,
+        "name": "UB150",
+        "desc": "Authentic regional passion and mass-market reach. Ground-level racing featuring highly modified underbone machines.",
+        "image": "/5.jpeg",
+        "championship": "Asia Road Racing Championship",
+        "years": "2025/2026"
+      },
+      {
+        "id": 5,
+        "name": "TVS ASIA OMC",
+        "desc": "A global showcase of mechanical reliability and emerging talent riding uniform race-tuned TVS Apache RR 310s.",
+        "image": "/6.jpeg",
+        "championship": "TVS Asia One Make Championship",
+        "years": "2025/2026"
+      }
+    ]
+  },
+  "seasonSchedule": {
+    "title": "2026 Calendar",
+    "subtitle": "Season Schedule",
+    "defaultCategory": "rounds",
+    "categories": [
+      {
+        "id": "rounds",
+        "label": "All Rounds",
+        "images": [
+          { "src": "/2.jpeg", "alt": "Season Schedule", "caption": "2026 CALENDAR" },
+          { "src": "/3.jpeg", "alt": "Sepang International Circuit", "caption": "ROUND 1 — SEPANG" },
+          { "src": "/4.jpeg", "alt": "Chang International Circuit", "caption": "ROUND 2 — CHANG" },
+          { "src": "/5.jpeg", "alt": "Mobility Resort Motegi", "caption": "ROUND 3 — MOTEGI" },
+          { "src": "/6.jpeg", "alt": "Mandalika International Circuit", "caption": "ROUND 4 — MANDALIKA" },
+          { "src": "/2.jpeg", "alt": "Sepang International Circuit", "caption": "ROUND 5 — SEPANG" },
+          { "src": "/3.jpeg", "alt": "Chang International Circuit", "caption": "ROUND 6 — CHANG" }
+        ]
+      },
+      {
+        "id": "asb1000",
+        "label": "ASB1000",
+        "images": [
+          { "src": "/2.jpeg", "alt": "ASB1000 Racer", "caption": "YUKI KUNII — SDG MS HARC-PRO" }
+        ]
+      },
+      {
+        "id": "ss600",
+        "label": "SS600",
+        "images": [
+          { "src": "/3.jpeg", "alt": "SS600 Racer", "caption": "APIWATH WONG — YAMAHA TEKHNE" }
+        ]
+      },
+      {
+        "id": "ap250",
+        "label": "AP250",
+        "images": [
+          { "src": "/4.jpeg", "alt": "AP250 Racer", "caption": "HERJUN ATNA — ASTRa HONDA" }
+        ]
+      },
+      {
+        "id": "ub150",
+        "label": "UB150",
+        "images": [
+          { "src": "/5.jpeg", "alt": "UB150 Racer", "caption": "MD AKID AZIZ — UMA RACING" }
+        ]
+      }
+    ]
+  },
+  "latestUpdates": {
+    "sectionLabel": "LATEST STORIES",
+    "sectionTitle": "Latest Updates"
+  },
+  "bottomHero": {
+    "sectionLabel": "EXPERIENCE THE RACING LEGACY",
+    "sectionTitle": {
+      "line1": "BEYOND THE",
+      "line2": "FINISH LINE"
+    },
+    "paragraph": "Feel the raw adrenaline of the Asia Road Racing Championship. Access the latest paddock media highlights, stay up to date with official stories, and review season standings.",
+    "ctaPrimary": {
+      "text": "EXPLORE GALLERY",
+      "href": "/gallery"
+    },
+    "ctaSecondary": {
+      "text": "LATEST UPDATES",
+      "href": "/updates"
+    },
+    "backgroundImage": "/IMG_8541.JPG"
+  },
+  "newsItems": [
+    {
+      "image": "/5.jpeg",
+      "title": "2026 KTM Cup Champion",
+      "subtitle": "Johann seals the title in a dominant season finale",
+      "handle": "#KTMCup2026",
+      "borderColor": "#EF4444",
+      "gradient": "linear-gradient(145deg, #EF4444, #000)",
+      "url": "/updates"
+    },
+    {
+      "image": "/3.jpeg",
+      "title": "Qatar Superstock 600 Champion",
+      "subtitle": "First Indian rider to win the title, 2025 season",
+      "handle": "#QatarSTK600",
+      "borderColor": "#F97316",
+      "gradient": "linear-gradient(160deg, #F97316, #000)",
+      "url": "/updates"
+    },
+    {
+      "image": "/5.jpeg",
+      "title": "ARRC AP250 Campaign",
+      "subtitle": "Backed by Honda Racing India on the Asian stage",
+      "handle": "#ARRC2025",
+      "borderColor": "#F59E0B",
+      "gradient": "linear-gradient(180deg, #F59E0B, #000)",
+      "url": "/updates"
+    },
+    {
+      "image": "/joh.png",
+      "title": "Lusail Lap Record",
+      "subtitle": "New SSP300 lap record set in Qatar",
+      "handle": "#LusailRecord",
+      "borderColor": "#DC2626",
+      "gradient": "linear-gradient(200deg, #DC2626, #000)",
+      "url": "/updates"
+    },
+    {
+      "image": "/5.jpeg",
+      "title": "Estoril Wet Race — P4",
+      "subtitle": "European Talent Cup standout finish in Portugal",
+      "handle": "#EuropeanTalentCup",
+      "borderColor": "#EA580C",
+      "gradient": "linear-gradient(220deg, #EA580C, #000)",
+      "url": "/updates"
+    },
+    {
+      "image": "/5.jpeg",
+      "title": "Thailand Talent Cup",
+      "subtitle": "Selected for the regional development series",
+      "handle": "#ThailandTalentCup",
+      "borderColor": "#FB923C",
+      "gradient": "linear-gradient(240deg, #FB923C, #000)",
+      "url": "/updates"
+    }
+  ]
+}

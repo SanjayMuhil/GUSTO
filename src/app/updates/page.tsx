@@ -5,81 +5,9 @@ import Shuffle from "../../components/Shuffle";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Footer from "../../components/Footer";
+import updatesData from "../../content/updates.json";
 
-const newsItems = [
-  {
-    title: "SIX AND COUNTING FOR HAFIZH",
-    date: "June 14, 2026",
-    tag: "ASB1000",
-    description:
-      "Malaysia's Hafizh Syahrin Abdullah of JDT RACING TEAM continued his remarkable run of form in the ASB1000 category, producing another dominant performance under pressure.",
-    image: "/2.jpeg",
-  },
-  {
-    title: "HIKARI COMPLETED THE CLEAN SWEEP",
-    date: "June 14, 2026",
-    tag: "SS600",
-    description:
-      "The SS600 action at Mobility Resort Motegi, Japan, saw local favourite Hikari Okubo of SANWA RACING TEAM complete a perfect weekend with a clean sweep.",
-    image: "/3.jpeg",
-  },
-  {
-    title: "HIROKI SEALED DREAM HOME DOUBLE",
-    date: "June 14, 2026",
-    tag: "AP250",
-    description:
-      "The AP250 class at Mobility Resort Motegi saw Japan's Hiroki Ono of HONDA RACING VIETNAM complete a dream weekend with a stunning double victory on home soil.",
-    image: "/home-hero.png",
-  },
-  {
-    title: "SYIRAT'S STUNNING MOTEGI VICTORY",
-    date: "June 14, 2026",
-    tag: "UB150",
-    description:
-      "The UB150 class saw Syirat Sauki of YAMAHA LFN HP969 INDONESIA RACING TEAM emerge victorious in Race 2 at Mobility Resort Motegi.",
-    image: "/4.jpeg",
-  },
-  {
-    title: "PERFECT STRATEGY PUT VICENTE ON TOP",
-    date: "June 14, 2026",
-    tag: "TVS ASIA OMC",
-    description:
-      "TVS Racing International Championship at Round 3 of the FIM Asia Road Racing Championship 2026 at Mobility Resort Motegi, Japan, delivered high-octane action.",
-    image: "/5.jpeg",
-  },
-  {
-    title: "FIFTH STRAIGHT FOR HAFIZH",
-    date: "June 13, 2026",
-    tag: "ASB1000",
-    description:
-      "Hafizh Syahrin Abdullah of JDT RACING TEAM continued his remarkable run in Round 3 of FIM Asia Road Racing with a commanding fifth consecutive victory.",
-    image: "/6.jpeg",
-  },
-  {
-    title: "HIKARI DELIGHTED HOME CROWD IN MOTEGI",
-    date: "June 13, 2026",
-    tag: "SS600",
-    description:
-      "The SS600 category delivered a captivating battle at Mobility Resort Motegi as Japan's wildcard rider Hikari Okubo of SANWA RACING delighted the home crowd.",
-    image: "/hero-racer.jpg",
-  },
-  {
-    title: "HIROKI CLAIMED HOME GLORY",
-    date: "June 13, 2026",
-    tag: "AP250",
-    description:
-      "Home hero Hiroki Ono of HONDA RACING VIETNAM produced a commanding performance under pressure to secure a memorable victory in front of his fans.",
-    image: "/4.jpeg",
-  },
-  {
-    title: "JOHN ENDED 3 YEAR WAIT",
-    date: "June 13, 2026",
-    tag: "UB150",
-    description:
-      "The UB150 class delivered an unforgettable spectacle at Mobility Resort Motegi, Japan as John Emerson Inguito of 4S1M EVO YAMAHA ended his three-year wait for victory.",
-    image: "/2.jpeg",
-  },
-];
+const newsItems = updatesData.newsItems;
 
 export default function UpdatesPage() {
   const shouldReduceMotion = useReducedMotion();
@@ -112,7 +40,7 @@ export default function UpdatesPage() {
             </div>
           </div>
           <div className="mt-4 sm:mt-6 text-center">
-            <span className="text-[10px] text-zinc-500 tracking-[0.3em] font-black uppercase block">Race Highlights Reel</span>
+            <span className="text-[10px] text-zinc-500 tracking-[0.3em] font-black uppercase block">{updatesData.videoSection.label}</span>
           </div>
         </motion.section>
 
@@ -122,7 +50,7 @@ export default function UpdatesPage() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {newsItems.map((item, idx) => (
+          {newsItems.map((item: any, idx: number) => (
             <motion.article
               key={idx}
               initial={{ opacity: 0, y: 30 }}
@@ -158,7 +86,7 @@ export default function UpdatesPage() {
                   </p>
                 </div>
                 <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-zinc-900/60 flex items-center justify-between">
-                  <span className="text-[10px] tracking-widest text-zinc-500 font-extrabold uppercase">Idemitsu FIM Asia Road Racing Championship</span>
+                  <span className="text-[10px] tracking-widest text-zinc-500 font-extrabold uppercase">{updatesData.championshipName}</span>
                   <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:bg-red-600 group-hover:text-white transition duration-300 text-xs sm:text-sm">→</span>
                 </div>
               </div>
@@ -172,7 +100,7 @@ export default function UpdatesPage() {
             type="button"
             className="px-3 sm:px-4 py-2 rounded-xl border border-zinc-900 bg-zinc-950 text-zinc-500 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:border-red-600/30 hover:text-white transition duration-300"
           >
-            Previous Page
+            {updatesData.pagination.previous}
           </button>
           <button
             type="button"
@@ -196,7 +124,7 @@ export default function UpdatesPage() {
             type="button"
             className="px-3 sm:px-4 py-2 rounded-xl border border-zinc-900 bg-zinc-950 text-zinc-500 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:border-red-600/30 hover:text-white transition duration-300"
           >
-            Next Page
+            {updatesData.pagination.next}
           </button>
         </div>
       </main>

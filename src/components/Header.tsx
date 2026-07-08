@@ -5,14 +5,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import GooeyNav from "./GooeyNav";
-
-const navItems = [
-  { href: "/about", label: "ABOUT" },
-  { href: "/updates", label: "UPDATES" },
-  { href: "/gallery", label: "GALLERY" },
-  { href: "/upcoming-races", label: "UPCOMING RACES" },
-  { href: "/results", label: "RESULTS" },
-];
+import navigationData from "../content/navigation.json";
+const navItems = navigationData.items;
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

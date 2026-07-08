@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import siteData from "../content/site.json";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Idemitsu FIM Asia Road Racing Championship",
-  description: "Asia's biggest road racing championship - Home of the Asian Champions",
+  title: siteData.title,
+  description: siteData.description,
 };
 
 export default function RootLayout({

@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "href": "/about", "label": "ABOUT" },
+    { "href": "/updates", "label": "UPDATES" },
+    { "href": "/gallery", "label": "GALLERY" },
+    { "href": "/upcoming-races", "label": "UPCOMING RACES" },
+    { "href": "/results", "label": "RESULTS" }
+  ]
+}
