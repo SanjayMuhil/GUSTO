@@ -326,33 +326,42 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+{/* 4. Achievements Section */}
+<section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900 overflow-hidden">
+  <div className="container mx-auto px-4 max-w-7xl">
+    <div className="text-center mb-16 space-y-2">
+      <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">
+        {aboutData.achievements.sectionLabel}
+      </span>
 
-      {/* 4. Achievements Section */}
-      <section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900 overflow-hidden">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.achievements.sectionLabel}</span>
-            <Shuffle
-              text={aboutData.achievements.sectionTitle}
-              tag="h2"
-              className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
-              textAlign="center"
-              duration={0.4}
-            />
-          </div>
+      <Shuffle
+        text={aboutData.achievements.sectionTitle}
+        tag="h2"
+        className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
+        textAlign="center"
+        duration={0.4}
+      />
+    </div>
 
-          <div className="relative w-full h-[550px] overflow-hidden select-none">
-            <CircularGallery
-              items={aboutData.achievements.galleryItems.map((item: any) => ({ image: item.image, text: item.text }))}
-              bend={3}
-              textColor="#ffffff"
-              borderRadius={0.05}
-              scrollEase={0.03}
-              font="bold 24px Figtree"
-            />
-          </div>
-        </div>
-      </section>
+    <div className="relative w-full h-[550px] overflow-hidden select-none">
+      <CircularGallery
+        items={aboutData.achievements.galleryItems.map((item: any) => ({
+          image: item.image,
+          text: item.text,
+        }))}
+        bend={3}
+        textColor="#ffffff"
+        borderRadius={0.05}
+        scrollEase={0.03}
+        font={
+          typeof window !== "undefined" && window.innerWidth < 640
+            ? "bold 14px Figtree"
+            : "bold 24px Figtree"
+        }
+      />
+    </div>
+  </div>
+</section>
 
       {/* 5. Career Highlights Timeline */}
       <section className="py-16 sm:py-20 md:py-28 bg-black border-b border-zinc-900">
