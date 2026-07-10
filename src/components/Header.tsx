@@ -27,12 +27,21 @@ export default function Header() {
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl py-2 sm:py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center flex-shrink-0 transition-transform duration-300 hover:scale-105">
           <Image
+<<<<<<< HEAD
             src="/LOGO.png"
             alt="CUSTO Racing Logo"
             width={160}
             height={64}
             priority
             className="  max-w-[90px] sm:max-w-[110px] md:max-w-[130px] lg:max-w-[150px]"
+=======
+            src="/Johi logo 1.png"
+            alt="CUSTO Racing Logo"
+            width={126}
+            height={90}
+            priority
+            className=" max-h-[40px] sm:max-h-[50px] md:max-h-[60px]"
+>>>>>>> 7aaa862 (update new)
           />
         </Link>
 

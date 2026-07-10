@@ -334,6 +334,7 @@ export default function AboutPage() {
         {aboutData.achievements.sectionLabel}
       </span>
 
+<<<<<<< HEAD
       <Shuffle
         text={aboutData.achievements.sectionTitle}
         tag="h2"
@@ -343,6 +344,25 @@ export default function AboutPage() {
       />
     </div>
 
+=======
+     {/* 4. Achievements Section */}
+<section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900 overflow-hidden">
+  <div className="container mx-auto px-4 max-w-7xl">
+    <div className="text-center mb-16 space-y-2">
+      <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">
+        {aboutData.achievements.sectionLabel}
+      </span>
+
+      <Shuffle
+        text={aboutData.achievements.sectionTitle}
+        tag="h2"
+        className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
+        textAlign="center"
+        duration={0.4}
+      />
+    </div>
+
+>>>>>>> 7aaa862 (update new)
     <div className="relative w-full h-[550px] overflow-hidden select-none">
       <CircularGallery
         items={aboutData.achievements.galleryItems.map((item: any) => ({
@@ -355,7 +375,11 @@ export default function AboutPage() {
         scrollEase={0.03}
         font={
           typeof window !== "undefined" && window.innerWidth < 640
+<<<<<<< HEAD
             ? "bold 14px Figtree"
+=======
+            ? "bold 10px Figtree"
+>>>>>>> 7aaa862 (update new)
             : "bold 24px Figtree"
         }
       />

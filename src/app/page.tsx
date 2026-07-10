@@ -420,8 +420,13 @@ export default function Home() {
     delay={0.2 + idx * 0.1}
     className="flex-shrink-0 max-w-[95vw]"
     style={{
+<<<<<<< HEAD
       height: "clamp(400px, 65vw, 600px)",
       width: `calc((100% - ${visibleCards > 1 ? '24px' : '0px'} * (${visibleCards} - 1)) / ${visibleCards})`
+=======
+      height: visibleCards === 1 ? "clamp(430px, 118vw, 640px)" : "clamp(260px, 50vw, 500px)",
+      width: `calc((100% - ${visibleCards > 1 ? '24px' : '16px'} * (${visibleCards} - 1)) / ${visibleCards})`
+>>>>>>> 7aaa862 (update new)
     }}
   >
     <PixelTransition
@@ -436,27 +441,50 @@ export default function Home() {
         />
       }
       secondContent={
+<<<<<<< HEAD
         <div className="flex flex-col justify-between h-full p-4 sm:p-5 md:p-6 bg-zinc-950">
           <div>
             <p className="text-[10px] sm:text-xs font-black uppercase tracking-[0.35em] text-red-200">{homeData.champions.cardLabels.telemetry}</p>
             <h3 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-black uppercase tracking-tight text-white">{champion.name}</h3>
             <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-zinc-200">{champion.country} • {champion.team}</p>
+=======
+        <div className="flex flex-col justify-between h-full p-4 sm:p-4 md:p-6 bg-zinc-950">
+          <div>
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-red-200">{homeData.champions.cardLabels.telemetry}</p>
+              <span className="hidden max-sm:inline-flex text-[10px] font-black uppercase tracking-[0.2em] text-red-400 border border-red-500/30 rounded-full px-2 py-0.5 whitespace-nowrap">{champion.class}</span>
+            </div>
+            <h3 className="mt-2 sm:mt-3 text-2xl sm:text-2xl font-black uppercase tracking-tight text-white leading-tight">{champion.name}</h3>
+            <p className="mt-1 sm:mt-2 text-sm sm:text-sm text-zinc-200">{champion.country} • {champion.team}</p>
+>>>>>>> 7aaa862 (update new)
           </div>
           <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm">
-            <div className="rounded-2xl border border-white/10 bg-black/20 px-2 sm:px-3 py-2 sm:py-3">
+            <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-3 py-3 sm:py-3">
               <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.wins}</p>
+<<<<<<< HEAD
               <p className="mt-1 text-xl sm:text-2xl font-black text-white">{champion.stats.wins}</p>
+=======
+              <p className="mt-1 text-xl sm:text-xl font-black text-white">{champion.stats.wins}</p>
+>>>>>>> 7aaa862 (update new)
             </div>
-            <div className="rounded-2xl border border-white/10 bg-black/20 px-2 sm:px-3 py-2 sm:py-3">
+            <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-3 py-3 sm:py-3">
               <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.podiums}</p>
+<<<<<<< HEAD
               <p className="mt-1 text-xl sm:text-2xl font-black text-white">{champion.stats.podiums}</p>
+=======
+              <p className="mt-1 text-xl sm:text-xl font-black text-white">{champion.stats.podiums}</p>
+>>>>>>> 7aaa862 (update new)
             </div>
-            <div className="rounded-2xl border border-white/10 bg-black/20 px-2 sm:px-3 py-2 sm:py-3 col-span-2">
+            <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-3 py-3 sm:py-3 col-span-2">
               <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.bestLap}</p>
+<<<<<<< HEAD
               <p className="mt-1 text-xl sm:text-2xl font-black text-white">{champion.stats.lap}</p>
+=======
+              <p className="mt-1 text-xl sm:text-xl font-black text-white">{champion.stats.lap}</p>
+>>>>>>> 7aaa862 (update new)
             </div>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-zinc-200">
+          <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-4 py-3 sm:py-3 text-xs sm:text-sm text-zinc-200">
             <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-400">{homeData.champions.cardLabels.role}</span>
             <p className="mt-1 font-semibold">{champion.stats.role}</p>
           </div>
@@ -521,7 +549,11 @@ export default function Home() {
 
           <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 max-w-6xl mx-auto min-h-[320px] sm:min-h-[420px]">
             {/* Left Column: Category Description Details */}
+<<<<<<< HEAD
             <FadeIn delay={0.3} className="w-full lg:w-5/12 space-y-4 sm:space-y-6 flex flex-col justify-center text-left min-h-[200px] sm:min-h-[250px] lg:pr-8">
+=======
+            <div className="w-full lg:w-5/12 space-y-4 sm:space-y-6 flex flex-col justify-center items-center lg:items-start text-center lg:text-left min-h-[200px] sm:min-h-[250px] lg:pr-8 order-1 lg:order-1">
+>>>>>>> 7aaa862 (update new)
               <div className="inline-flex items-center gap-3">
                  <span className="text-[10px] sm:text-xs bg-red-600/10 text-red-500 font-black px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-red-500/20 uppercase tracking-widest">
                   {homeData.categories.labels.activeClass}
@@ -543,7 +575,7 @@ export default function Home() {
               </div>
 
               {/* Description box with subtle top red accent border */}
-              <div className="border-l-2 border-red-600 pl-4 sm:pl-6 py-2 min-h-[80px] sm:min-h-[100px] flex items-center">
+                <div className="border-l-2 border-red-600 pl-4 sm:pl-6 lg:pl-6 py-2 min-h-[80px] sm:min-h-[100px] flex items-center max-lg:border-l-0 max-lg:pl-0">
                 <p className="text-zinc-400 text-sm sm:text-base leading-relaxed font-medium">
                   {categoriesData[activeCategory].desc}
                 </p>
@@ -562,6 +594,7 @@ export default function Home() {
               </div>
             </FadeIn>
 
+<<<<<<< HEAD
             {/* Right Column: Mobile Grid / Desktop CardSwap */}
             {isMobile ? (
               <FadeIn delay={0.3} className="w-full flex justify-center items-center py-4 sm:py-6">
@@ -583,6 +616,48 @@ export default function Home() {
                           <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-6 flex flex-col gap-1 sm:gap-2">
                             <span className="text-[10px] sm:text-xs text-red-500 font-black uppercase tracking-[0.3em]">
                               {cat.championship}
+=======
+            {/* Right Column: CardSwap */}
+            <div className="hidden lg:flex w-full lg:w-7/12 justify-center items-center overflow-visible py-4 sm:py-6 order-2 lg:order-2">
+              <div style={{ minHeight: '420px', height: cardSwapHeight + 80, position: 'relative', width: '100%', maxWidth: cardSwapWidth + 100 }}>
+                <CardSwap
+                  width={cardSwapWidth}
+                  height={cardSwapHeight}
+                  cardDistance={40}
+                  verticalDistance={50}
+                  delay={4000}
+                  pauseOnHover={false}
+                  onCardClick={() => {}}
+                  skewAmount={4}
+                  easing="elastic"
+                >
+                  {categoriesData.map((cat: any) => (
+                    <Card key={cat.name} className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={cat.image}
+                          alt={cat.name}
+                          fill
+                          className="object-cover"
+                          priority={false}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent" />
+                        <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 md:p-6 flex flex-col gap-1 sm:gap-2">
+                          <span className="text-[10px] text-red-500 font-black uppercase tracking-[0.3em]">
+                            {cat.championship}
+                          </span>
+                          <h3 className="text-lg sm:text-xl md:text-2xl font-black text-white uppercase tracking-tight leading-none">
+                            {cat.name}
+                          </h3>
+                          <p className="text-[10px] sm:text-xs text-zinc-300 leading-relaxed line-clamp-2">
+                            {cat.desc}
+                          </p>
+                          <div className="flex items-center gap-3 pt-1 sm:pt-2">
+                            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
+                              Season {cat.years}
+>>>>>>> 7aaa862 (update new)
                             </span>
                             <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-none">
                               {cat.name}
@@ -598,6 +673,7 @@ export default function Home() {
                           </div>
                         </div>
                       </div>
+<<<<<<< HEAD
                     ))}
                   </div>
                 </div>
@@ -652,6 +728,51 @@ export default function Home() {
                 </div>
               </FadeIn>
             )}
+=======
+                    </Card>
+                  ))}
+                </CardSwap>
+              </div>
+            </div>
+
+            {/* Mobile / Tablet: centered responsive grid replacing the CardSwap stack */}
+            <div className="order-2 lg:hidden w-full flex justify-center pt-8 sm:pt-10">
+              <div className="grid grid-cols-1 min-[481px]:grid-cols-2 gap-5 sm:gap-6 w-full max-w-2xl mx-auto px-1">
+                {categoriesData.map((cat: any) => (
+                  <div key={cat.name} className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950 w-full">
+                    <div className="relative w-full aspect-[4/5]">
+                      <Image
+                        src={cat.image}
+                        alt={cat.name}
+                        fill
+                        className="object-cover"
+                        priority={false}
+                        sizes="(max-width: 480px) 100vw, 50vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent" />
+                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex flex-col gap-1.5 sm:gap-2">
+                        <span className="text-[11px] text-red-500 font-black uppercase tracking-[0.3em]">
+                          {cat.championship}
+                        </span>
+                        <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight leading-none">
+                          {cat.name}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                          {cat.desc}
+                        </p>
+                        <div className="flex items-center gap-3 pt-1 sm:pt-2">
+                          <span className="text-[11px] text-zinc-500 font-bold uppercase tracking-wider">
+                            Season {cat.years}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+>>>>>>> 7aaa862 (update new)
           </div>
         </div>
       </section>

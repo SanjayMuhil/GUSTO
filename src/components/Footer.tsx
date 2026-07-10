@@ -45,12 +45,20 @@ export default function Footer() {
             <div className="md:col-span-4 space-y-4 sm:space-y-6">
               <Link href="/" className="inline-block transition-transform duration-300 hover:scale-105">
                 <Image
+<<<<<<< HEAD
                   src="/LOGO.png"
+=======
+                  src="/Johi logo 1.png"
+>>>>>>> 7aaa862 (update new)
                   alt="CUSTO Racing Logo"
                   width={160}
                   height={64}
                   priority={false}
+<<<<<<< HEAD
                   className=" max-w-[90px] sm:max-w-[110px] md:max-w-[130px] lg:max-w-[150px]"
+=======
+                  className=" max-h-[40px] sm:max-h-[50px]"
+>>>>>>> 7aaa862 (update new)
                 />
               </Link>
               <p className="text-zinc-500 text-xs sm:text-sm leading-relaxed max-w-xs">
