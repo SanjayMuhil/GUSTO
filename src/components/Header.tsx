@@ -27,12 +27,12 @@ export default function Header() {
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl py-2 sm:py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center flex-shrink-0 transition-transform duration-300 hover:scale-105">
           <Image
-            src="/Gusto Racing india logo white (1).png"
+            src="/LOGO.png"
             alt="CUSTO Racing Logo"
-            width={90}
-            height={40}
+            width={160}
+            height={64}
             priority
-            className="h-auto w-auto max-h-[40px] sm:max-h-[50px] md:max-h-[60px]"
+            className="  max-w-[90px] sm:max-w-[110px] md:max-w-[130px] lg:max-w-[150px]"
           />
         </Link>
 

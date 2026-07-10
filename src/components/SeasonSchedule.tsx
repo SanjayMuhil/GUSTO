@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import MarqueeScroll from "./animations/MarqueeScroll";
 
 export interface SeasonImage {
   src: string;
@@ -228,6 +229,21 @@ const SeasonSchedule: React.FC<SeasonScheduleProps> = ({
             </button>
           ))}
         </motion.div>
+
+        {/* Marquee Scroll Rows */}
+        <div className="mb-12 sm:mb-16 md:mb-20 space-y-6">
+          <MarqueeScroll 
+            images={["/2.jpeg", "/3.jpeg", "/4.jpeg", "/5.jpeg", "/6.jpeg"]}
+            direction="right"
+            speed={0.3}
+            className="mb-4"
+          />
+          <MarqueeScroll 
+            images={["/6.jpeg", "/5.jpeg", "/4.jpeg", "/3.jpeg", "/2.jpeg"]}
+            direction="left"
+            speed={0.3}
+          />
+        </div>
 
         {/* Animated Image Grid */}
         <AnimatePresence mode="popLayout">
