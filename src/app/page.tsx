@@ -10,7 +10,6 @@ import PixelCard from "../components/PixelCard";
 import PixelTransition from "../components/PixelTransition";
 import CardSwap, { Card } from "../components/CardSwap";
 import Footer from "../components/Footer";
-import { FadeIn, Magnet, AnimatedText, GradientHeading } from "../components/animations";
 import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import homeData from "../content/home.json";
@@ -45,20 +44,14 @@ export default function Home() {
       }
       const w = window.innerWidth;
       if (w < 640) {
-        setCardSwapWidth(Math.min(360, w - 24));
-        setCardSwapHeight(280);
-        setCardSwapCardDistance(30);
-        setCardSwapVerticalDistance(35);
+        setCardSwapWidth(Math.min(280, w - 48));
+        setCardSwapHeight(200);
       } else if (w < 1024) {
-        setCardSwapWidth(400);
-        setCardSwapHeight(320);
-        setCardSwapCardDistance(40);
-        setCardSwapVerticalDistance(50);
+        setCardSwapWidth(340);
+        setCardSwapHeight(260);
       } else {
         setCardSwapWidth(420);
         setCardSwapHeight(320);
-        setCardSwapCardDistance(40);
-        setCardSwapVerticalDistance(50);
       }
     };
     handleResize();
@@ -94,8 +87,6 @@ export default function Home() {
   const [particles, setParticles] = useState<Array<{ id: number; size: number; x: number; y: number; delay: number; duration: number; opacity: number }>>([]);
   const [cardSwapWidth, setCardSwapWidth] = useState(320);
   const [cardSwapHeight, setCardSwapHeight] = useState(260);
-  const [cardSwapCardDistance, setCardSwapCardDistance] = useState(40);
-  const [cardSwapVerticalDistance, setCardSwapVerticalDistance] = useState(50);
 
   useEffect(() => {
     // Generate 30 random particles
@@ -181,11 +172,8 @@ export default function Home() {
     <div
       className="min-h-screen flex flex-col bg-black text-white overflow-x-hidden relative"
       onMouseMove={handlePageMouseMove}
-      style={{ overflowX: 'clip' }}
     >
-      <FadeIn delay={0}>
-        <Header />
-      </FadeIn>
+      <Header />
 
       {/* Hero Section */}
       <section className="relative min-h-screen bg-gradient-to-b from-zinc-950 to-black flex items-center pt-24 pb-16 overflow-hidden">
@@ -305,88 +293,101 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-4 sm:space-y-6">
-              <FadeIn delay={0.15}>
-                <p className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold">
-                  {homeData.hero.eyebrow}
-                </p>
-              </FadeIn>
+            <motion.div
+              className="lg:col-span-7 space-y-4 sm:space-y-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.p
+                variants={itemVariants}
+                className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold"
+              >
+                {homeData.hero.eyebrow}
+              </motion.p>
 
-              <FadeIn delay={0.35}>
-                <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black leading-none text-white tracking-tight uppercase">
-                  {homeData.hero.title.line1} <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
-                    {homeData.hero.title.line2}
-                  </span>
-                </h1>
-              </FadeIn>
+              <motion.h1
+                variants={itemVariants}
+                className="text-4xl sm:text-6xl lg:text-8xl font-black leading-none text-white tracking-tight uppercase"
+              >
+                {homeData.hero.title.line1} <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
+                  {homeData.hero.title.line2}
+                </span>
+              </motion.h1>
 
-              <FadeIn delay={0.5}>
-                <p className="text-sm sm:text-lg text-zinc-400 max-w-2xl leading-relaxed">
-                  {homeData.hero.subtitle}
-                </p>
-              </FadeIn>
+              <motion.p
+                variants={itemVariants}
+                className="text-sm sm:text-lg text-zinc-400 max-w-2xl leading-relaxed"
+              >
+                {homeData.hero.subtitle}
+              </motion.p>
+
+              {/* Highlight strip */}
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-wrap gap-3 sm:gap-4 text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-red-500 border-t border-zinc-900 pt-4 sm:pt-6"
+              >
+                
+              </motion.div>
 
               {/* Buttons */}
-              <FadeIn delay={0.6}>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-3 sm:pt-4">
-                  <motion.div
-                    whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-                    whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-                    className="w-full sm:w-auto"
-                  >
-                    <Link href={homeData.hero.ctaPrimary.href} className="px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition transform hover:scale-105 text-center shadow-lg shadow-red-600/25 cursor-pointer block text-[10px] sm:text-xs tracking-widest uppercase">
-                      {homeData.hero.ctaPrimary.text}
-                    </Link>
-                  </motion.div>
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-3 sm:pt-4"
+              >
+                <motion.div
+                  whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+                  whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+                  className="w-full sm:w-auto"
+                >
+                  <Link href={homeData.hero.ctaPrimary.href} className="px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition transform hover:scale-105 text-center shadow-lg shadow-red-600/25 cursor-pointer block text-[10px] sm:text-xs tracking-widest uppercase">
+                    {homeData.hero.ctaPrimary.text}
+                  </Link>
+                </motion.div>
 
-                  <motion.div
-                    whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-                    whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-                    className="w-full sm:w-auto"
-                  >
-                    <Link href={homeData.hero.ctaSecondary.href} className="px-6 sm:px-8 py-3 sm:py-4 border border-zinc-800 hover:border-white text-white font-bold rounded-xl bg-zinc-950/50 hover:bg-white hover:text-black transition transform hover:scale-105 text-center cursor-pointer block text-[10px] sm:text-xs tracking-widest uppercase">
-                      {homeData.hero.ctaSecondary.text}
-                    </Link>
-                  </motion.div>
-                </div>
-              </FadeIn>
-            </div>
+                <motion.div
+                  whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+                  whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+                  className="w-full sm:w-auto"
+                >
+                  <Link href={homeData.hero.ctaSecondary.href} className="px-6 sm:px-8 py-3 sm:py-4 border border-zinc-800 hover:border-white text-white font-bold rounded-xl bg-zinc-950/50 hover:bg-white hover:text-black transition transform hover:scale-105 text-center cursor-pointer block text-[10px] sm:text-xs tracking-widest uppercase">
+                    {homeData.hero.ctaSecondary.text}
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </motion.div>
 
             {/* Right Image Column */}
-            <FadeIn delay={0.7} className="lg:col-span-5">
-              <Magnet strength={20} padding={100} disabled={isMobile}>
+            <div
+              className="lg:col-span-5 relative"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              style={tiltStyle}
+            >
+              {/* Outer glow overlay */}
+              <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-red-600 to-orange-500 opacity-25 blur-lg transition duration-500" />
+
+              <div className="relative overflow-hidden rounded-3xl border border-zinc-900 bg-zinc-950 aspect-square sm:aspect-[4/3] shadow-2xl select-none">
+                <Image
+                  src="/hero-racer.jpg"
+                  alt="Asia Road Racing Championship Winner celebrating victory"
+                  width={600}
+                  height={450}
+                  priority
+                  className="w-full h-full object-cover"
+                />
+
+                {/* 3D Glare effect overlay */}
                 <div
-                  className="relative"
-                  onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
-                  style={tiltStyle}
-                >
-                  {/* Outer glow overlay */}
-                  <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-red-600 to-orange-500 opacity-25 blur-lg transition duration-500" />
+                  className="absolute inset-0 pointer-events-none z-20 mix-blend-screen transition-opacity duration-300"
+                  style={glareStyle}
+                />
 
-                  <div className="relative overflow-hidden rounded-3xl border border-zinc-900 bg-zinc-950 aspect-square sm:aspect-[4/3] shadow-2xl select-none">
-                    <Image
-                      src="/hero-racer.jpg"
-                      alt="Asia Road Racing Championship Winner celebrating victory"
-                      width={600}
-                      height={450}
-                      priority
-                      className="w-full h-full object-cover"
-                    />
-
-                    {/* 3D Glare effect overlay */}
-                    <div
-                      className="absolute inset-0 pointer-events-none z-20 mix-blend-screen transition-opacity duration-300"
-                      style={glareStyle}
-                    />
-
-                    {/* Subtle border shine effect */}
-                    <div className="absolute inset-0 rounded-3xl border border-white/5 pointer-events-none z-10" />
-                  </div>
-                </div>
-              </Magnet>
-            </FadeIn>
+                {/* Subtle border shine effect */}
+                <div className="absolute inset-0 rounded-3xl border border-white/5 pointer-events-none z-10" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -395,14 +396,14 @@ export default function Home() {
       <section id="champions" className="py-16 sm:py-24 bg-black border-t border-zinc-900 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
           <div className="mb-8 sm:mb-12 text-center">
-            <FadeIn delay={0}>
-              <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold">{homeData.champions.sectionLabel}</span>
-            </FadeIn>
-            <FadeIn delay={0.1}>
-              <GradientHeading as="h2" className="text-2xl sm:text-4xl font-black mt-2">
-                {homeData.champions.sectionTitle}
-              </GradientHeading>
-            </FadeIn>
+            <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold">{homeData.champions.sectionLabel}</span>
+            <Shuffle
+              text={homeData.champions.sectionTitle}
+              tag="h2"
+              className="text-2xl sm:text-4xl font-black mt-2 text-white"
+              textAlign="center"
+              duration={0.4}
+            />
           </div>
 
           <div className="relative group/slider px-2 sm:px-4 md:px-12">
@@ -411,22 +412,16 @@ export default function Home() {
               <div
                 className="flex transition-transform duration-500 ease-out gap-4 sm:gap-6"
                 style={{
-                  transform: `translate3d(calc(-${sliderIndex} * ${visibleCards === 1 ? '100%' : `(100% + 24px) / ${visibleCards}`}), 0, 0)`
+                  transform: `translate3d(calc(-${sliderIndex} * (100% + ${visibleCards > 1 ? '24px' : '16px'}) / ${visibleCards}), 0, 0)`
                 }}
               >
-{champions.map((champion: any, idx: number) => (
-  <FadeIn 
+{champions.map((champion: any) => (
+  <div
     key={champion.class}
-    delay={0.2 + idx * 0.1}
     className="flex-shrink-0 max-w-[95vw]"
     style={{
-<<<<<<< HEAD
-      height: "clamp(400px, 65vw, 600px)",
-      width: `calc((100% - ${visibleCards > 1 ? '24px' : '0px'} * (${visibleCards} - 1)) / ${visibleCards})`
-=======
       height: visibleCards === 1 ? "clamp(430px, 118vw, 640px)" : "clamp(260px, 50vw, 500px)",
       width: `calc((100% - ${visibleCards > 1 ? '24px' : '16px'} * (${visibleCards} - 1)) / ${visibleCards})`
->>>>>>> 7aaa862 (update new)
     }}
   >
     <PixelTransition
@@ -441,13 +436,6 @@ export default function Home() {
         />
       }
       secondContent={
-<<<<<<< HEAD
-        <div className="flex flex-col justify-between h-full p-4 sm:p-5 md:p-6 bg-zinc-950">
-          <div>
-            <p className="text-[10px] sm:text-xs font-black uppercase tracking-[0.35em] text-red-200">{homeData.champions.cardLabels.telemetry}</p>
-            <h3 className="mt-2 sm:mt-3 text-xl sm:text-2xl font-black uppercase tracking-tight text-white">{champion.name}</h3>
-            <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-zinc-200">{champion.country} • {champion.team}</p>
-=======
         <div className="flex flex-col justify-between h-full p-4 sm:p-4 md:p-6 bg-zinc-950">
           <div>
             <div className="flex items-center justify-between gap-2">
@@ -456,32 +444,19 @@ export default function Home() {
             </div>
             <h3 className="mt-2 sm:mt-3 text-2xl sm:text-2xl font-black uppercase tracking-tight text-white leading-tight">{champion.name}</h3>
             <p className="mt-1 sm:mt-2 text-sm sm:text-sm text-zinc-200">{champion.country} • {champion.team}</p>
->>>>>>> 7aaa862 (update new)
           </div>
           <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm">
             <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-3 py-3 sm:py-3">
               <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.wins}</p>
-<<<<<<< HEAD
-              <p className="mt-1 text-xl sm:text-2xl font-black text-white">{champion.stats.wins}</p>
-=======
               <p className="mt-1 text-xl sm:text-xl font-black text-white">{champion.stats.wins}</p>
->>>>>>> 7aaa862 (update new)
             </div>
             <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-3 py-3 sm:py-3">
               <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.podiums}</p>
-<<<<<<< HEAD
-              <p className="mt-1 text-xl sm:text-2xl font-black text-white">{champion.stats.podiums}</p>
-=======
               <p className="mt-1 text-xl sm:text-xl font-black text-white">{champion.stats.podiums}</p>
->>>>>>> 7aaa862 (update new)
             </div>
             <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-3 py-3 sm:py-3 col-span-2">
               <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.bestLap}</p>
-<<<<<<< HEAD
-              <p className="mt-1 text-xl sm:text-2xl font-black text-white">{champion.stats.lap}</p>
-=======
               <p className="mt-1 text-xl sm:text-xl font-black text-white">{champion.stats.lap}</p>
->>>>>>> 7aaa862 (update new)
             </div>
           </div>
           <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-4 py-3 sm:py-3 text-xs sm:text-sm text-zinc-200">
@@ -497,7 +472,7 @@ export default function Home() {
       style={{ width: '100%', height: '100%' }}
       reducedMotion={shouldReduceMotion}
     />
-  </FadeIn>
+  </div>
 ))}
               </div>
             </div>
@@ -507,7 +482,7 @@ export default function Home() {
               <>
                 <motion.button
                   onClick={handlePrev}
-                  className="absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/95 text-white rounded-full w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center border border-zinc-800 focus:outline-none cursor-pointer"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/95 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-zinc-800 focus:outline-none cursor-pointer"
                   aria-label={homeData.champions.controls.previousAriaLabel}
                   whileHover={shouldReduceMotion ? {} : { scale: 1.15, backgroundColor: "#000000" }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.92 }}
@@ -518,7 +493,7 @@ export default function Home() {
                 </motion.button>
                 <motion.button
                   onClick={handleNext}
-                  className="absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/95 text-white rounded-full w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center border border-zinc-800 focus:outline-none cursor-pointer"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/95 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-zinc-800 focus:outline-none cursor-pointer"
                   aria-label={homeData.champions.controls.nextAriaLabel}
                   whileHover={shouldReduceMotion ? {} : { scale: 1.15, backgroundColor: "#000000" }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.92 }}
@@ -537,23 +512,19 @@ export default function Home() {
       <section id="categories" className="py-16 sm:py-24 bg-black border-t border-zinc-900 overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-16 space-y-2">
-            <FadeIn delay={0}>
-              <p className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">THE CATEGORIES</p>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <GradientHeading as="h2" className="text-2xl sm:text-4xl md:text-5xl font-black leading-tight">
-                {homeData.categories.sectionTitle}
-              </GradientHeading>
-            </FadeIn>
+            <p className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">THE CATEGORIES</p>
+            <Shuffle
+              text={homeData.categories.sectionTitle}
+              tag="h2"
+              className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight"
+              textAlign="center"
+              duration={0.4}
+            />
           </div>
 
           <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 max-w-6xl mx-auto min-h-[320px] sm:min-h-[420px]">
             {/* Left Column: Category Description Details */}
-<<<<<<< HEAD
-            <FadeIn delay={0.3} className="w-full lg:w-5/12 space-y-4 sm:space-y-6 flex flex-col justify-center text-left min-h-[200px] sm:min-h-[250px] lg:pr-8">
-=======
             <div className="w-full lg:w-5/12 space-y-4 sm:space-y-6 flex flex-col justify-center items-center lg:items-start text-center lg:text-left min-h-[200px] sm:min-h-[250px] lg:pr-8 order-1 lg:order-1">
->>>>>>> 7aaa862 (update new)
               <div className="inline-flex items-center gap-3">
                  <span className="text-[10px] sm:text-xs bg-red-600/10 text-red-500 font-black px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-red-500/20 uppercase tracking-widest">
                   {homeData.categories.labels.activeClass}
@@ -592,31 +563,8 @@ export default function Home() {
                    <span className="text-xs sm:text-sm text-zinc-300 font-bold block mt-1">{categoriesData[activeCategory].years}</span>
                  </div>
               </div>
-            </FadeIn>
+            </div>
 
-<<<<<<< HEAD
-            {/* Right Column: Mobile Grid / Desktop CardSwap */}
-            {isMobile ? (
-              <FadeIn delay={0.3} className="w-full flex justify-center items-center py-4 sm:py-6">
-                <div className="w-full max-w-3xl mx-auto">
-                  <div className="grid grid-cols-1 min-[480px]:grid-cols-2 gap-4 sm:gap-6">
-                    {categoriesData.map((cat: any) => (
-                      <div key={cat.name} className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950">
-                        <div className="relative w-full aspect-[4/5]">
-                          <Image
-                            src={cat.image}
-                            alt={cat.name}
-                            fill
-                            className="object-cover"
-                            priority={false}
-                            sizes="(max-width: 480px) 100vw, (max-width: 767px) 50vw, 33vw"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                          <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent" />
-                          <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 md:p-6 flex flex-col gap-1 sm:gap-2">
-                            <span className="text-[10px] sm:text-xs text-red-500 font-black uppercase tracking-[0.3em]">
-                              {cat.championship}
-=======
             {/* Right Column: CardSwap */}
             <div className="hidden lg:flex w-full lg:w-7/12 justify-center items-center overflow-visible py-4 sm:py-6 order-2 lg:order-2">
               <div style={{ minHeight: '420px', height: cardSwapHeight + 80, position: 'relative', width: '100%', maxWidth: cardSwapWidth + 100 }}>
@@ -657,78 +605,10 @@ export default function Home() {
                           <div className="flex items-center gap-3 pt-1 sm:pt-2">
                             <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
                               Season {cat.years}
->>>>>>> 7aaa862 (update new)
                             </span>
-                            <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-none">
-                              {cat.name}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed line-clamp-2">
-                              {cat.desc}
-                            </p>
-                            <div className="flex items-center gap-3 pt-1 sm:pt-2">
-                              <span className="text-[10px] sm:text-xs text-zinc-500 font-bold uppercase tracking-wider">
-                                Season {cat.years}
-                              </span>
-                            </div>
                           </div>
                         </div>
                       </div>
-<<<<<<< HEAD
-                    ))}
-                  </div>
-                </div>
-              </FadeIn>
-            ) : (
-              <FadeIn delay={0.3} className="w-full lg:w-7/12 flex justify-center items-center overflow-visible py-4 sm:py-6">
-                <div style={{ minHeight: '420px', height: cardSwapHeight + 80, position: 'relative', width: '100%', maxWidth: cardSwapWidth + 100 }}>
-                  <CardSwap
-                    width={cardSwapWidth}
-                    height={cardSwapHeight}
-                    cardDistance={cardSwapCardDistance}
-                    verticalDistance={cardSwapVerticalDistance}
-                    delay={4000}
-                    pauseOnHover={false}
-                    onCardClick={() => {}}
-                    skewAmount={4}
-                    easing="elastic"
-                  >
-                    {categoriesData.map((cat: any) => (
-                      <Card key={cat.name} className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950">
-                        <div className="relative w-full h-full">
-                          <Image
-                            src={cat.image}
-                            alt={cat.name}
-                            fill
-                            className="object-cover"
-                            priority={false}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                          <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent" />
-                          <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 md:p-6 flex flex-col gap-1 sm:gap-2">
-                            <span className="text-[10px] text-red-500 font-black uppercase tracking-[0.3em]">
-                              {cat.championship}
-                            </span>
-                            <h3 className="text-lg sm:text-xl md:text-2xl font-black text-white uppercase tracking-tight leading-none">
-                              {cat.name}
-                            </h3>
-                            <p className="text-[10px] sm:text-xs text-zinc-300 leading-relaxed line-clamp-2">
-                              {cat.desc}
-                            </p>
-                            <div className="flex items-center gap-3 pt-1 sm:pt-2">
-                              <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
-                                Season {cat.years}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </Card>
-                    ))}
-                  </CardSwap>
-                </div>
-              </FadeIn>
-            )}
-=======
                     </Card>
                   ))}
                 </CardSwap>
@@ -772,7 +652,6 @@ export default function Home() {
                 ))}
               </div>
             </div>
->>>>>>> 7aaa862 (update new)
           </div>
         </div>
       </section>
@@ -789,28 +668,26 @@ export default function Home() {
       <section id="updates" className="py-16 sm:py-24 bg-gradient-to-b from-zinc-950 to-black text-white border-t border-zinc-900 overflow-hidden relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="mb-8 sm:mb-12 text-center space-y-2">
-            <FadeIn delay={0}>
-              <span className="text-red-600 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">{homeData.latestUpdates.sectionLabel}</span>
-            </FadeIn>
-            <FadeIn delay={0.15}>
-              <GradientHeading as="h2" className="text-2xl sm:text-3xl md:text-4xl font-black mt-2">
-                {homeData.latestUpdates.sectionTitle}
-              </GradientHeading>
-            </FadeIn>
+            <span className="text-red-600 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">{homeData.latestUpdates.sectionLabel}</span>
+            <Shuffle
+              text={homeData.latestUpdates.sectionTitle}
+              tag="h2"
+              className="text-2xl sm:text-3xl md:text-4xl font-black mt-2 text-white"
+              textAlign="center"
+              duration={0.4}
+            />
           </div>
         </div>
 
-        <FadeIn delay={0.3}>
-          <div style={{ minHeight: "500px sm:min-height-[600px]", position: "relative" }}>
-            <ChromaGrid
-              items={newsItems}
-              radius={300}
-              damping={0.45}
-              fadeOut={0.6}
-              ease="power3.out"
-            />
-          </div>
-        </FadeIn>
+        <div style={{ minHeight: "500px sm:min-height-[600px]", position: "relative" }}>
+          <ChromaGrid
+            items={newsItems}
+            radius={300}
+            damping={0.45}
+            fadeOut={0.6}
+            ease="power3.out"
+          />
+        </div>
       </section>
 
       {/* Bottom Navigation Hero Section */}
@@ -826,57 +703,44 @@ export default function Home() {
         <div className="absolute bottom-0 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl relative z-10 text-center">
-          <FadeIn delay={0}>
-            <span className="text-red-500 text-[10px] sm:text-xs md:text-sm tracking-[0.3em] font-extrabold uppercase drop-shadow-md">
-              {homeData.bottomHero.sectionLabel}
-            </span>
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <GradientHeading as="h2" className="text-3xl sm:text-5xl md:text-6xl font-black mt-3 sm:mt-4 tracking-tighter uppercase drop-shadow-lg leading-none">
-              {homeData.bottomHero.sectionTitle.line1}
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">
-                {homeData.bottomHero.sectionTitle.line2}
-              </span>
-            </GradientHeading>
-          </FadeIn>
-          
-          <div className="mt-4 sm:mt-6">
-            <AnimatedText 
-              text={homeData.bottomHero.paragraph}
-              className="text-zinc-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed drop-shadow"
-            />
-          </div>
+          <span className="text-red-500 text-[10px] sm:text-xs md:text-sm tracking-[0.3em] font-extrabold uppercase drop-shadow-md">
+            {homeData.bottomHero.sectionLabel}
+          </span>
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mt-3 sm:mt-4 tracking-tighter uppercase drop-shadow-lg leading-none">
+            <Shuffle text={homeData.bottomHero.sectionTitle.line1} tag="span" className="block text-white" textAlign="center" duration={0.4} />
+            <Shuffle text={homeData.bottomHero.sectionTitle.line2} tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="center" duration={0.4} />
+          </h2>
+          <p className="text-zinc-300 text-sm sm:text-base mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed drop-shadow">
+            {homeData.bottomHero.paragraph}
+          </p>
 
-          <FadeIn delay={0.3}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10">
+            <motion.div
+              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+              className="w-full sm:w-auto"
+            >
+                <a
+                  href={homeData.bottomHero.ctaPrimary.href}
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-red-600/20 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
+                >
+                  {homeData.bottomHero.ctaPrimary.text}
+                </a>
+              </motion.div>
+
               <motion.div
                 whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
                 whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                 className="w-full sm:w-auto"
               >
-                  <a
-                    href={homeData.bottomHero.ctaPrimary.href}
-                    className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-red-600/20 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
-                  >
-                    {homeData.bottomHero.ctaPrimary.text}
-                  </a>
-                </motion.div>
-
-                <motion.div
-                  whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-                  whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-                  className="w-full sm:w-auto"
+                <a
+                  href={homeData.bottomHero.ctaSecondary.href}
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 border border-zinc-800 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
                 >
-                  <a
-                    href={homeData.bottomHero.ctaSecondary.href}
-                    className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 border border-zinc-800 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
-                  >
-                    {homeData.bottomHero.ctaSecondary.text}
-                  </a>
-                </motion.div>
-            </div>
-          </FadeIn>
+                  {homeData.bottomHero.ctaSecondary.text}
+                </a>
+              </motion.div>
+          </div>
         </div>
       </section>
 
