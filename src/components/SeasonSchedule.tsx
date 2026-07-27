@@ -22,6 +22,7 @@ interface SeasonScheduleProps {
   categories: SeasonCategory[];
   title?: string;
   subtitle?: string;
+  subTitle?: string;
   defaultCategory?: string;
   className?: string;
 }
@@ -152,6 +153,7 @@ const SeasonSchedule: React.FC<SeasonScheduleProps> = ({
   categories,
   title = "2026 Calendar",
   subtitle = "SEASON SCHEDULE",
+  subTitle,
   defaultCategory,
   className = "",
 }) => {
@@ -192,6 +194,16 @@ const SeasonSchedule: React.FC<SeasonScheduleProps> = ({
           >
             {title}
           </motion.h2>
+          {subTitle && (
+            <motion.p
+              initial={isInView ? {} : { opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.25, duration: 0.6 }}
+              className="text-zinc-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed whitespace-pre-line"
+            >
+              {subTitle}
+            </motion.p>
+          )}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}

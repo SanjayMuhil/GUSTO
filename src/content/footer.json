@@ -1,10 +1,66 @@
 {
-  "description": "Asia's biggest road racing championship. Home of the Asian Champions.",
+  "brand": {
+    "logo": "/Johi logo 1.png",
+    "logoAlt": "Johann Emmanuel Racing Logo",
+    "tagline": "Racing Towards The World Championship.",
+    "description": "Johann Emmanuel represents India on the international motorsport stage, competing across Europe and Asia with speed, precision, and relentless ambition."
+  },
   "quickLinksTitle": "Quick Links",
-  "socialLinksTitle": "Follow Us",
-  "copyright": "© Copyright 2026 Two Wheels Motor Racing Sdn Bhd (TWMR). All Rights Reserved.",
-  "links": {
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+  "quickLinks": [
+    { "href": "/", "label": "Home" },
+    { "href": "/about", "label": "Career" },
+    { "href": "/results", "label": "Racing" },
+    { "href": "/#schedule", "label": "Schedule" },
+    { "href": "/updates", "label": "News" },
+    { "href": "/about#brandPartners", "label": "Partners" },
+    { "href": "/gallery", "label": "Media" },
+    { "href": "/about#contact", "label": "Contact" }
+  ],
+  "contactTitle": "Contact Information",
+  "contact": {
+    "email": {
+      "label": "Email",
+      "value": "johannemmanuel.partnerships@gmail.com",
+      "href": "mailto:johannemmanuel.partnerships@gmail.com"
+    },
+    "phone": {
+      "label": "Phone",
+      "value": "+91 9840911406",
+      "href": "tel:+919840911406"
+    },
+    "location": {
+      "label": "Location",
+      "value": "Chennai, India"
+    }
+  },
+  "socialTitle": "Follow Us",
+  "socialLinks": [
+    {
+      "href": "https://instagram.com/johann_emmanuel11",
+      "label": "Instagram",
+      "icon": "instagram"
+    },
+    {
+      "href": "https://youtube.com",
+      "label": "YouTube",
+      "icon": "youtube"
+    },
+    {
+      "href": "https://facebook.com",
+      "label": "Facebook",
+      "icon": "facebook"
+    },
+    {
+      "href": "https://linkedin.com",
+      "label": "LinkedIn",
+      "icon": "linkedin"
+    }
+  ],
+  "bottomBar": {
+    "copyright": "© 2026 Johann Emmanuel Racing. All Rights Reserved.",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    }
   }
 }

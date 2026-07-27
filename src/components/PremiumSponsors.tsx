@@ -113,7 +113,7 @@ const PremiumSponsors: React.FC<PremiumSponsorsProps> = ({
         {/* Copyright */}
         <div className="text-center space-y-2">
           <p className="text-[11px] sm:text-xs text-zinc-700 font-medium tracking-wide">
-            {footerData.copyright}
+            {footerData.bottomBar.copyright}
           </p>
         </div>
       </div>

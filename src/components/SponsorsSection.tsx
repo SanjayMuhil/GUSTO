@@ -216,7 +216,7 @@ export default function SponsorsSection({
             {/* Copyright */}
             <div className="mt-16 sm:mt-20 pt-8 border-t border-zinc-900 text-center">
                <p className="text-[11px] sm:text-xs text-zinc-700 font-medium tracking-wide">
-                {footerData.copyright}
+                 {footerData.bottomBar.copyright}
               </p>
             </div>
           </div>

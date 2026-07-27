@@ -5,111 +5,68 @@
       "line1": "JOHANN",
       "line2": "EMMANUEL"
     },
-    "subtitle": "Born April 11, 2006 in Chennai, India; started motorsport at age six; only Indian rider trained across top European and Asian championships.",
+    "subtitle": "From Chennai to the world's most demanding race circuits, Johann Emmanuel is one of India's fastest-rising motorcycle racers. Competing across Europe and Asia, he continues to push the limits of speed, precision, and performance.",
     "ctaPrimary": {
-      "text": "Career Results",
+      "text": "View Racing Career",
       "href": "/results"
     },
     "ctaSecondary": {
-      "text": "CONTACT",
+      "text": "Partner With Johann",
       "href": "/about#contact"
     }
   },
   "champions": {
-    "sectionLabel": "LEGACY OF SPEED",
-    "sectionTitle": "2025 Champions",
-    "cardLabels": {
-      "telemetry": "Telemetry",
-      "wins": "Wins",
-      "podiums": "Podiums",
-      "bestLap": "Best Lap",
-      "role": "Role"
-    },
+    "sectionLabel": "A Career Built One ",
+    "sectionTitle": "Corner At A Time.",
+    "subTitle": "Not every racing career begins on the podium.\nJohann's journey started in Chennai and evolved into international competition across Europe, Asia, and the Middle East. Every championship, every setback, and every victory has shaped the rider he is today.",
     "controls": {
       "previousAriaLabel": "Previous card",
       "nextAriaLabel": "Next card"
     },
     "items": [
       {
-        "class": "ASB1000",
-        "name": "Yuki Kunii",
-        "team": "SDG MS Harc-Pro. Honda",
-        "country": "Japan",
-        "number": "92",
-        "image": "/2.jpeg",
-        "gradient": "from-purple-950 via-fuchsia-800 to-fuchsia-600",
-        "stats": {
-          "wins": "12",
-          "podiums": "18",
-          "lap": "1:35.244",
-          "role": "Team Leader"
-        }
+        "year": "2019",
+        "title": "Career Begins",
+        "image": "/2.jpeg"
       },
       {
-        "class": "SS600",
-        "name": "Apiwath Wongthananon",
-        "team": "Yamaha Tekhne Racing Team Asean",
-        "country": "Thailand",
-        "number": "24",
-        "image": "/3.jpeg",
-        "gradient": "from-blue-950 via-cyan-800 to-cyan-600",
-        "stats": {
-          "wins": "8",
-          "podiums": "14",
-          "lap": "1:38.102",
-          "role": "Precision Expert"
-        }
+        "year": "2024",
+        "title": "Historic Qatar Hat-trick",
+        "image": "/3.jpeg"
       },
       {
-        "class": "AP250",
-        "name": "Herjun Atna Firdaus",
-        "team": "Astra Honda Racing Team",
-        "country": "Indonesia",
-        "number": "46",
-        "image": "/4.jpeg",
-        "gradient": "from-emerald-950 via-green-850 to-emerald-600",
-        "stats": {
-          "wins": "6",
-          "podiums": "11",
-          "lap": "1:40.312",
-          "role": "Rising Star"
-        }
+        "year": "2026",
+        "title": "KTM Cup Champion",
+        "image": "/4.jpeg"
+      }
+    ]
+  },
+  "achievementsStats": {
+    "sectionLabel": "KEY NUMBERS",
+    "sectionTitle": "Achievements & Targets",
+    "sectionSubtitle": "A snapshot of Johann's career milestones and future ambitions on the world stage.",
+    "stats": [
+      {
+        "value": "6+",
+        "label": "International Championships"
       },
       {
-        "class": "UB150",
-        "name": "Md Akid Aziz",
-        "team": "UMA Racing YAMAHA Maju Motor Asia Team",
-        "country": "Malaysia",
-        "number": "13",
-        "image": "/5.jpeg",
-        "gradient": "from-indigo-950 via-indigo-850 to-blue-700",
-        "stats": {
-          "wins": "10",
-          "podiums": "16",
-          "lap": "1:45.922",
-          "role": "Underbone King"
-        }
+        "value": "4",
+        "label": "Countries Competed"
       },
       {
-        "class": "TVS ASIA OMC",
-        "name": "Hiroki Ono",
-        "team": "TVS Racing",
-        "country": "Japan",
-        "number": "1",
-        "image": "/6.jpeg",
-        "gradient": "from-red-950 via-red-800 to-orange-600",
-        "stats": {
-          "wins": "14",
-          "podiums": "20",
-          "lap": "1:42.155",
-          "role": "TVS Champion"
-        }
+        "value": "2026",
+        "label": "KTM Cup Champion"
+      },
+      {
+        "value": "2028",
+        "label": "World Championship Target"
       }
     ]
   },
   "categories": {
-    "sectionLabel": "THE CATEGORIES",
-    "sectionTitle": "WHERE ASIANS DREAM.",
+    "sectionLabel": "CURRENT CHAMPIONSHIP",
+    "sectionTitle": "CURRENT CHAMPIONSHIP",
     "labels": {
       "activeClass": "Active Class",
       "championship": "CHAMPIONSHIP",
@@ -159,15 +116,16 @@
     ]
   },
   "seasonSchedule": {
-    "title": "2026 Calendar",
+    "title": "2026 RACE CALENDAR",
     "subtitle": "Season Schedule",
+    "subTitle": "Follow Johann's championship journey across Asia and Europe.",
     "defaultCategory": "rounds",
     "categories": [
       {
         "id": "rounds",
         "label": "All Rounds",
         "images": [
-          { "src": "/2.jpeg", "alt": "Season Schedule", "caption": "2026 CALENDAR" },
+          { "src": "/2.jpeg", "alt": "Season Schedule", "caption": "2026 RACE CALENDAR" },
           { "src": "/3.jpeg", "alt": "Sepang International Circuit", "caption": "ROUND 1 — SEPANG" },
           { "src": "/4.jpeg", "alt": "Chang International Circuit", "caption": "ROUND 2 — CHANG" },
           { "src": "/5.jpeg", "alt": "Mobility Resort Motegi", "caption": "ROUND 3 — MOTEGI" },
@@ -178,51 +136,57 @@
       },
       {
         "id": "asb1000",
-        "label": "ASB1000",
+        "label": "Spain 🇪🇸",
         "images": [
-          { "src": "/2.jpeg", "alt": "ASB1000 Racer", "caption": "YUKI KUNII — SDG MS HARC-PRO" }
+          { "src": "/2.jpeg", "alt": "ASB1000 Racer", "caption": "Spain 🇪🇸— April 18–20-Completed" }
         ]
       },
       {
         "id": "ss600",
-        "label": "SS600",
+        "label": "Chang 🇹🇭",
         "images": [
-          { "src": "/3.jpeg", "alt": "SS600 Racer", "caption": "APIWATH WONG — YAMAHA TEKHNE" }
+          { "src": "/3.jpeg", "alt": "SS600 Racer", "caption": "Chang 🇹🇭 — Upcoming" }
         ]
       },
       {
         "id": "ap250",
-        "label": "AP250",
+        "label": "Asia 🇹🇭",
         "images": [
-          { "src": "/4.jpeg", "alt": "AP250 Racer", "caption": "HERJUN ATNA — ASTRa HONDA" }
+          { "src": "/4.jpeg", "alt": "AP250 Racer", "caption": "Asia 🇹🇭 — Upcoming" }
         ]
       },
       {
         "id": "ub150",
-        "label": "UB150",
+        "label": "Malaysia 🇲🇾",
         "images": [
-          { "src": "/5.jpeg", "alt": "UB150 Racer", "caption": "MD AKID AZIZ — UMA RACING" }
+          { "src": "/5.jpeg", "alt": "UB150 Racer", "caption": "Malaysia 🇲🇾 — Upcoming" }
         ]
       }
     ]
   },
   "latestUpdates": {
     "sectionLabel": "LATEST STORIES",
-    "sectionTitle": "Latest Updates"
+    "sectionTitle": "Latest Updates",
+    "subTitle": "Trackside moments, race reports, podium finishes, and behind-the-scenes updates from Johann's journey around the world.",
+    "ctaPrimary": {
+      "text": "VIEW ALL UPDATES",
+      "href": "/updates"
+    }
   },
   "bottomHero": {
     "sectionLabel": "EXPERIENCE THE RACING LEGACY",
+    "subtitle": "",
     "sectionTitle": {
-      "line1": "BEYOND THE",
+      "line1": "Beyond The ",
       "line2": "FINISH LINE"
     },
-    "paragraph": "Feel the raw adrenaline of the Asia Road Racing Championship. Access the latest paddock media highlights, stay up to date with official stories, and review season standings.",
+    "paragraph": "Every race is another chapter in Johann Emmanuel's pursuit of world-class excellence.From international championships to inspiring the next generation of Indian motorsport, the journey is only accelerating.",
     "ctaPrimary": {
-      "text": "EXPLORE GALLERY",
+      "text": "Become a Partner",
       "href": "/gallery"
     },
     "ctaSecondary": {
-      "text": "LATEST UPDATES",
+      "text": "Latest Results",
       "href": "/updates"
     },
     "backgroundImage": "/IMG_8541.JPG"
@@ -230,54 +194,48 @@
   "newsItems": [
     {
       "image": "/5.jpeg",
-      "title": "2026 KTM Cup Champion",
-      "subtitle": "Johann seals the title in a dominant season finale",
-      "handle": "#KTMCup2026",
+      "title": "🏆 KTM Cup Champion: Season Sealed In Style",
+      
       "borderColor": "#EF4444",
       "gradient": "linear-gradient(145deg, #EF4444, #000)",
       "url": "/updates"
     },
     {
       "image": "/3.jpeg",
-      "title": "Qatar Superstock 600 Champion",
-      "subtitle": "First Indian rider to win the title, 2025 season",
-      "handle": "#QatarSTK600",
+      "title": "🇶🇦 Historic Hat-Trick In Qatar",
+      
       "borderColor": "#F97316",
       "gradient": "linear-gradient(160deg, #F97316, #000)",
       "url": "/updates"
     },
     {
       "image": "/5.jpeg",
-      "title": "ARRC AP250 Campaign",
-      "subtitle": "Backed by Honda Racing India on the Asian stage",
-      "handle": "#ARRC2025",
+      "title": "🇪🇸 Europe Tested. Experience Gained",
+      
       "borderColor": "#F59E0B",
       "gradient": "linear-gradient(180deg, #F59E0B, #000)",
       "url": "/updates"
     },
     {
       "image": "/joh.png",
-      "title": "Lusail Lap Record",
-      "subtitle": "New SSP300 lap record set in Qatar",
-      "handle": "#LusailRecord",
+      "title": "🇹🇭 Thailand Talent Cup: Learning From Asia's Best",
+     
       "borderColor": "#DC2626",
       "gradient": "linear-gradient(200deg, #DC2626, #000)",
       "url": "/updates"
     },
     {
       "image": "/5.jpeg",
-      "title": "Estoril Wet Race — P4",
-      "subtitle": "European Talent Cup standout finish in Portugal",
-      "handle": "#EuropeanTalentCup",
+      "title": "🏁 New Lap Record At Lusail",
+      
       "borderColor": "#EA580C",
       "gradient": "linear-gradient(220deg, #EA580C, #000)",
       "url": "/updates"
     },
     {
       "image": "/5.jpeg",
-      "title": "Thailand Talent Cup",
-      "subtitle": "Selected for the regional development series",
-      "handle": "#ThailandTalentCup",
+      "title": "🎙 Behind The Helmet: Race Weekend Reflections",
+     
       "borderColor": "#FB923C",
       "gradient": "linear-gradient(240deg, #FB923C, #000)",
       "url": "/updates"

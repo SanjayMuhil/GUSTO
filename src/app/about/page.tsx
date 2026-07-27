@@ -9,6 +9,78 @@ import CircularGallery from "../../components/CircularGallery";
 import Footer from "../../components/Footer";
 import aboutData from "../../content/about.json";
 
+interface GalleryItem {
+  image: string;
+  text: string;
+}
+
+interface TimelineItem {
+  year: string;
+  event: string;
+}
+
+interface ProgrammeItem {
+  title: string;
+  subtitle: string;
+}
+
+interface StatItem {
+  value: number;
+  suffix?: string;
+  label: string;
+}
+
+interface AdvantageItem {
+  title: string;
+  desc: string;
+}
+
+interface BrandPartner {
+  name: string;
+  info: string;
+}
+
+interface RoiCategory {
+  cat: string;
+  details: string[];
+}
+
+interface ValueColumn {
+  title: string;
+  items: string[];
+}
+
+interface ProgrammeItem {
+  title: string;
+  subtitle: string;
+}
+
+interface StatItem {
+  value: number;
+  suffix?: string;
+  label: string;
+}
+
+interface AdvantageItem {
+  title: string;
+  desc: string;
+}
+
+interface BrandPartner {
+  name: string;
+  info: string;
+}
+
+interface RoiCategory {
+  cat: string;
+  details: string[];
+}
+
+interface ValueColumn {
+  title: string;
+  items: string[];
+}
+
 // High-performance count-up stat counter
 function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const ref = useRef(null);
@@ -111,7 +183,7 @@ function FloatingDecorations() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({
         x: (e.clientX / window.innerWidth - 0.5) * 30,
@@ -119,7 +191,10 @@ function FloatingDecorations() {
       });
     };
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   return (
@@ -346,7 +421,7 @@ export default function AboutPage() {
 
     <div className="relative w-full h-[550px] overflow-hidden select-none">
       <CircularGallery
-        items={aboutData.achievements.galleryItems.map((item: any) => ({
+        items={aboutData.achievements.galleryItems.map((item: GalleryItem) => ({
           image: item.image,
           text: item.text,
         }))}
@@ -379,7 +454,7 @@ export default function AboutPage() {
           </div>
 
           <div className="relative border-l border-zinc-900 ml-3 sm:ml-4 md:ml-32 space-y-10 sm:space-y-12">
-            {aboutData.timeline.items.map((item: any, idx: number) => (
+            {aboutData.timeline.items.map((item: TimelineItem, idx: number) => (
               <div key={idx} className="relative pl-6 sm:pl-8 md:pl-12 group">
                 {/* Timeline node */}
                 <div className="absolute left-[-5px] top-1 sm:top-1.5 w-[8px] h-[8px] sm:w-[9px] sm:h-[9px] rounded-full bg-zinc-900 group-hover:bg-red-500 border border-zinc-800 transition-colors duration-300" />
@@ -420,7 +495,7 @@ export default function AboutPage() {
 
             {/* Right lists column */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {aboutData.programme2026.programs.map((prog: any, idx: number) => (
+              {aboutData.programme2026.programs.map((prog: ProgrammeItem, idx: number) => (
                 <div key={idx} className="border border-zinc-900 bg-zinc-900/10 p-6 rounded-2xl flex flex-col justify-center">
                   <h3 className="text-lg font-black text-white tracking-tight uppercase">{prog.title}</h3>
                   <p className="text-zinc-500 text-xs sm:text-sm mt-1">{prog.subtitle}</p>
@@ -449,7 +524,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {aboutData.mediaCoverage.stats.map((stat: any, idx: number) => (
+            {aboutData.mediaCoverage.stats.map((stat: StatItem, idx: number) => (
               <div key={idx} className="bg-zinc-950/60 border border-zinc-900 rounded-3xl p-8 hover:border-zinc-800 transition-colors">
                 <Counter value={stat.value} suffix={stat.suffix} />
                 <span className="text-zinc-500 text-xs sm:text-sm font-extrabold uppercase tracking-widest block mt-3">{stat.label}</span>
@@ -478,7 +553,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {aboutData.whyJohann.items.map((adv: any, i: number) => (
+            {aboutData.whyJohann.items.map((adv: AdvantageItem, i: number) => (
               <div key={i} className="border border-zinc-900 bg-zinc-900/10 p-8 rounded-2xl hover:border-zinc-800 transition-all">
                 <span className="text-red-500 font-extrabold text-sm uppercase block tracking-wider">{adv.title}</span>
                 <p className="text-zinc-400 text-sm sm:text-base mt-3 leading-relaxed">{adv.desc}</p>
@@ -503,7 +578,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
-            {aboutData.brandPartners.items.map((brand: any, i: number) => (
+            {aboutData.brandPartners.items.map((brand: BrandPartner, i: number) => (
               <div
                 key={i}
                 className="flex flex-col items-center justify-center p-4 sm:p-6 border border-zinc-900 bg-zinc-950/80 rounded-2xl text-center min-h-[100px] sm:min-h-[120px] hover:border-zinc-800 transition duration-300 select-none"
@@ -531,7 +606,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
-            {aboutData.roiBrandValue.categories.map((val: any, idx: number) => (
+            {aboutData.roiBrandValue.categories.map((val: RoiCategory, idx: number) => (
               <div key={idx} className="border border-zinc-900 bg-zinc-900/10 p-8 rounded-2xl">
                 <span className="text-white font-extrabold text-lg uppercase block tracking-tight pb-3 border-b border-zinc-900">{val.cat}</span>
                 <ul className="mt-4 space-y-2 text-zinc-400 text-xs sm:text-sm">
@@ -563,7 +638,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-            {aboutData.valueStructure.columns.map((column: any, idx: number) => (
+            {aboutData.valueStructure.columns.map((column: ValueColumn, idx: number) => (
               <div key={idx} className="space-y-3 sm:space-y-4">
                 <div className={`h-1 ${idx === 0 ? 'bg-red-600 w-10 sm:w-12' : idx === 1 ? 'bg-orange-500 w-12' : 'bg-zinc-700 w-12'}`} />
                 <h3 className="text-xl sm:text-2xl font-black uppercase text-white tracking-tight">{column.title}</h3>

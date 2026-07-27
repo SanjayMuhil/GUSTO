@@ -37,7 +37,6 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center ml-auto">
-          {/* @ts-ignore */}
           <GooeyNav
             items={gooeyItems}
             particleCount={15}
@@ -76,7 +75,7 @@ export default function Header() {
         <nav className="flex flex-col px-4 sm:px-6 py-4 sm:py-6 space-y-2 sm:space-y-3">
           {navItems.map((item) => (
             <Link
-              key={item.href}
+              key={item.label}
               href={item.href}
               className="block py-4 px-5 text-base sm:text-lg font-bold text-left hover:text-red-500 hover:bg-zinc-800 transition-all duration-200 transform hover:scale-105 cursor-pointer rounded-lg min-h-[52px] sm:min-h-[56px]"
             >

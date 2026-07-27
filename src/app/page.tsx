@@ -6,50 +6,83 @@ import Header from "../components/Header";
 import Shuffle from "../components/Shuffle";
 import SeasonSchedule from "../components/SeasonSchedule";
 import ChromaGrid from "../components/ChromaGrid";
-import PixelCard from "../components/PixelCard";
 import PixelTransition from "../components/PixelTransition";
 import CardSwap, { Card } from "../components/CardSwap";
 import Footer from "../components/Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import homeData from "../content/home.json";
 
-const champions = homeData.champions.items;
-const categoriesData = homeData.categories.items;
+interface Champion {
+  year: string;
+  title: string;
+  image: string;
+}
+
+interface Category {
+  id: number;
+  name: string;
+  desc: string;
+  image: string;
+  championship: string;
+  years: string;
+}
+
+interface AchievementStat {
+  value: string;
+  label: string;
+}
+
+interface AchievementsStats {
+  sectionLabel: string;
+  sectionTitle: string;
+  sectionSubtitle: string;
+  stats: AchievementStat[];
+}
+
+const champions = homeData.champions.items as Champion[];
+const categoriesData = homeData.categories.items as Category[];
 const newsItems = homeData.newsItems;
 const scheduleCategories = homeData.seasonSchedule.categories;
+const achievementsStats = homeData.achievementsStats as AchievementsStats;
+
+type Particle = {
+  id: number;
+  size: number;
+  x: number;
+  y: number;
+  delay: number;
+  duration: number;
+  opacity: number;
+  randomX: number;
+};
 
 export default function Home() {
   const [sliderIndex, setSliderIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
   const [activeCategory, setActiveCategory] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
+  const [glareStyle, setGlareStyle] = useState<React.CSSProperties>({ opacity: 0 });
+  const [cardSwapWidth, setCardSwapWidth] = useState(320);
+  const [cardSwapHeight, setCardSwapHeight] = useState(260);
+  const particlesRef = useRef<Particle[]>([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
   const preferredMotion = useReducedMotion();
-  const [shouldReduceMotion, setShouldReduceMotion] = useState(false);
-
-  useEffect(() => {
-    setShouldReduceMotion(preferredMotion ?? false);
-  }, [preferredMotion]);
+  const shouldReduceMotion = preferredMotion ?? false;
 
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
       if (window.innerWidth < 640) {
         setVisibleCards(1);
+        setCardSwapWidth(Math.min(280, window.innerWidth - 48));
+        setCardSwapHeight(200);
       } else if (window.innerWidth < 1024) {
         setVisibleCards(2);
-      } else {
-        setVisibleCards(3);
-      }
-      const w = window.innerWidth;
-      if (w < 640) {
-        setCardSwapWidth(Math.min(280, w - 48));
-        setCardSwapHeight(200);
-      } else if (w < 1024) {
         setCardSwapWidth(340);
         setCardSwapHeight(260);
       } else {
+        setVisibleCards(3);
         setCardSwapWidth(420);
         setCardSwapHeight(320);
       }
@@ -77,29 +110,17 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const maxIdx = champions.length - visibleCards;
-    if (sliderIndex > maxIdx) {
-      setSliderIndex(maxIdx);
-    }
-  }, [visibleCards, sliderIndex]);
-
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [particles, setParticles] = useState<Array<{ id: number; size: number; x: number; y: number; delay: number; duration: number; opacity: number }>>([]);
-  const [cardSwapWidth, setCardSwapWidth] = useState(320);
-  const [cardSwapHeight, setCardSwapHeight] = useState(260);
-
-  useEffect(() => {
-    // Generate 30 random particles
-    const generated = Array.from({ length: 30 }).map((_, i) => ({
+    particlesRef.current = Array.from({ length: 30 }).map((_, i) => ({
       id: i,
-      size: Math.random() * 3 + 1.5, // 1.5px to 4.5px
+      size: Math.random() * 3 + 1.5,
       x: Math.random() * 100,
       y: Math.random() * 100,
       delay: Math.random() * 6,
       duration: Math.random() * 10 + 8,
       opacity: Math.random() * 0.35 + 0.1,
+      randomX: Math.random() * 60 - 30,
     }));
-    setParticles(generated);
+    setParticles(particlesRef.current);
   }, []);
 
   const handlePageMouseMove = (e: React.MouseEvent) => {
@@ -130,9 +151,6 @@ export default function Home() {
       },
     },
   };
-
-  const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
-  const [glareStyle, setGlareStyle] = useState<React.CSSProperties>({ opacity: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -211,7 +229,7 @@ export default function Home() {
               }}
               animate={shouldReduceMotion ? {} : {
                 y: [0, -180],
-                x: [0, Math.random() * 60 - 30],
+                x: [0, p.randomX],
                 opacity: [0, p.opacity, 0],
               }}
               transition={{
@@ -404,6 +422,9 @@ export default function Home() {
               textAlign="center"
               duration={0.4}
             />
+            <p className="text-zinc-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
+              {homeData.champions.subTitle}
+            </p>
           </div>
 
           <div className="relative group/slider px-2 sm:px-4 md:px-12">
@@ -415,9 +436,9 @@ export default function Home() {
                   transform: `translate3d(calc(-${sliderIndex} * (100% + ${visibleCards > 1 ? '24px' : '16px'}) / ${visibleCards}), 0, 0)`
                 }}
               >
-{champions.map((champion: any) => (
+{champions.map((champion: Champion) => (
   <div
-    key={champion.class}
+    key={champion.title}
     className="flex-shrink-0 max-w-[95vw]"
     style={{
       height: visibleCards === 1 ? "clamp(430px, 118vw, 640px)" : "clamp(260px, 50vw, 500px)",
@@ -428,7 +449,7 @@ export default function Home() {
       firstContent={
         <Image
           src={champion.image}
-          alt={champion.name}
+          alt={champion.title}
           fill
           className="object-cover"
           priority={false}
@@ -436,33 +457,9 @@ export default function Home() {
         />
       }
       secondContent={
-        <div className="flex flex-col justify-between h-full p-4 sm:p-4 md:p-6 bg-zinc-950">
-          <div>
-            <div className="flex items-center justify-between gap-2">
-              <p className="text-[10px] font-black uppercase tracking-[0.35em] text-red-200">{homeData.champions.cardLabels.telemetry}</p>
-              <span className="hidden max-sm:inline-flex text-[10px] font-black uppercase tracking-[0.2em] text-red-400 border border-red-500/30 rounded-full px-2 py-0.5 whitespace-nowrap">{champion.class}</span>
-            </div>
-            <h3 className="mt-2 sm:mt-3 text-2xl sm:text-2xl font-black uppercase tracking-tight text-white leading-tight">{champion.name}</h3>
-            <p className="mt-1 sm:mt-2 text-sm sm:text-sm text-zinc-200">{champion.country} • {champion.team}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm">
-            <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-3 py-3 sm:py-3">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.wins}</p>
-              <p className="mt-1 text-xl sm:text-xl font-black text-white">{champion.stats.wins}</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-3 py-3 sm:py-3">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.podiums}</p>
-              <p className="mt-1 text-xl sm:text-xl font-black text-white">{champion.stats.podiums}</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-3 py-3 sm:py-3 col-span-2">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-zinc-300">{homeData.champions.cardLabels.bestLap}</p>
-              <p className="mt-1 text-xl sm:text-xl font-black text-white">{champion.stats.lap}</p>
-            </div>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-black/20 px-3 sm:px-4 py-3 sm:py-3 text-xs sm:text-sm text-zinc-200">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-400">{homeData.champions.cardLabels.role}</span>
-            <p className="mt-1 font-semibold">{champion.stats.role}</p>
-          </div>
+        <div className="flex flex-col justify-center h-full p-4 sm:p-4 md:p-6 bg-zinc-950">
+          <p className="text-[10px] font-black uppercase tracking-[0.35em] text-red-200">{champion.year}</p>
+          <h3 className="mt-2 sm:mt-3 text-2xl sm:text-2xl font-black uppercase tracking-tight text-white leading-tight">{champion.title}</h3>
         </div>
       }
       gridSize={8}
@@ -504,6 +501,43 @@ export default function Home() {
                 </motion.button>
               </>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* Achievements Stats Section */}
+      <section className="py-16 sm:py-24 bg-zinc-950 border-t border-zinc-900 overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="mb-10 sm:mb-16 text-center space-y-2">
+            <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">{achievementsStats.sectionLabel}</span>
+            <Shuffle
+              text={achievementsStats.sectionTitle}
+              tag="h2"
+              className="text-2xl sm:text-4xl font-black mt-2 text-white"
+              textAlign="center"
+              duration={0.4}
+            />
+            <p className="text-zinc-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
+              {achievementsStats.sectionSubtitle}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {achievementsStats.stats.map((stat, idx) => (
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                className="group relative overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950 p-6 sm:p-8 text-center hover:border-zinc-800 transition-colors duration-300"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <p className="relative z-10 text-3xl sm:text-4xl font-black text-white tracking-tighter">
+                  {stat.value}
+                </p>
+                <p className="relative z-10 text-[10px] sm:text-xs text-zinc-500 font-extrabold uppercase tracking-widest mt-2">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -579,7 +613,7 @@ export default function Home() {
                   skewAmount={4}
                   easing="elastic"
                 >
-                  {categoriesData.map((cat: any) => (
+                  {categoriesData.map((cat: Category) => (
                     <Card key={cat.name} className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950">
                       <div className="relative w-full h-full">
                         <Image
@@ -618,7 +652,7 @@ export default function Home() {
             {/* Mobile / Tablet: centered responsive grid replacing the CardSwap stack */}
             <div className="order-2 lg:hidden w-full flex justify-center pt-8 sm:pt-10">
               <div className="grid grid-cols-1 min-[481px]:grid-cols-2 gap-5 sm:gap-6 w-full max-w-2xl mx-auto px-1">
-                {categoriesData.map((cat: any) => (
+                {categoriesData.map((cat: Category) => (
                   <div key={cat.name} className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950 w-full">
                     <div className="relative w-full aspect-[4/5]">
                       <Image
@@ -657,12 +691,15 @@ export default function Home() {
       </section>
 
       {/* Season Schedule Section */}
-      <SeasonSchedule
-        title={homeData.seasonSchedule.title}
-        subtitle={homeData.seasonSchedule.subtitle}
-        categories={scheduleCategories}
-        defaultCategory={homeData.seasonSchedule.defaultCategory}
-      />
+      <section id="schedule">
+        <SeasonSchedule
+          title={homeData.seasonSchedule.title}
+          subtitle={homeData.seasonSchedule.subtitle}
+          subTitle={homeData.seasonSchedule.subTitle}
+          categories={scheduleCategories}
+          defaultCategory={homeData.seasonSchedule.defaultCategory}
+        />
+      </section>
 
       {/* Latest Updates Section (ChromaGrid) */}
       <section id="updates" className="py-16 sm:py-24 bg-gradient-to-b from-zinc-950 to-black text-white border-t border-zinc-900 overflow-hidden relative">
@@ -676,6 +713,9 @@ export default function Home() {
               textAlign="center"
               duration={0.4}
             />
+            <p className="text-zinc-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
+              {homeData.latestUpdates.subTitle}
+            </p>
           </div>
         </div>
 
