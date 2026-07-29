@@ -99,36 +99,47 @@ const GooeyNav = ({
     textRef.current.innerText = element.innerText;
   };
 
-  const handleClick = (e, index) => {
+  const handleClick = (e, index, href) => {
     const liEl = e.currentTarget;
-    if (activeIndex === index) return;
+    if (activeIndex !== index) {
+      setActiveIndex(index);
+      updateEffectPosition(liEl);
 
-    setActiveIndex(index);
-    updateEffectPosition(liEl);
+      if (filterRef.current) {
+        const particles = filterRef.current.querySelectorAll('.particle');
+        particles.forEach(p => filterRef.current.removeChild(p));
+      }
 
-    if (filterRef.current) {
-      const particles = filterRef.current.querySelectorAll('.particle');
-      particles.forEach(p => filterRef.current.removeChild(p));
+      if (textRef.current) {
+        textRef.current.classList.remove('active');
+
+        void textRef.current.offsetWidth;
+        textRef.current.classList.add('active');
+      }
+
+      if (filterRef.current) {
+        makeParticles(filterRef.current);
+      }
     }
 
-    if (textRef.current) {
-      textRef.current.classList.remove('active');
-
-      void textRef.current.offsetWidth;
-      textRef.current.classList.add('active');
-    }
-
-    if (filterRef.current) {
-      makeParticles(filterRef.current);
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.slice(1);
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
     }
   };
 
-  const handleKeyDown = (e, index) => {
+  const handleKeyDown = (e, index, href) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       const liEl = e.currentTarget.parentElement;
       if (liEl) {
-        handleClick({ currentTarget: liEl }, index);
+        handleClick({ currentTarget: liEl, preventDefault: () => {} }, index, href);
       }
     }
   };
@@ -168,7 +179,7 @@ const GooeyNav = ({
         <ul ref={navRef}>
           {items.map((item, index) => (
             <li key={index} className={activeIndex === index ? 'active' : ''}>
-              <Link href={item.href} onClick={e => handleClick(e, index)} onKeyDown={e => handleKeyDown(e, index)}>
+              <Link href={item.href} onClick={e => handleClick(e, index, item.href)} onKeyDown={e => handleKeyDown(e, index, item.href)}>
                 {item.label}
               </Link>
             </li>

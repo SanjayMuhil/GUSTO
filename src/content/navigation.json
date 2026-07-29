@@ -1,12 +1,9 @@
 {
   "items": [
-    { "href": "/", "label": "Home" },
-    { "href": "/about", "label": "Career" },
-    { "href": "/results", "label": "Racing" },
-    { "href": "/#schedule", "label": "Schedule" },
-    { "href": "/updates", "label": "News" },
-    { "href": "/about#brandPartners", "label": "Partners" },
-    { "href": "/gallery", "label": "Media" },
-    { "href": "/about#contact", "label": "Contact" }
+    { "href": "/results", "label": "Results" },
+    { "href": "/about", "label": "About" },
+    { "href": "/gallery", "label": "Gallery" },
+    { "href": "/partners", "label": "Partners" },
+    { "href": "/contact", "label": "Contact" }
   ]
 }

@@ -2,7 +2,7 @@
 
 import Header from "../../components/Header";
 import Shuffle from "../../components/Shuffle";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Footer from "../../components/Footer";
 import upcomingRacesData from "../../content/upcoming-races.json";
@@ -10,8 +10,6 @@ import upcomingRacesData from "../../content/upcoming-races.json";
 const specData = upcomingRacesData.specData;
 
 export default function UpcomingRacesPage() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <div className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
       <Header />

@@ -5,7 +5,8 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Shuffle from "../components/Shuffle";
 import SeasonSchedule from "../components/SeasonSchedule";
-import ChromaGrid from "../components/ChromaGrid";
+import DiagonalCarousel from "../components/DiagonalCarousel";
+import RippleDisplacementSlider from "../components/RippleDisplacementSlider";
 import PixelTransition from "../components/PixelTransition";
 import CardSwap, { Card } from "../components/CardSwap";
 import Footer from "../components/Footer";
@@ -37,13 +38,14 @@ interface AchievementsStats {
   sectionLabel: string;
   sectionTitle: string;
   sectionSubtitle: string;
+  backgroundImage?: string;
   stats: AchievementStat[];
 }
 
 const champions = homeData.champions.items as Champion[];
 const categoriesData = homeData.categories.items as Category[];
-const newsItems = homeData.newsItems;
-const scheduleCategories = homeData.seasonSchedule.categories;
+const newsItems = homeData.latestUpdates.news;
+const scheduleRounds = homeData.seasonSchedule.rounds;
 const achievementsStats = homeData.achievementsStats as AchievementsStats;
 
 type Particle = {
@@ -324,15 +326,16 @@ export default function Home() {
                 {homeData.hero.eyebrow}
               </motion.p>
 
-              <motion.h1
+              <motion.h6
                 variants={itemVariants}
-                className="text-4xl sm:text-6xl lg:text-8xl font-black leading-none text-white tracking-tight uppercase"
+                className="font-gasdrifo text-[42px] sm:text-[62px] lg:text-[85px] leading-[0.85] tracking-[-0.02em] font-black text-white uppercase"
+                style={{ fontFamily: "'NCL Gasdrifo', var(--font-geist-sans), sans-serif", fontWeight: 900 }}
               >
-                {homeData.hero.title.line1} <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
+                <span className="block">{homeData.hero.title.line1}</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
                   {homeData.hero.title.line2}
                 </span>
-              </motion.h1>
+              </motion.h6>
 
               <motion.p
                 variants={itemVariants}
@@ -410,134 +413,66 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Champions Section */}
-      <section id="champions" className="py-16 sm:py-24 bg-black border-t border-zinc-900 relative overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
-          <div className="mb-8 sm:mb-12 text-center">
-            <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold">{homeData.champions.sectionLabel}</span>
-            <Shuffle
-              text={homeData.champions.sectionTitle}
-              tag="h2"
-              className="text-2xl sm:text-4xl font-black mt-2 text-white"
-              textAlign="center"
-              duration={0.4}
-            />
-            <p className="text-zinc-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
-              {homeData.champions.subTitle}
-            </p>
-          </div>
+      {/* Champions Section - Ripple Displacement Slider */}
+      <RippleDisplacementSlider
+        sectionLabel={homeData.champions.sectionLabel}
+        sectionTitle={homeData.champions.sectionTitle}
+        subTitle={homeData.champions.subTitle}
+        items={homeData.champions.items}
+      />
 
-          <div className="relative group/slider px-2 sm:px-4 md:px-12">
-            {/* Slider Track Container */}
-            <div className="overflow-hidden">
-              <div
-                className="flex transition-transform duration-500 ease-out gap-4 sm:gap-6"
-                style={{
-                  transform: `translate3d(calc(-${sliderIndex} * (100% + ${visibleCards > 1 ? '24px' : '16px'}) / ${visibleCards}), 0, 0)`
-                }}
+
+
+      {/* Section 3: Bottom Navigation Hero Section (Experience the Racing Legacy) */}
+      <section
+        className="relative py-12 sm:py-16 lg:py-20 bg-cover bg-center border-t border-zinc-900 overflow-hidden m-0"
+        style={{ backgroundImage: `url('${homeData.bottomHero.backgroundImage || "/IMG_8541.JPG"}')` }}
+      >
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/80 z-0" />
+
+        {/* Ambient colored glows */}
+        <div className="absolute top-0 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl relative z-10 text-center">
+          <span className="text-red-500 text-[10px] sm:text-xs md:text-sm tracking-[0.3em] font-extrabold uppercase drop-shadow-md">
+            {homeData.bottomHero.sectionLabel}
+          </span>
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mt-3 sm:mt-4 tracking-tighter uppercase drop-shadow-lg leading-none">
+            <Shuffle text={homeData.bottomHero.sectionTitle.line1} tag="span" className="block text-white" textAlign="center" duration={0.4} />
+            <Shuffle text={homeData.bottomHero.sectionTitle.line2} tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="center" duration={0.4} />
+          </h2>
+          <p className="text-zinc-300 text-sm sm:text-base mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed drop-shadow">
+            {homeData.bottomHero.paragraph}
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10">
+            <motion.div
+              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+              className="w-full sm:w-auto"
+            >
+              <a
+                href={homeData.bottomHero.ctaPrimary.href}
+                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-red-600/20 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
               >
-{champions.map((champion: Champion) => (
-  <div
-    key={champion.title}
-    className="flex-shrink-0 max-w-[95vw]"
-    style={{
-      height: visibleCards === 1 ? "clamp(430px, 118vw, 640px)" : "clamp(260px, 50vw, 500px)",
-      width: `calc((100% - ${visibleCards > 1 ? '24px' : '16px'} * (${visibleCards} - 1)) / ${visibleCards})`
-    }}
-  >
-    <PixelTransition
-      firstContent={
-        <Image
-          src={champion.image}
-          alt={champion.title}
-          fill
-          className="object-cover"
-          priority={false}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-      }
-      secondContent={
-        <div className="flex flex-col justify-center h-full p-4 sm:p-4 md:p-6 bg-zinc-950">
-          <p className="text-[10px] font-black uppercase tracking-[0.35em] text-red-200">{champion.year}</p>
-          <h3 className="mt-2 sm:mt-3 text-2xl sm:text-2xl font-black uppercase tracking-tight text-white leading-tight">{champion.title}</h3>
-        </div>
-      }
-      gridSize={8}
-      pixelColor="#ffffff"
-      animationStepDuration={shouldReduceMotion ? 0 : 0.4}
-      once={false}
-      style={{ width: '100%', height: '100%' }}
-      reducedMotion={shouldReduceMotion}
-    />
-  </div>
-))}
-              </div>
-            </div>
+                {homeData.bottomHero.ctaPrimary.text}
+              </a>
+            </motion.div>
 
-            {/* Slider Controls */}
-            {champions.length > visibleCards && (
-              <>
-                <motion.button
-                  onClick={handlePrev}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/95 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-zinc-800 focus:outline-none cursor-pointer"
-                  aria-label={homeData.champions.controls.previousAriaLabel}
-                  whileHover={shouldReduceMotion ? {} : { scale: 1.15, backgroundColor: "#000000" }}
-                  whileTap={shouldReduceMotion ? {} : { scale: 0.92 }}
-                >
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </motion.button>
-                <motion.button
-                  onClick={handleNext}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-black/60 hover:bg-black/95 text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-zinc-800 focus:outline-none cursor-pointer"
-                  aria-label={homeData.champions.controls.nextAriaLabel}
-                  whileHover={shouldReduceMotion ? {} : { scale: 1.15, backgroundColor: "#000000" }}
-                  whileTap={shouldReduceMotion ? {} : { scale: 0.92 }}
-                >
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                  </svg>
-                </motion.button>
-              </>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Achievements Stats Section */}
-      <section className="py-16 sm:py-24 bg-zinc-950 border-t border-zinc-900 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="mb-10 sm:mb-16 text-center space-y-2">
-            <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">{achievementsStats.sectionLabel}</span>
-            <Shuffle
-              text={achievementsStats.sectionTitle}
-              tag="h2"
-              className="text-2xl sm:text-4xl font-black mt-2 text-white"
-              textAlign="center"
-              duration={0.4}
-            />
-            <p className="text-zinc-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
-              {achievementsStats.sectionSubtitle}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {achievementsStats.stats.map((stat, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                className="group relative overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950 p-6 sm:p-8 text-center hover:border-zinc-800 transition-colors duration-300"
+            <motion.div
+              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
+              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+              className="w-full sm:w-auto"
+            >
+              <a
+                href={homeData.bottomHero.ctaSecondary.href}
+                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 border border-zinc-800 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <p className="relative z-10 text-3xl sm:text-4xl font-black text-white tracking-tighter">
-                  {stat.value}
-                </p>
-                <p className="relative z-10 text-[10px] sm:text-xs text-zinc-500 font-extrabold uppercase tracking-widest mt-2">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
+                {homeData.bottomHero.ctaSecondary.text}
+              </a>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -694,14 +629,13 @@ export default function Home() {
       <section id="schedule">
         <SeasonSchedule
           title={homeData.seasonSchedule.title}
-          subtitle={homeData.seasonSchedule.subtitle}
-          subTitle={homeData.seasonSchedule.subTitle}
-          categories={scheduleCategories}
-          defaultCategory={homeData.seasonSchedule.defaultCategory}
+          subtitle={homeData.seasonSchedule.sectionLabel || "SEASON SCHEDULE"}
+          subTitle={homeData.seasonSchedule.subtitle}
+          rounds={scheduleRounds}
         />
       </section>
 
-      {/* Latest Updates Section (ChromaGrid) */}
+      {/* Latest Updates Section (3D DiagonalCarousel) */}
       <section id="updates" className="py-16 sm:py-24 bg-gradient-to-b from-zinc-950 to-black text-white border-t border-zinc-900 overflow-hidden relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="mb-8 sm:mb-12 text-center space-y-2">
@@ -719,68 +653,83 @@ export default function Home() {
           </div>
         </div>
 
-        <div style={{ minHeight: "500px sm:min-height-[600px]", position: "relative" }}>
-          <ChromaGrid
+        <div className="w-full relative">
+          <DiagonalCarousel
             items={newsItems}
-            radius={300}
-            damping={0.45}
-            fadeOut={0.6}
-            ease="power3.out"
+            loop={true}
+            autoPlay={true}
+            autoPlayInterval={5000}
+            showControls={true}
+            showDots={true}
           />
         </div>
       </section>
 
-      {/* Bottom Navigation Hero Section */}
+      {/* KEY NUMBERS – Achievements & Targets Section (Immediately above the Footer) */}
       <section
         className="relative py-20 sm:py-28 lg:py-36 bg-cover bg-center border-t border-zinc-900 overflow-hidden"
-        style={{ backgroundImage: "url('/IMG_8541.JPG')" }}
+        style={{ backgroundImage: `url('${achievementsStats.backgroundImage || "/images/backgrounds/achievements-bg.jpg"}')` }}
       >
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/80 z-0" />
+        {/* Dark black gradient overlay for readability (70-80%) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-black/95 z-0" />
 
-        {/* Ambient colored glows */}
-        <div className="absolute top-0 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Ambient colored glows & cinematic depth */}
+        <div className="absolute top-1/4 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-red-600/15 rounded-full blur-3xl pointer-events-none z-0" />
+        <div className="absolute bottom-1/4 right-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none z-0" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(0,0,0,0.6)_100%)] pointer-events-none z-0" />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl relative z-10 text-center">
-          <span className="text-red-500 text-[10px] sm:text-xs md:text-sm tracking-[0.3em] font-extrabold uppercase drop-shadow-md">
-            {homeData.bottomHero.sectionLabel}
-          </span>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mt-3 sm:mt-4 tracking-tighter uppercase drop-shadow-lg leading-none">
-            <Shuffle text={homeData.bottomHero.sectionTitle.line1} tag="span" className="block text-white" textAlign="center" duration={0.4} />
-            <Shuffle text={homeData.bottomHero.sectionTitle.line2} tag="span" className="block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400" textAlign="center" duration={0.4} />
-          </h2>
-          <p className="text-zinc-300 text-sm sm:text-base mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed drop-shadow">
-            {homeData.bottomHero.paragraph}
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10">
-            <motion.div
-              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-              whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-              className="w-full sm:w-auto"
-            >
-                <a
-                  href={homeData.bottomHero.ctaPrimary.href}
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-red-600/20 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
-                >
-                  {homeData.bottomHero.ctaPrimary.text}
-                </a>
-              </motion.div>
-
-              <motion.div
-                whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-                whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-                className="w-full sm:w-auto"
-              >
-                <a
-                  href={homeData.bottomHero.ctaSecondary.href}
-                  className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-extrabold rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 border border-zinc-800 text-center block text-[10px] sm:text-xs tracking-widest uppercase"
-                >
-                  {homeData.bottomHero.ctaSecondary.text}
-                </a>
-              </motion.div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+          {/* Section Header */}
+          <div className="mb-12 sm:mb-16 text-center space-y-3">
+            <span className="text-red-500 text-[10px] sm:text-xs md:text-sm tracking-[0.3em] font-extrabold uppercase drop-shadow-md block">
+              {achievementsStats.sectionLabel}
+            </span>
+            <Shuffle
+              text={achievementsStats.sectionTitle}
+              tag="h2"
+              className="text-3xl sm:text-5xl md:text-6xl font-black text-white uppercase tracking-tighter drop-shadow-lg leading-none"
+              textAlign="center"
+              duration={0.4}
+            />
+            <p className="text-zinc-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed mt-4 drop-shadow text-center">
+              {achievementsStats.sectionSubtitle}
+            </p>
           </div>
+
+          {/* Statistics Cards - Responsive Grid (Desktop: 4, Laptop: 4, Tablet: 2, Mobile: 1) */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+          >
+            {achievementsStats.stats.map((stat, idx) => (
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                whileHover={shouldReduceMotion ? {} : { y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/60 backdrop-blur-md p-6 sm:p-8 text-center shadow-2xl hover:border-red-500/60 transition-all duration-300"
+              >
+                {/* Subtle gradient overlay & red hover glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-600/15 via-red-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                {/* Card border glow edge */}
+                <div className="absolute -inset-px rounded-2xl border border-red-500/0 group-hover:border-red-500/30 transition-colors duration-300 pointer-events-none" />
+
+                <p className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tighter drop-shadow-md">
+                  {stat.value}
+                </p>
+                <p className="relative z-10 text-[11px] sm:text-xs md:text-sm text-zinc-400 font-extrabold uppercase tracking-widest mt-3 leading-snug">
+                  {stat.label}
+                </p>
+
+                {/* Animated accent line */}
+                <div className="w-12 h-1 bg-gradient-to-r from-red-600 to-orange-500 rounded-full mx-auto mt-4 group-hover:w-20 transition-all duration-300 opacity-80 group-hover:opacity-100" />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 

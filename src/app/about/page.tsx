@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import Shuffle from "../../components/Shuffle";
 import Image from "next/image";
 import { motion, useReducedMotion, useInView } from "framer-motion";
-import CircularGallery from "../../components/CircularGallery";
+import HoverImageReveal from "../../components/HoverImageReveal";
 import Footer from "../../components/Footer";
 import aboutData from "../../content/about.json";
 
@@ -14,11 +14,6 @@ interface GalleryItem {
   text: string;
 }
 
-interface TimelineItem {
-  year: string;
-  event: string;
-}
-
 interface ProgrammeItem {
   title: string;
   subtitle: string;
@@ -28,57 +23,6 @@ interface StatItem {
   value: number;
   suffix?: string;
   label: string;
-}
-
-interface AdvantageItem {
-  title: string;
-  desc: string;
-}
-
-interface BrandPartner {
-  name: string;
-  info: string;
-}
-
-interface RoiCategory {
-  cat: string;
-  details: string[];
-}
-
-interface ValueColumn {
-  title: string;
-  items: string[];
-}
-
-interface ProgrammeItem {
-  title: string;
-  subtitle: string;
-}
-
-interface StatItem {
-  value: number;
-  suffix?: string;
-  label: string;
-}
-
-interface AdvantageItem {
-  title: string;
-  desc: string;
-}
-
-interface BrandPartner {
-  name: string;
-  info: string;
-}
-
-interface RoiCategory {
-  cat: string;
-  details: string[];
-}
-
-interface ValueColumn {
-  title: string;
-  items: string[];
 }
 
 // High-performance count-up stat counter
@@ -403,73 +347,24 @@ export default function AboutPage() {
       </section>
 
      {/* 4. Achievements Section */}
-<section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900 overflow-hidden">
-  <div className="container mx-auto px-4 max-w-7xl">
-    <div className="text-center mb-16 space-y-2">
-      <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">
-        {aboutData.achievements.sectionLabel}
-      </span>
+      {/* 4. Achievements Section */}
+      <section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900 overflow-hidden">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-16 space-y-2">
+            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">
+              {aboutData.achievements.sectionLabel}
+            </span>
 
-      <Shuffle
-        text={aboutData.achievements.sectionTitle}
-        tag="h2"
-        className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
-        textAlign="center"
-        duration={0.4}
-      />
-    </div>
-
-    <div className="relative w-full h-[550px] overflow-hidden select-none">
-      <CircularGallery
-        items={aboutData.achievements.galleryItems.map((item: GalleryItem) => ({
-          image: item.image,
-          text: item.text,
-        }))}
-        bend={3}
-        textColor="#ffffff"
-        borderRadius={0.05}
-        scrollEase={0.03}
-        font={
-          typeof window !== "undefined" && window.innerWidth < 640
-            ? "bold 10px Figtree"
-            : "bold 24px Figtree"
-        }
-      />
-    </div>
-  </div>
-</section>
-
-      {/* 5. Career Highlights Timeline */}
-      <section className="py-16 sm:py-20 md:py-28 bg-black border-b border-zinc-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-          <div className="text-center mb-10 sm:mb-16 space-y-2">
-            <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">{aboutData.timeline.sectionLabel}</span>
             <Shuffle
-              text={aboutData.timeline.sectionTitle}
+              text={aboutData.achievements.sectionTitle}
               tag="h2"
-              className="text-2xl sm:text-4xl md:text-5xl font-black text-white uppercase tracking-tight"
+              className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
               textAlign="center"
               duration={0.4}
             />
           </div>
 
-          <div className="relative border-l border-zinc-900 ml-3 sm:ml-4 md:ml-32 space-y-10 sm:space-y-12">
-            {aboutData.timeline.items.map((item: TimelineItem, idx: number) => (
-              <div key={idx} className="relative pl-6 sm:pl-8 md:pl-12 group">
-                {/* Timeline node */}
-                <div className="absolute left-[-5px] top-1 sm:top-1.5 w-[8px] h-[8px] sm:w-[9px] sm:h-[9px] rounded-full bg-zinc-900 group-hover:bg-red-500 border border-zinc-800 transition-colors duration-300" />
-
-                {/* Timeline Year left block */}
-                <div className="absolute left-[-12px] sm:left-[-16px] md:left-[-120px] top-0 text-red-600 font-black text-xs sm:text-sm md:text-lg tracking-wider">
-                  {item.year}
-                </div>
-
-                <div className="bg-zinc-950/40 border border-zinc-900 rounded-2xl p-4 sm:p-6 hover:border-zinc-800 transition-colors">
-                  <p className="text-zinc-300 font-extrabold text-xs sm:text-sm md:text-base leading-snug">{item.event}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <HoverImageReveal items={aboutData.achievements.galleryItems} />
         </div>
       </section>
 
@@ -538,120 +433,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 8. Why Johann? */}
-      <section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.whyJohann.sectionLabel}</span>
-            <Shuffle
-              text={aboutData.whyJohann.sectionTitle}
-              tag="h2"
-              className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
-              textAlign="center"
-              duration={0.4}
-            />
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {aboutData.whyJohann.items.map((adv: AdvantageItem, i: number) => (
-              <div key={i} className="border border-zinc-900 bg-zinc-900/10 p-8 rounded-2xl hover:border-zinc-800 transition-all">
-                <span className="text-red-500 font-extrabold text-sm uppercase block tracking-wider">{adv.title}</span>
-                <p className="text-zinc-400 text-sm sm:text-base mt-3 leading-relaxed">{adv.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 9. Brand Partners */}
-      <section className="py-20 sm:py-28 bg-black border-b border-zinc-900">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.brandPartners.sectionLabel}</span>
-            <Shuffle
-              text={aboutData.brandPartners.sectionTitle}
-              tag="h2"
-              className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
-              textAlign="center"
-              duration={0.4}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
-            {aboutData.brandPartners.items.map((brand: BrandPartner, i: number) => (
-              <div
-                key={i}
-                className="flex flex-col items-center justify-center p-4 sm:p-6 border border-zinc-900 bg-zinc-950/80 rounded-2xl text-center min-h-[100px] sm:min-h-[120px] hover:border-zinc-800 transition duration-300 select-none"
-              >
-                <span className="font-black text-lg tracking-wider text-white uppercase block">{brand.name}</span>
-                <span className="text-[10px] text-zinc-500 font-semibold tracking-wide mt-1 sm:mt-2 block text-[10px] sm:text-xs">{brand.info}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 10. Return on Investment / Brand Value */}
-      <section className="py-20 sm:py-28 bg-zinc-950 border-b border-zinc-900">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.roiBrandValue.sectionLabel}</span>
-            <Shuffle
-              text={aboutData.roiBrandValue.sectionTitle}
-              tag="h2"
-              className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
-              textAlign="center"
-              duration={0.4}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
-            {aboutData.roiBrandValue.categories.map((val: RoiCategory, idx: number) => (
-              <div key={idx} className="border border-zinc-900 bg-zinc-900/10 p-8 rounded-2xl">
-                <span className="text-white font-extrabold text-lg uppercase block tracking-tight pb-3 border-b border-zinc-900">{val.cat}</span>
-                <ul className="mt-4 space-y-2 text-zinc-400 text-xs sm:text-sm">
-                  {val.details.map((det: string, dIdx: number) => (
-                    <li key={dIdx} className="flex items-start gap-2">
-                      <span className="text-red-500 mt-1">•</span>
-                      <span>{det}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 11. ROI Summary */}
-      <section className="py-20 sm:py-28 bg-black border-b border-zinc-900">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16 space-y-2">
-            <span className="text-red-500 text-xs tracking-[0.3em] font-bold uppercase">{aboutData.valueStructure.sectionLabel}</span>
-            <Shuffle
-              text={aboutData.valueStructure.sectionTitle}
-              tag="h2"
-              className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight"
-              textAlign="center"
-              duration={0.4}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-            {aboutData.valueStructure.columns.map((column: ValueColumn, idx: number) => (
-              <div key={idx} className="space-y-3 sm:space-y-4">
-                <div className={`h-1 ${idx === 0 ? 'bg-red-600 w-10 sm:w-12' : idx === 1 ? 'bg-orange-500 w-12' : 'bg-zinc-700 w-12'}`} />
-                <h3 className="text-xl sm:text-2xl font-black uppercase text-white tracking-tight">{column.title}</h3>
-                <ul className="space-y-3 text-zinc-400 text-sm sm:text-base">
-                  {column.items.map((item: string, itemIdx: number) => (
-                    <li key={itemIdx}>• {item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 12. Get In Touch */}
       <section id="contact" className="py-24 sm:py-32 bg-zinc-950 relative overflow-hidden">

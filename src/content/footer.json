@@ -7,14 +7,26 @@
   },
   "quickLinksTitle": "Quick Links",
   "quickLinks": [
-    { "href": "/", "label": "Home" },
-    { "href": "/about", "label": "Career" },
-    { "href": "/results", "label": "Racing" },
-    { "href": "/#schedule", "label": "Schedule" },
-    { "href": "/updates", "label": "News" },
-    { "href": "/about#brandPartners", "label": "Partners" },
-    { "href": "/gallery", "label": "Media" },
-    { "href": "/about#contact", "label": "Contact" }
+    {
+      "href": "/results",
+      "label": "Results"
+    },
+    {
+      "href": "/about",
+      "label": "About"
+    },
+    {
+      "href": "/gallery",
+      "label": "Gallery"
+    },
+    {
+      "href": "/partners",
+      "label": "Partners"
+    },
+    {
+      "href": "/contact",
+      "label": "Contact"
+    }
   ],
   "contactTitle": "Contact Information",
   "contact": {
@@ -41,26 +53,22 @@
       "icon": "instagram"
     },
     {
-      "href": "https://youtube.com",
+      "href": "https://youtube.com/@johannreeves7201?si=l2cXssEmG_j3SQT4",
       "label": "YouTube",
       "icon": "youtube"
     },
     {
-      "href": "https://facebook.com",
+      "href": "https://www.facebook.com/share/1B2AYuAzJo/",
       "label": "Facebook",
       "icon": "facebook"
     },
     {
-      "href": "https://linkedin.com",
+      "href": "https://www.linkedin.com/in/johann-reeves-b56b41332?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
       "label": "LinkedIn",
       "icon": "linkedin"
     }
   ],
   "bottomBar": {
-    "copyright": "© 2026 Johann Emmanuel Racing. All Rights Reserved.",
-    "links": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms & Conditions"
-    }
+    "copyright": "© 2026 Johann Emmanuel Racing. All Rights Reserved."
   }
 }

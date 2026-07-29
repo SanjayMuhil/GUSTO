@@ -55,23 +55,26 @@
     "sectionLabel": "RECORDS & ACCOLADES",
     "sectionTitle": "Key Milestones",
     "galleryItems": [
-      { "image": "/1.JPG", "text": "2026 KTM CUP CHAMPION" },
-      { "image": "/2.jpeg", "text": "2025 QATAR 600CC CHAMPION" },
-      { "image": "/3.jpeg", "text": "LUSAIL SSP300 RECORD HOLDER" },
-      { "image": "/4.jpeg", "text": "QATAR DEBUT SWEEP WINNER" },
-      { "image": "/5.jpeg", "text": "EUROPE TALENT CUP TOP 10" }
-    ]
-  },
-  "timeline": {
-    "sectionLabel": "HISTORICAL TRACK",
-    "sectionTitle": "Timeline",
-    "items": [
-      { "year": "2021", "event": "—" },
-      { "year": "2022", "event": "Honda India Talent Cup (CBR150)" },
-      { "year": "2023", "event": "Honda India Talent Cup (NSF250R), European Talent Cup" },
-      { "year": "2024", "event": "Thailand Talent Cup, European Talent Cup" },
-      { "year": "2025", "event": "ARRC AP250, Qatar STK-600, Indian Superstock" },
-      { "year": "2026", "event": "(see 2026 Programme section)" }
+      {
+        "image": "/1.JPG",
+        "text": "2026 KTM CUP CHAMPION"
+      },
+      {
+        "image": "/2.jpeg",
+        "text": "2025 QATAR 600CC CHAMPION"
+      },
+      {
+        "image": "/3.jpeg",
+        "text": "LUSAIL SSP300 RECORD HOLDER"
+      },
+      {
+        "image": "/4.jpeg",
+        "text": "QATAR DEBUT SWEEP WINNER"
+      },
+      {
+        "image": "/5.jpeg",
+        "text": "EUROPE TALENT CUP TOP 10"
+      }
     ]
   },
   "programme2026": {
@@ -86,11 +89,26 @@
       "value": "Full-time World Championship by 2028"
     },
     "programs": [
-      { "title": "Yamaha R7 Cup", "subtitle": "European Superbike Championship Support" },
-      { "title": "JuniorGP (600cc)", "subtitle": "Junior World Championship Series" },
-      { "title": "Qatar Supersport 600", "subtitle": "Defending Regional Title" },
-      { "title": "Indian National Championship", "subtitle": "National Superstock 600 Title Campaign" },
-      { "title": "ARRC 600cc Rounds", "subtitle": "Selected Asia Road Racing Championship wildcard entry" }
+      {
+        "title": "Yamaha R7 Cup",
+        "subtitle": "European Superbike Championship Support"
+      },
+      {
+        "title": "JuniorGP (600cc)",
+        "subtitle": "Junior World Championship Series"
+      },
+      {
+        "title": "Qatar Supersport 600",
+        "subtitle": "Defending Regional Title"
+      },
+      {
+        "title": "Indian National Championship",
+        "subtitle": "National Superstock 600 Title Campaign"
+      },
+      {
+        "title": "ARRC 600cc Rounds",
+        "subtitle": "Selected Asia Road Racing Championship wildcard entry"
+      }
     ]
   },
   "mediaCoverage": {
@@ -114,144 +132,6 @@
       }
     ],
     "paragraph": "In addition to international TV channels, all races are streamed live globally on official YouTube motorsport networks, securing active viewer reach across mobile audiences."
-  },
-  "whyJohann": {
-    "sectionLabel": "THE ADVANTAGE",
-    "sectionTitle": "Why Johann?",
-    "items": [
-      {
-        "title": "Spain-Based Training",
-        "desc": "Based in Spain since 2023, training year-round in high-performance environments alongside Moto3/Moto2 stars."
-      },
-      {
-        "title": "Proven Track Record",
-        "desc": "Winner of the Qatar Supersport 600 Championship and competitive runs in the highly technical Asia Road Racing grids."
-      },
-      {
-        "title": "Elite Co-Training",
-        "desc": "Trains alongside World Championship GP riders, ensuring constant technical adaptation and mental sharpness."
-      },
-      {
-        "title": "Structured Roadmap",
-        "desc": "Clear step-by-step career path moving from Junior GP towards a target World Championship seat by 2028."
-      }
-    ]
-  },
-  "brandPartners": {
-    "sectionLabel": "CURRENT SPONSORS",
-    "sectionTitle": "Sponsors",
-    "items": [
-      { "name": "KYT Helmets", "info": "Designed/developed in Italy, manufactured in Indonesia (PT Tara Citra Kusuma)" },
-      { "name": "Honda Racing India", "info": "Motorsports participation, developing next-gen Indian riders" },
-      { "name": "Sidvin Energy", "info": "Czech-based, oil & gas / petrochemical / process industries" },
-      { "name": "4SR Moto Suits", "info": "Engineering & design for international competition riding gear" },
-      { "name": "Voyage Eyewear", "info": "Venture of SS Enterprises — stylish, functional sunglasses" }
-    ]
-  },
-  "roiBrandValue": {
-    "sectionLabel": "COMMERCIAL REACH",
-    "sectionTitle": "ROI & Brand Value",
-    "categories": [
-      {
-        "cat": "Brand Visibility",
-        "details": [
-          "Racing bike decals",
-          "Rider leathers & helmet",
-          "Grid bottles & gear bags",
-          "Paddock apparel branding"
-        ]
-      },
-      {
-        "cat": "Personal Endorsements",
-        "details": [
-          "Video testimonials",
-          "Social media partnerships",
-          "Joint PR releases",
-          "Advertorial integrations"
-        ]
-      },
-      {
-        "cat": "Community Engagement",
-        "details": [
-          "Safety awareness programs",
-          "Community message amplification",
-          "Influencing target customer purchasing"
-        ]
-      },
-      {
-        "cat": "Event Participation",
-        "details": [
-          "Dealer launches & exhibits",
-          "Corporate guest interactions",
-          "Product demonstration activations"
-        ]
-      },
-      {
-        "cat": "Media Exposure",
-        "details": [
-          "Global live broadcast audiences",
-          "Paddock press conferences",
-          "Racetrack podcaster reviews",
-          "Magazine features"
-        ]
-      },
-      {
-        "cat": "Social Media Reach",
-        "details": [
-          "Instagram: 9.4K followers",
-          "Annual reach of 9 Million users",
-          "Active link referral conversions"
-        ]
-      }
-    ]
-  },
-  "valueStructure": {
-    "sectionLabel": "BUSINESS OBJECTIVES",
-    "sectionTitle": "Value Structure",
-    "columns": [
-      {
-        "title": "Providing Value",
-        "items": [
-          "Exclusivity in category",
-          "On-site signage & branding",
-          "Rights to license logo & property content",
-          "Presence in digital, social & mobile media",
-          "Access to audience & fanbase",
-          "Tickets & hospitality",
-          "Right to promote co-branded products/services",
-          "Access to Johann's IP materials & mailing list"
-        ]
-      },
-      {
-        "title": "Reaching Objectives",
-        "items": [
-          "Create brand awareness & visibility",
-          "Increase brand loyalty",
-          "Showcase community & social responsibility",
-          "Change / reinforce brand image",
-          "Entertain clients & prospects",
-          "Access experiential branding platform",
-          "Obtain content for digital, social & other media",
-          "Capture database / lead generation",
-          "Stimulate sales, trial & usage"
-        ]
-      },
-      {
-        "title": "Brand Impact",
-        "items": [
-          "Social media amplification",
-          "On-site interactions",
-          "PR & press coverage",
-          "Internal communications",
-          "Hospitality activations",
-          "Digital & mobile promotions",
-          "Traditional advertising (magazines)",
-          "B2B networking",
-          "Sales promotion offers",
-          "Direct marketing"
-        ]
-      }
-    ]
   },
   "contact": {
     "sectionLabel": "CONNECT WITH US",

@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './ChromaGrid.css';
 
-export const ChromaGrid = ({
+const ChromaGrid = ({
   items,
   className = '',
   radius = 300,

@@ -1,125 +1,245 @@
 "use client";
 
-import Header from "../../components/Header";
-import Shuffle from "../../components/Shuffle";
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Shuffle from "../../components/Shuffle";
 import resultsData from "../../content/results.json";
 
-const roundsData = resultsData.rounds;
+interface CategoryLink {
+  name: string;
+  link: string;
+  hasLaptime?: boolean;
+}
+
+interface EventItem {
+  id: string;
+  round: string;
+  title: string;
+  circuit: string;
+  location: string;
+  country: string;
+  flag: string;
+  date: string;
+  image: string;
+  championship: string;
+  championshipLogoText: string;
+  result: string;
+  position: string;
+  points: string;
+  badge: string;
+  categories: CategoryLink[];
+}
 
 export default function ResultsPage() {
   const shouldReduceMotion = useReducedMotion();
+  const [expandedCardId, setExpandedCardId] = useState<string | null>(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
       <Header />
 
-      <main className="relative z-10">
-        {/* Hero Header */}
-        <section className="relative py-12 sm:py-16 md:py-24 bg-gradient-to-b from-zinc-950 to-black border-b border-zinc-900 overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-red-900/10 via-transparent to-transparent pointer-events-none" />
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
-            <div className="text-center space-y-3 sm:space-y-4">
-              <span className="text-red-500 uppercase tracking-[0.35em] text-[10px] sm:text-xs font-black block">{resultsData.hero.sectionLabel}</span>
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-none">
-                {resultsData.hero.title.line1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">{resultsData.hero.title.line2}</span>
-              </h1>
-              <p className="text-zinc-500 max-w-2xl mx-auto text-xs sm:text-sm md:text-base leading-relaxed">
-                {resultsData.hero.subtitle}
-              </p>
+      <main className="relative z-10 pb-20">
+        {/* 1. Hero Header */}
+        <section className="relative py-16 sm:py-24 bg-gradient-to-b from-zinc-950 via-zinc-950 to-black border-b border-zinc-900 overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-red-600/10 rounded-full blur-[150px] pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 text-center space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-1.5 text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-red-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+              {resultsData.hero.sectionLabel}
             </div>
+
+            <Shuffle
+              text={`${resultsData.hero.title.line1} ${resultsData.hero.title.line2}`}
+              tag="h1"
+              className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white"
+              textAlign="center"
+              duration={0.4}
+            />
+
+            <p className="text-zinc-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed pt-1">
+              {resultsData.hero.subtitle}
+            </p>
           </div>
         </section>
 
-        {/* Rounds Results */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-10 sm:py-12 md:py-16 space-y-12 sm:space-y-16 md:space-y-20 lg:space-y-24">
-          {roundsData.map((round: any, rIdx: number) => (
-            <motion.section
-              key={round.round}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="relative"
-            >
-                {/* Round Header with Image */}
-                <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-900 bg-zinc-950 mb-6 sm:mb-8 group">
-                  <div className="absolute inset-0">
-                    <Image
-                      src={round.image}
-                      alt={round.subtitle}
-                      fill
-                      className="object-cover opacity-30 group-hover:opacity-40 transition duration-700"
-                      sizes="(max-width: 768px) 100vw, 80vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-zinc-950/60" />
-                  </div>
+        {/* 2. Race Results Cards Grid */}
+        <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pt-12 sm:pt-16">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 items-start"
+          >
+            {resultsData.events.map((event: EventItem) => (
+              <motion.div
+                key={event.id}
+                variants={cardVariants}
+                whileHover={shouldReduceMotion ? {} : { y: -6 }}
+                className="bg-zinc-950 border border-zinc-900 rounded-[24px] overflow-hidden shadow-2xl hover:border-red-500/50 hover:shadow-red-950/30 transition-all duration-300 flex flex-col group"
+              >
+                {/* Top Section: 16:9 Image with Overlay */}
+                <div className="relative aspect-video w-full overflow-hidden bg-zinc-900">
+                  <Image
+                    src={event.image}
+                    alt={event.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
 
-                  <div className="relative z-10 p-4 sm:p-6 md:p-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4">
-                    <div>
-                      <span className="text-red-500 text-[10px] sm:text-xs tracking-[0.3em] font-black uppercase block mb-1 sm:mb-2">
-                        {round.round}
-                      </span>
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter leading-none">
-                        {round.subtitle}
-                      </h2>
-                    </div>
-                     <span className="text-zinc-500 text-[10px] sm:text-xs md:text-sm font-extrabold uppercase tracking-widest">
-                       {resultsData.hero.championshipName}
-                     </span>
+                  {/* Overlay Badges */}
+                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 z-10">
+                    <span className="bg-black/80 backdrop-blur-md border border-zinc-800 text-zinc-300 text-[9px] font-extrabold uppercase px-2.5 py-1 rounded-full tracking-widest shadow-md">
+                      {event.championship}
+                    </span>
+                    <span className="bg-red-600/90 text-white text-[10px] font-black uppercase px-3 py-1 rounded-full tracking-wider shadow-lg flex items-center gap-1">
+                      {event.badge}
+                    </span>
                   </div>
                 </div>
 
-                {/* Categories Grid */}
-                <div className="grid grid-cols-1 min-[380px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
-                  {round.categories.map((cat: any, idx: number) => (
-                    <motion.a
-                      key={idx}
-                      href={cat.link}
-                      className="group relative overflow-hidden rounded-xl border border-zinc-900 bg-zinc-950/80 p-3 sm:p-4 md:p-5 flex flex-col justify-between hover:border-red-600/30 transition-all duration-300 min-h-[60px] sm:min-h-[70px]"
-                      whileHover={shouldReduceMotion ? {} : { y: -4, borderColor: "rgba(220, 38, 38, 0.3)" }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    >
-                    <div className="flex items-start justify-between gap-2">
-                      <span className="text-[10px] sm:text-xs font-black text-white uppercase tracking-wider leading-tight group-hover:text-red-500 transition-colors duration-300">
-                        {cat.name}
-                      </span>
-                       {cat.hasLaptime && (
-                         <span className="text-[9px] text-zinc-600 font-bold uppercase tracking-wider whitespace-nowrap">
-                           Laptime
-                         </span>
-                       )}
-                    </div>
-                    <div className="mt-2 sm:mt-3 flex items-center gap-1 text-zinc-600 group-hover:text-red-500 transition-colors duration-300">
-                      <span className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider">View</span>
-                      <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </motion.a>
-                ))}
-              </div>
-            </motion.section>
-          ))}
-        </div>
+                {/* Middle Banner: Championship Logo & Date Badge (Inspired by Yamaha format) */}
+                <div className="p-4 bg-zinc-900/60 border-b border-zinc-900 flex items-center justify-between gap-3">
+                  {/* Left: Championship Logo Title */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl sm:text-2xl font-black italic tracking-tighter text-white uppercase font-mono group-hover:text-red-500 transition-colors">
+                      {event.championshipLogoText}
+                    </span>
+                  </div>
 
-        {/* Previous Results */}
-        <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pb-16 sm:pb-20">
-          <div className="text-center p-6 sm:p-8 md:p-12 bg-zinc-950 border border-zinc-900 rounded-2xl sm:rounded-3xl">
-            <p className="text-zinc-400 text-sm sm:text-base mb-4">
+                  {/* Right: Date Badge Pill */}
+                  <div className="bg-[#101b33] border border-blue-900/50 text-white font-extrabold text-xs sm:text-sm px-3.5 py-1.5 rounded-full uppercase tracking-wider shadow-md">
+                    {event.date}
+                  </div>
+                </div>
+
+                {/* Card Content & Details */}
+                <div className="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                  <div>
+                    <span className="text-red-500 text-[10px] tracking-[0.25em] font-black uppercase block mb-1">
+                      {event.round}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-black text-white uppercase tracking-tight leading-snug">
+                      {event.title}
+                    </h3>
+                  </div>
+
+                  {/* Circuit & Location */}
+                  <div className="space-y-2 pt-2 border-t border-zinc-900/80">
+                    <div className="flex items-start gap-2 text-zinc-300 text-xs font-medium">
+                      <span className="text-red-500 text-sm mt-0.5">📍</span>
+                      <span className="line-clamp-2 leading-tight">{event.circuit}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs pt-1">
+                      <div className="flex items-center gap-1.5 text-zinc-400 font-bold uppercase tracking-wider text-[11px]">
+                        <span className="text-base">{event.flag}</span>
+                        <span>{event.country}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="bg-zinc-900 text-zinc-300 px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border border-zinc-800">
+                          {event.position}
+                        </span>
+                        <span className="bg-red-500/10 border border-red-500/30 text-red-400 px-2 py-0.5 rounded text-[10px] font-extrabold uppercase">
+                          {event.points}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Expandable Session Links */}
+                  <div className="pt-3">
+                    <button
+                      onClick={() => setExpandedCardId(expandedCardId === event.id ? null : event.id)}
+                      className="w-full py-2.5 px-3 bg-zinc-900/80 hover:bg-zinc-900 border border-zinc-800 rounded-xl text-zinc-400 hover:text-white text-[11px] font-extrabold uppercase tracking-wider flex items-center justify-between transition-colors"
+                    >
+                      <span>Session Links & Data ({event.categories.length})</span>
+                      <svg
+                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                          expandedCardId === event.id ? "rotate-180 text-red-500" : ""
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+
+                    {/* Session Grid Drawer */}
+                    {expandedCardId === event.id && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="mt-3 grid grid-cols-2 gap-2 pt-2 border-t border-zinc-900"
+                      >
+                        {event.categories.map((cat: CategoryLink, idx: number) => (
+                          <a
+                            key={idx}
+                            href={cat.link}
+                            className="p-2 bg-zinc-950 border border-zinc-900 hover:border-red-500/40 rounded-lg text-[10px] font-bold text-zinc-300 hover:text-red-400 flex items-center justify-between transition-all"
+                          >
+                            <span className="truncate">{cat.name}</span>
+                            <span className="text-zinc-600">→</span>
+                          </a>
+                        ))}
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* 3. Previous Results Section */}
+        <section className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl pt-16 sm:pt-20">
+          <div className="text-center p-8 sm:p-12 bg-zinc-950 border border-zinc-900 rounded-3xl space-y-4 shadow-xl">
+            <h3
+              className="text-white text-xl sm:text-2xl font-black uppercase tracking-tight"
+              style={{ fontFamily: "'Royal Tomato', sans-serif" }}
+            >
+              ARCHIVED CHAMPIONSHIP SEASONS
+            </h3>
+            <p className="text-zinc-400 text-xs sm:text-sm max-w-md mx-auto">
               {resultsData.previousResults.paragraph}
             </p>
             <a
               href="#"
-              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl transition duration-300 text-[10px] sm:text-xs tracking-widest uppercase shadow-lg shadow-red-600/20"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-500 text-white font-extrabold rounded-xl transition duration-300 text-xs tracking-widest uppercase shadow-lg shadow-red-600/30 active:scale-98"
             >
               {resultsData.previousResults.buttonText}
             </a>
           </div>
         </section>
       </main>
+
       <Footer />
     </div>
   );

@@ -1,37 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Image from "next/image";
 import galleryData from "../../content/gallery.json";
 
 const gallerySections = galleryData.sections;
-
 const SECTIONS_PER_PAGE = 2;
 
 export default function GalleryPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [columns, setColumns] = useState(3);
 
   const totalPages = Math.ceil(gallerySections.length / SECTIONS_PER_PAGE);
   const startIndex = (currentPage - 1) * SECTIONS_PER_PAGE;
   const visibleSections = gallerySections.slice(startIndex, startIndex + SECTIONS_PER_PAGE);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 768) {
-        setColumns(2);
-      } else {
-        setColumns(3);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -51,12 +34,7 @@ export default function GalleryPage() {
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-white uppercase tracking-tight">
                   {section.title}
                 </h2>
-                <div
-                  className="grid gap-3 sm:gap-4"
-                  style={{
-                    gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`
-                  }}
-                >
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                   {section.images.map((img: any, idx: number) => (
                     <div
                       key={idx}
@@ -66,7 +44,7 @@ export default function GalleryPage() {
                         src={img.src}
                         alt={img.alt}
                         fill
-                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -81,14 +59,14 @@ export default function GalleryPage() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 sm:gap-3 py-8 sm:py-12">
-              <button
-                type="button"
-                onClick={() => goToPage(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="px-3 sm:px-4 py-2 rounded-xl border border-zinc-900 bg-zinc-950 text-zinc-500 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:border-red-600/30 hover:text-white transition duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                {galleryData.pagination.previous}
-              </button>
+            <button
+              type="button"
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-3 sm:px-4 py-2 rounded-xl border border-zinc-900 bg-zinc-950 text-zinc-500 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:border-red-600/30 hover:text-white transition duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {galleryData.pagination.previous}
+            </button>
 
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
@@ -105,14 +83,14 @@ export default function GalleryPage() {
               </button>
             ))}
 
-              <button
-                type="button"
-                onClick={() => goToPage(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className="px-3 sm:px-4 py-2 rounded-xl border border-zinc-900 bg-zinc-950 text-zinc-500 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:border-red-600/30 hover:text-white transition duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                {galleryData.pagination.next}
-              </button>
+            <button
+              type="button"
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-3 sm:px-4 py-2 rounded-xl border border-zinc-900 bg-zinc-950 text-zinc-500 font-black text-[10px] sm:text-xs uppercase tracking-widest hover:border-red-600/30 hover:text-white transition duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {galleryData.pagination.next}
+            </button>
           </div>
         )}
       </main>

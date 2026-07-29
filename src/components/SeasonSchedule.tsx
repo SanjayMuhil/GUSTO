@@ -1,277 +1,184 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import Shuffle from "./Shuffle";
 
-export interface SeasonImage {
-  src: string;
-  alt: string;
-  caption?: string;
-  width?: number;
-  height?: number;
-}
-
-export interface SeasonCategory {
-  id: string;
-  label: string;
-  images: SeasonImage[];
+export interface RaceRound {
+  round: string;
+  date: string;
+  circuit: string;
+  location: string;
+  country: string;
+  countryFlag: string;
+  image: string;
+  alt?: string;
+  status: string;
 }
 
 interface SeasonScheduleProps {
-  categories: SeasonCategory[];
+  rounds?: RaceRound[];
   title?: string;
   subtitle?: string;
   subTitle?: string;
-  defaultCategory?: string;
   className?: string;
 }
 
-function useParallaxTilt(limit = 12) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState("");
-  const [glare, setGlare] = useState("");
-
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const px = x / rect.width - 0.5;
-      const py = y / rect.height - 0.5;
-      const rotateY = px * limit;
-      const rotateX = -py * limit;
-
-      setTransform(
-        `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.04,1.04,1.04)`
-      );
-      const gx = (x / rect.width) * 100;
-      const gy = (y / rect.height) * 100;
-      setGlare(
-        `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 75%)`
-      );
-    },
-    [limit]
-  );
-
-  const reset = useCallback(() => {
-    setTransform(
-      "perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)"
-    );
-    setGlare("");
-  }, []);
-
-  return { ref, transform, glare, handlers: { onMouseMove: handleMouseMove, onMouseLeave: reset } };
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.96 },
+const cardVariants = {
+  hidden: { opacity: 0, y: 35 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
       delay: i * 0.08,
-      duration: 0.7,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-    },
-  }),
-  exit: (i: number) => ({
-    opacity: 0,
-    y: -30,
-    scale: 0.95,
-    transition: {
-      delay: i * 0.04,
-      duration: 0.45,
-      ease: [0.7, 0, 0.84, 0] as [number, number, number, number],
+      duration: 0.5,
     },
   }),
 };
 
-function ScheduleImageCard({
-  img,
-  index,
-}: {
-  img: SeasonImage;
-  index: number;
-}) {
-  const { ref, transform, glare, handlers } = useParallaxTilt(10);
-
+function StatusBadge({ status }: { status: string }) {
+  const lower = status.toLowerCase();
+  if (lower === "completed") {
+    return (
+      <span className="bg-emerald-600/90 text-white font-extrabold text-[10px] sm:text-xs tracking-wider uppercase px-3 py-1 rounded-full shadow-md border border-emerald-400/30">
+        Completed
+      </span>
+    );
+  }
+  if (lower === "finale") {
+    return (
+      <span className="bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[10px] sm:text-xs tracking-wider uppercase px-3 py-1 rounded-full shadow-md flex items-center gap-1">
+        🏆 Finale
+      </span>
+    );
+  }
   return (
-    <motion.div
-      custom={index}
-      variants={itemVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      ref={ref}
-      {...handlers}
-      className="group relative overflow-hidden rounded-3xl border border-zinc-900 bg-zinc-950 aspect-[4/3] cursor-pointer select-none"
-      style={{ transform, transition: "transform 0.1s ease-out" }}
-    >
-      {/* Soft glow on hover */}
-      <div className="absolute -inset-0.5 bg-gradient-to-br from-red-600/10 via-transparent to-orange-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-700 pointer-events-none blur-sm" />
-
-      <Image
-        src={img.src}
-        alt={img.alt}
-        fill
-        priority={index < 3}
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        loading={index < 3 ? "eager" : "lazy"}
-      />
-
-      {/* Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
-
-      {/* Glassmorphism caption */}
-      {img.caption && (
-        <div className="absolute bottom-5 left-5 right-5 z-10">
-          <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-xl px-4 py-3">
-            <p className="text-white text-xs sm:text-sm font-extrabold tracking-wide uppercase">
-              {img.caption}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Glare */}
-      <div
-        className="absolute inset-0 pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition duration-300"
-        style={{ background: glare }}
-      />
-
-      {/* Soft border shine */}
-      <div className="absolute inset-0 rounded-3xl border border-white/5 pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition duration-500" />
-    </motion.div>
+    <span className="bg-[#0b1f47]/90 text-white font-bold text-[10px] sm:text-xs tracking-wider uppercase px-3 py-1 rounded-full shadow-md border border-blue-400/30">
+      {status}
+    </span>
   );
 }
 
-const SeasonSchedule: React.FC<SeasonScheduleProps> = ({
-  categories,
-  title = "2026 Calendar",
+export default function SeasonSchedule({
+  rounds = [],
+  title = "2026 ESBK Race Calendar",
   subtitle = "SEASON SCHEDULE",
-  subTitle,
-  defaultCategory,
+  subTitle = "Follow Johann's 2026 ESBK championship journey across Spain and Portugal.",
   className = "",
-}) => {
-  const initial = defaultCategory ?? categories[0]?.id ?? "";
-  const [active, setActive] = useState(initial);
+}: SeasonScheduleProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: false, margin: "-120px" });
-  const cat = categories.find((c) => c.id === active) ?? categories[0];
+  const isInView = useInView(sectionRef, { once: false, margin: "-80px" });
 
   return (
     <section
       ref={sectionRef}
-      className={`relative w-full py-20 sm:py-24 md:py-28 lg:py-36 bg-[#050505] border-t border-zinc-900 overflow-hidden ${className}`}
+      className={`relative w-full py-16 sm:py-24 md:py-28 bg-black border-t border-zinc-900 overflow-hidden ${className}`}
     >
-      {/* Background ambient glow */}
+      {/* Background Ambient Glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[140px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-orange-500/5 rounded-full blur-[120px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.03)_0%,transparent_55%)]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-red-600/10 rounded-full blur-[160px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_0%,transparent_70%)]" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        {/* Header */}
-        <div className="text-center mb-10 sm:mb-14 md:mb-16 lg:mb-20 space-y-2 sm:space-y-3">
-          <motion.p
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
+        {/* Section Header */}
+        <div className="text-center mx-auto max-w-[850px] mb-10 sm:mb-14 lg:mb-16 space-y-3">
+          <motion.div
             initial={isInView ? {} : { opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="text-red-500 text-[10px] sm:text-xs tracking-[0.35em] font-black uppercase"
+            className="text-red-500 font-bold text-[12px] sm:text-[13px] lg:text-[14px] uppercase tracking-[0.45em] text-center block"
           >
             {subtitle}
-          </motion.p>
-          <motion.h2
-            initial={isInView ? {} : { opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-white uppercase leading-none"
-          >
-            {title}
-          </motion.h2>
-          {subTitle && (
-            <motion.p
-              initial={isInView ? {} : { opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.25, duration: 0.6 }}
-              className="text-zinc-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed whitespace-pre-line"
-            >
-              {subTitle}
-            </motion.p>
-          )}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-            className="w-16 sm:w-24 h-1 bg-gradient-to-r from-red-600 to-orange-500 rounded-full mx-auto origin-center"
+          </motion.div>
+
+          <Shuffle
+            text={title}
+            tag="h2"
+            className="text-[34px] sm:text-[48px] md:text-[62px] lg:text-[76px] font-black text-white uppercase tracking-tight leading-none text-center"
+            textAlign="center"
+            duration={0.4}
           />
+
+          {subTitle && (
+            <p className="text-zinc-400 text-[15px] sm:text-[17px] lg:text-[20px] max-w-[700px] mx-auto leading-relaxed text-center pt-1">
+              {subTitle}
+            </p>
+          )}
         </div>
 
-        {/* Category Tabs */}
-        <motion.div
-          initial={isInView ? {} : { opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-12 sm:mb-16 md:mb-20 overflow-x-auto pb-2"
-        >
-          {categories.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => setActive(c.id)}
-              className={`relative px-4 sm:px-6 py-2 sm:py-2.5 md:py-3 rounded-full text-xs sm:text-sm font-black tracking-widest uppercase transition-all duration-500 outline-none focus-visible:ring-2 focus-visible:ring-red-500/60 whitespace-nowrap min-h-[40px] sm:min-h-[44px] ${
-                active === c.id
-                  ? "text-white"
-                  : "text-zinc-500 hover:text-zinc-300"
-              }`}
+        {/* Vertical Stack of Large Horizontal Racing Cards (1 Card Per Row) */}
+        <div className="space-y-6 sm:space-y-8 lg:space-y-10">
+          {rounds.map((roundItem, index) => (
+            <motion.div
+              key={roundItem.round}
+              custom={index}
+              variants={cardVariants}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              whileHover={{ y: -6, scale: 1.005 }}
+              className="group relative w-full h-[280px] sm:h-[340px] md:h-[380px] lg:h-[420px] rounded-[24px] overflow-hidden bg-zinc-950 border border-zinc-900 shadow-2xl hover:border-red-500/60 hover:shadow-red-950/40 transition-all duration-400 flex flex-col justify-between p-5 sm:p-7 md:p-8 cursor-pointer select-none"
             >
-              {active === c.id && (
-                <motion.span
-                  layoutId="active-pill"
-                  className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-[0_0_30px_rgba(220,38,38,0.35)]"
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+              {/* Full Card Background Image with Dark Overlay */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src={roundItem.image}
+                  alt={roundItem.alt || roundItem.circuit}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-              )}
-              <span className="relative z-10">{c.label}</span>
-            </button>
+                {/* Dark Vignette & Gradient Overlays */}
+                <div className="absolute inset-0 bg-black/55 group-hover:bg-black/45 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60" />
+              </div>
+
+              {/* Top-Left: Round Badge */}
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10">
+                <span className="bg-red-600 text-white font-black text-xs sm:text-sm tracking-wider uppercase px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-lg border border-red-500/30">
+                  {roundItem.round}
+                </span>
+              </div>
+
+              {/* Top-Right: Status Badge */}
+              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10">
+                <StatusBadge status={roundItem.status} />
+              </div>
+
+              {/* Centered Main Card Content */}
+              <div className="relative z-10 my-auto text-center px-4 space-y-2 sm:space-y-3 flex flex-col items-center justify-center max-w-4xl mx-auto">
+                {/* 1. Country Flag Emblem */}
+                <div className="text-2xl sm:text-3xl lg:text-4xl leading-none drop-shadow-md">
+                  {roundItem.countryFlag}
+                </div>
+
+                {/* 2. Circuit Name: Desktop 52px, Laptop 44px, Tablet 34px, Mobile 24px, Font Weight 900 */}
+                <h3 className="text-[24px] sm:text-[34px] md:text-[44px] lg:text-[52px] font-black text-white uppercase tracking-tight leading-[1.08] line-clamp-2 group-hover:text-red-500 transition-colors drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] text-center">
+                  {roundItem.circuit}
+                </h3>
+
+                {/* 3. Location: Desktop 22px, Mobile 15px, Italic */}
+                <p className="text-zinc-300 font-serif italic text-[15px] sm:text-[18px] lg:text-[22px] tracking-wide drop-shadow text-center">
+                  {roundItem.location}
+                </p>
+
+                {/* 4. Date Badge: Desktop 20px, Mobile 14px, Dark background pill */}
+                <div className="pt-1">
+                  <div className="inline-flex items-center gap-2 bg-[#0b1f47]/80 backdrop-blur-md border border-blue-900/60 text-white font-black text-[14px] sm:text-[17px] lg:text-[20px] px-5 py-1.5 sm:px-6 sm:py-2 rounded-full uppercase tracking-wider shadow-xl">
+                    <svg className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>{roundItem.date}</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           ))}
-        </motion.div>
-
-        {/* Animated Image Grid */}
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.55, ease: [0.7, 0, 0.84, 0] as [number, number, number, number] }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-          >
-            {cat?.images.map((img, i) => (
-              <ScheduleImageCard
-                key={`${active}-${i}`}
-                img={img}
-                index={i}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Parallax decorative line */}
-        <motion.div
-          initial={isInView ? {} : { opacity: 0, scaleY: 0 }}
-          animate={isInView ? { opacity: 1, scaleY: 1 } : {}}
-          transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-          className="mt-20 sm:mt-28 h-px w-full bg-gradient-to-r from-transparent via-zinc-800 to-transparent origin-center"
-        />
+        </div>
       </div>
     </section>
   );
-};
-
-export default SeasonSchedule;
-export { useParallaxTilt };
+}

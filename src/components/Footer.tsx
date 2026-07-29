@@ -31,30 +31,44 @@ const socialIcons: Record<string, React.ReactNode> = {
 function QuickLinks() {
   const pathname = usePathname();
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.slice(1);
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+      }
+    }
+  };
+
   const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    return pathname.startsWith(href.split("#")[0]);
+    if (href.startsWith("#")) return false;
+    return pathname === href || pathname.startsWith(href);
   };
 
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+    <ul className="flex flex-col items-center md:items-start space-y-1 sm:space-y-2">
       {footerData.quickLinks.map((item) => {
         const active = isActive(item.href);
         return (
-          <li key={item.label}>
+          <li key={item.label} className="w-full text-center md:text-left">
             <Link
               href={item.href}
-              className={`text-xs sm:text-sm font-medium transition-all duration-200 inline-flex items-center gap-2 group ${
+              onClick={(e) => handleLinkClick(e, item.href)}
+              className={`min-h-[44px] py-2 px-3 md:px-0 inline-flex items-center justify-center md:justify-start gap-2 text-sm sm:text-base font-medium transition-all duration-200 group ${
                 active
-                  ? "text-red-500"
-                  : "text-zinc-500 hover:text-red-500"
+                  ? "text-red-500 font-bold"
+                  : "text-zinc-400 hover:text-red-500"
               }`}
             >
               <span
-                className={`h-px w-0 transition-all duration-200 ${
+                className={`hidden md:inline-block h-px transition-all duration-200 ${
                   active
                     ? "w-3 bg-red-500"
-                    : "group-hover:w-3 bg-zinc-700 group-hover:bg-red-500"
+                    : "w-0 group-hover:w-3 bg-zinc-700 group-hover:bg-red-500"
                 }`}
                 aria-hidden="true"
               />
@@ -69,12 +83,13 @@ function QuickLinks() {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-zinc-900 bg-black">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <footer id="contact" className="border-t border-zinc-900 bg-black text-white">
+      <div className="container mx-auto px-5 sm:px-8 max-w-7xl">
         <div className="py-12 sm:py-16 md:py-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 lg:gap-8 text-center md:text-left items-start">
+            
             {/* Brand Information */}
-            <div className="sm:col-span-2 lg:col-span-1 space-y-5">
+            <div className="space-y-4 sm:space-y-5 flex flex-col items-center md:items-start">
               <Link href="/" className="inline-block transition-transform duration-300 hover:scale-105">
                 <Image
                   src={footerData.brand.logo}
@@ -82,58 +97,67 @@ export default function Footer() {
                   width={140}
                   height={90}
                   priority={false}
-                  className="max-h-[50px] sm:max-h-[60px] w-auto"
+                  className="max-h-[48px] sm:max-h-[60px] w-auto mx-auto md:mx-0"
                 />
               </Link>
-              <p className="text-red-500 text-xs sm:text-sm font-black uppercase tracking-[0.2em]">
+              <p
+                className="text-red-500 text-xs sm:text-sm tracking-[0.2em] font-medium uppercase"
+                style={{ fontFamily: "'Royal Tomato', sans-serif" }}
+              >
                 {footerData.brand.tagline}
               </p>
-              <p className="text-zinc-500 text-xs sm:text-sm leading-relaxed">
+              <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed max-w-xs md:max-w-none">
                 {footerData.brand.description}
               </p>
             </div>
 
             {/* Quick Links */}
-            <div className="space-y-5">
-              <h3 className="text-white font-black text-xs sm:text-sm uppercase tracking-[0.2em]">
+            <div className="space-y-4 sm:space-y-5 flex flex-col items-center md:items-start">
+              <h3
+                className="text-white font-medium text-sm sm:text-base uppercase tracking-[0.2em]"
+                style={{ fontFamily: "'Royal Tomato', sans-serif" }}
+              >
                 {footerData.quickLinksTitle}
               </h3>
               <QuickLinks />
             </div>
 
             {/* Contact Information */}
-            <div className="space-y-5">
-              <h3 className="text-white font-black text-xs sm:text-sm uppercase tracking-[0.2em]">
+            <div className="space-y-4 sm:space-y-5 flex flex-col items-center md:items-start">
+              <h3
+                className="text-white font-medium text-sm sm:text-base uppercase tracking-[0.2em]"
+                style={{ fontFamily: "'Royal Tomato', sans-serif" }}
+              >
                 {footerData.contactTitle}
               </h3>
-              <ul className="space-y-3 sm:space-y-4">
+              <ul className="space-y-3 sm:space-y-4 w-full">
                 <li>
-                  <p className="text-zinc-600 text-[10px] sm:text-xs uppercase tracking-widest mb-1">
+                  <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest mb-1">
                     {footerData.contact.email.label}
                   </p>
                   <Link
                     href={footerData.contact.email.href}
-                    className="text-zinc-400 hover:text-red-500 text-xs sm:text-sm font-medium transition-colors duration-200"
+                    className="min-h-[44px] inline-flex items-center justify-center md:justify-start text-zinc-300 hover:text-red-500 text-xs sm:text-sm font-medium transition-colors duration-200 break-all"
                   >
                     {footerData.contact.email.value}
                   </Link>
                 </li>
                 <li>
-                  <p className="text-zinc-600 text-[10px] sm:text-xs uppercase tracking-widest mb-1">
+                  <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest mb-1">
                     {footerData.contact.phone.label}
                   </p>
                   <Link
                     href={footerData.contact.phone.href}
-                    className="text-zinc-400 hover:text-red-500 text-xs sm:text-sm font-medium transition-colors duration-200"
+                    className="min-h-[44px] inline-flex items-center justify-center md:justify-start text-zinc-300 hover:text-red-500 text-xs sm:text-sm font-medium transition-colors duration-200"
                   >
                     {footerData.contact.phone.value}
                   </Link>
                 </li>
                 <li>
-                  <p className="text-zinc-600 text-[10px] sm:text-xs uppercase tracking-widest mb-1">
+                  <p className="text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest mb-1">
                     {footerData.contact.location.label}
                   </p>
-                  <p className="text-zinc-400 text-xs sm:text-sm font-medium">
+                  <p className="text-zinc-300 text-xs sm:text-sm font-medium">
                     {footerData.contact.location.value}
                   </p>
                 </li>
@@ -141,11 +165,14 @@ export default function Footer() {
             </div>
 
             {/* Social Media */}
-            <div className="space-y-5">
-              <h3 className="text-white font-black text-xs sm:text-sm uppercase tracking-[0.2em]">
+            <div className="space-y-4 sm:space-y-5 flex flex-col items-center md:items-start">
+              <h3
+                className="text-white font-medium text-sm sm:text-base uppercase tracking-[0.2em]"
+                style={{ fontFamily: "'Royal Tomato', sans-serif" }}
+              >
                 {footerData.socialTitle}
               </h3>
-              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4">
                 {footerData.socialLinks.map((social) => (
                   <a
                     key={social.label}
@@ -153,37 +180,22 @@ export default function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={social.label}
-                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-red-500 hover:border-red-600/50 hover:bg-zinc-800 transition-all duration-300"
+                    className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-red-500 hover:border-red-600/50 hover:bg-zinc-800 transition-all duration-300"
                   >
                     {socialIcons[social.icon] || social.icon}
                   </a>
                 ))}
               </div>
             </div>
+
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-zinc-900 py-5 sm:py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
-            <p className="text-zinc-700 text-[10px] sm:text-xs font-medium tracking-wide text-center sm:text-left">
-              {footerData.bottomBar.copyright}
-            </p>
-            <div className="flex items-center gap-4 sm:gap-6">
-              <Link
-                href="/privacy"
-                className="text-zinc-700 hover:text-red-500 text-[10px] sm:text-xs font-medium transition-colors duration-200"
-              >
-                {footerData.bottomBar.links.privacy}
-              </Link>
-              <Link
-                href="/terms"
-                className="text-zinc-700 hover:text-red-500 text-[10px] sm:text-xs font-medium transition-colors duration-200"
-              >
-                {footerData.bottomBar.links.terms}
-              </Link>
-            </div>
-          </div>
+        <div className="border-t border-zinc-900/80 py-6 text-center">
+          <p className="text-zinc-500 text-xs font-medium tracking-wide">
+            {footerData.bottomBar.copyright}
+          </p>
         </div>
       </div>
     </footer>

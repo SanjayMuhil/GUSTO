@@ -1,7 +1,6 @@
 "use client";
 
 import Header from "../../components/Header";
-import Shuffle from "../../components/Shuffle";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Footer from "../../components/Footer";
