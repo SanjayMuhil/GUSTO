@@ -7,8 +7,7 @@ import Shuffle from "../components/Shuffle";
 import SeasonSchedule from "../components/SeasonSchedule";
 import DiagonalCarousel from "../components/DiagonalCarousel";
 import RippleDisplacementSlider from "../components/RippleDisplacementSlider";
-import PixelTransition from "../components/PixelTransition";
-import CardSwap, { Card } from "../components/CardSwap";
+import TiltedCover from "../components/TiltedCover";
 import Footer from "../components/Footer";
 import { useState, useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
@@ -18,15 +17,6 @@ interface Champion {
   year: string;
   title: string;
   image: string;
-}
-
-interface Category {
-  id: number;
-  name: string;
-  desc: string;
-  image: string;
-  championship: string;
-  years: string;
 }
 
 interface AchievementStat {
@@ -43,7 +33,6 @@ interface AchievementsStats {
 }
 
 const champions = homeData.champions.items as Champion[];
-const categoriesData = homeData.categories.items as Category[];
 const newsItems = homeData.latestUpdates.news;
 const scheduleRounds = homeData.seasonSchedule.rounds;
 const achievementsStats = homeData.achievementsStats as AchievementsStats;
@@ -62,12 +51,9 @@ type Particle = {
 export default function Home() {
   const [sliderIndex, setSliderIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
-  const [activeCategory, setActiveCategory] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
   const [glareStyle, setGlareStyle] = useState<React.CSSProperties>({ opacity: 0 });
-  const [cardSwapWidth, setCardSwapWidth] = useState(320);
-  const [cardSwapHeight, setCardSwapHeight] = useState(260);
   const particlesRef = useRef<Particle[]>([]);
   const [particles, setParticles] = useState<Particle[]>([]);
   const preferredMotion = useReducedMotion();
@@ -77,28 +63,15 @@ export default function Home() {
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setVisibleCards(1);
-        setCardSwapWidth(Math.min(280, window.innerWidth - 48));
-        setCardSwapHeight(200);
       } else if (window.innerWidth < 1024) {
         setVisibleCards(2);
-        setCardSwapWidth(340);
-        setCardSwapHeight(260);
       } else {
         setVisibleCards(3);
-        setCardSwapWidth(420);
-        setCardSwapHeight(320);
       }
     };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveCategory((prev) => (prev + 1) % categoriesData.length);
-    }, 4500);
-    return () => clearInterval(interval);
   }, []);
 
   const maxIndex = champions.length - visibleCards;
@@ -326,16 +299,16 @@ export default function Home() {
                 {homeData.hero.eyebrow}
               </motion.p>
 
-              <motion.h6
+              <motion.h2
                 variants={itemVariants}
-                className="font-gasdrifo text-[42px] sm:text-[62px] lg:text-[85px] leading-[0.85] tracking-[-0.02em] font-black text-white uppercase"
-                style={{ fontFamily: "'NCL Gasdrifo', var(--font-geist-sans), sans-serif", fontWeight: 900 }}
+                className="font-gasdrifo text-[44px] sm:text-[56px] md:text-[70px] lg:text-[85px] leading-[0.85] tracking-[-0.02em] font-black text-white uppercase"
+                style={{ fontFamily: "'RicoPalm', var(--font-geist-sans), sans-serif" }}
               >
                 <span className="block">{homeData.hero.title.line1}</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500">
                   {homeData.hero.title.line2}
                 </span>
-              </motion.h6>
+               </motion.h2>
 
               <motion.p
                 variants={itemVariants}
@@ -490,138 +463,7 @@ export default function Home() {
               duration={0.4}
             />
           </div>
-
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 max-w-6xl mx-auto min-h-[320px] sm:min-h-[420px]">
-            {/* Left Column: Category Description Details */}
-            <div className="w-full lg:w-5/12 space-y-4 sm:space-y-6 flex flex-col justify-center items-center lg:items-start text-center lg:text-left min-h-[200px] sm:min-h-[250px] lg:pr-8 order-1 lg:order-1">
-              <div className="inline-flex items-center gap-3">
-                 <span className="text-[10px] sm:text-xs bg-red-600/10 text-red-500 font-black px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-red-500/20 uppercase tracking-widest">
-                  {homeData.categories.labels.activeClass}
-                </span>
-                <span className="text-zinc-500 text-[10px] sm:text-xs font-bold uppercase tracking-wider">
-                  0{categoriesData[activeCategory].id} / 0{categoriesData.length}
-                </span>
-              </div>
-
-              {/* Animating the active name */}
-              <div className="h-[50px] sm:h-[60px] overflow-hidden flex items-center">
-                <Shuffle
-                  key={`cat-name-${activeCategory}`}
-                  text={categoriesData[activeCategory].name}
-                  tag="h3"
-                  className="text-3xl sm:text-4xl md:text-5xl font-black text-white uppercase tracking-tighter"
-                  duration={0.35}
-                />
-              </div>
-
-              {/* Description box with subtle top red accent border */}
-                <div className="border-l-2 border-red-600 pl-4 sm:pl-6 lg:pl-6 py-2 min-h-[80px] sm:min-h-[100px] flex items-center max-lg:border-l-0 max-lg:pl-0">
-                <p className="text-zinc-400 text-sm sm:text-base leading-relaxed font-medium">
-                  {categoriesData[activeCategory].desc}
-                </p>
-              </div>
-
-              {/* Telemetry info for interest */}
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-zinc-900">
-                 <div>
-                   <span className="text-[10px] text-zinc-500 font-extrabold uppercase tracking-widest block">{homeData.categories.labels.championship}</span>
-                   <span className="text-xs sm:text-sm text-zinc-300 font-bold block mt-1">{categoriesData[activeCategory].championship}</span>
-                 </div>
-                 <div>
-                   <span className="text-[10px] text-zinc-500 font-extrabold uppercase tracking-widest block">{homeData.categories.labels.season}</span>
-                   <span className="text-xs sm:text-sm text-zinc-300 font-bold block mt-1">{categoriesData[activeCategory].years}</span>
-                 </div>
-              </div>
-            </div>
-
-            {/* Right Column: CardSwap */}
-            <div className="hidden lg:flex w-full lg:w-7/12 justify-center items-center overflow-visible py-4 sm:py-6 order-2 lg:order-2">
-              <div style={{ minHeight: '420px', height: cardSwapHeight + 80, position: 'relative', width: '100%', maxWidth: cardSwapWidth + 100 }}>
-                <CardSwap
-                  width={cardSwapWidth}
-                  height={cardSwapHeight}
-                  cardDistance={40}
-                  verticalDistance={50}
-                  delay={4000}
-                  pauseOnHover={false}
-                  onCardClick={() => {}}
-                  skewAmount={4}
-                  easing="elastic"
-                >
-                  {categoriesData.map((cat: Category) => (
-                    <Card key={cat.name} className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950">
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={cat.image}
-                          alt={cat.name}
-                          fill
-                          className="object-cover"
-                          priority={false}
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent" />
-                        <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 md:p-6 flex flex-col gap-1 sm:gap-2">
-                          <span className="text-[10px] text-red-500 font-black uppercase tracking-[0.3em]">
-                            {cat.championship}
-                          </span>
-                          <h3 className="text-lg sm:text-xl md:text-2xl font-black text-white uppercase tracking-tight leading-none">
-                            {cat.name}
-                          </h3>
-                          <p className="text-[10px] sm:text-xs text-zinc-300 leading-relaxed line-clamp-2">
-                            {cat.desc}
-                          </p>
-                          <div className="flex items-center gap-3 pt-1 sm:pt-2">
-                            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
-                              Season {cat.years}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
-                </CardSwap>
-              </div>
-            </div>
-
-            {/* Mobile / Tablet: centered responsive grid replacing the CardSwap stack */}
-            <div className="order-2 lg:hidden w-full flex justify-center pt-8 sm:pt-10">
-              <div className="grid grid-cols-1 min-[481px]:grid-cols-2 gap-5 sm:gap-6 w-full max-w-2xl mx-auto px-1">
-                {categoriesData.map((cat: Category) => (
-                  <div key={cat.name} className="overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950 w-full">
-                    <div className="relative w-full aspect-[4/5]">
-                      <Image
-                        src={cat.image}
-                        alt={cat.name}
-                        fill
-                        className="object-cover"
-                        priority={false}
-                        sizes="(max-width: 480px) 100vw, 50vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-transparent" />
-                      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex flex-col gap-1.5 sm:gap-2">
-                        <span className="text-[11px] text-red-500 font-black uppercase tracking-[0.3em]">
-                          {cat.championship}
-                        </span>
-                        <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight leading-none">
-                          {cat.name}
-                        </h3>
-                        <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-                          {cat.desc}
-                        </p>
-                        <div className="flex items-center gap-3 pt-1 sm:pt-2">
-                          <span className="text-[11px] text-zinc-500 font-bold uppercase tracking-wider">
-                            Season {cat.years}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <TiltedCover items={homeData.categories.items} className="max-w-6xl mx-auto" />
         </div>
       </section>
 

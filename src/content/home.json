@@ -65,53 +65,45 @@
     ]
   },
   "categories": {
-    "sectionLabel": "CURRENT CHAMPIONSHIP",
-    "sectionTitle": "CURRENT CHAMPIONSHIP",
-    "labels": {
-      "activeClass": "Active Class",
-      "championship": "CHAMPIONSHIP",
-      "season": "SEASON"
-    },
+    "sectionTitle": "CATEGORIES",
     "items": [
       {
-        "id": 1,
-        "name": "ASB1000",
-        "desc": "The pinnacle of Asian motorsports. High-octane 1000cc superbikes showcasing peak rider precision and manufacturer engineering.",
-        "image": "/2.jpeg",
-        "championship": "Asia Road Racing Championship",
-        "years": "2025/2026"
+        "year": "2020",
+        "title": "Honda CBR150",
+        "motorcycle": "Honda CBR150",
+        "image": "/card/2020.jpeg"
       },
       {
-        "id": 2,
-        "name": "SS600",
-        "desc": "The ultimate proving ground for tactical skill and consistency. Mid-weight supersports demanding perfection.",
-        "image": "/3.jpeg",
-        "championship": "Qatar Superstock & ARRC",
-        "years": "2025/2026"
+        "year": "2021",
+        "title": "Honda CBR150",
+        "motorcycle": "Honda CBR150",
+        "image": "/card/2021.jpeg"
       },
       {
-        "id": 3,
-        "name": "AP250",
-        "desc": "The launchpad for Asia's next racing generation. Fast, competitive production-based racing.",
-        "image": "/4.jpeg",
-        "championship": "Asia Road Racing Championship",
-        "years": "2025/2026"
+        "year": "2022",
+        "title": "Honda NSF250R",
+        "motorcycle": "Honda NSF250R",
+        "image": "/card/2022.jpeg"
       },
       {
-        "id": 4,
-        "name": "UB150",
-        "desc": "Authentic regional passion and mass-market reach. Ground-level racing featuring highly modified underbone machines.",
-        "image": "/5.jpeg",
-        "championship": "Asia Road Racing Championship",
-        "years": "2025/2026"
+        "year": "2023",
+        "title": "European Talent Cup",
+        "motorcycle": "Honda NSF250R",
+        "image": "/card/2023.jpeg"
       },
       {
-        "id": 5,
-        "name": "TVS ASIA OMC",
-        "desc": "A global showcase of mechanical reliability and emerging talent riding uniform race-tuned TVS Apache RR 310s.",
-        "image": "/6.jpeg",
-        "championship": "TVS Asia One Make Championship",
-        "years": "2025/2026"
+        "year": "2024",
+        "title": "European Talent Cup",
+        "subtitle": "Thailand Talent Cup",
+        "motorcycle": "Honda NSF250R",
+        "image": "/card/2024.jpeg"
+      },
+      {
+        "year": "2025",
+        "title": "Asia Road Racing Championship",
+        "subtitle": "Qatar QSTK Championship",
+        "motorcycle": "",
+        "image": "/card/2025.jpeg"
       }
     ]
   },
