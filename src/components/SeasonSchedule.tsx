@@ -101,6 +101,17 @@ export default function SeasonSchedule({
             duration={0.4}
           />
 
+          <div className="flex justify-center items-center py-2 sm:py-3">
+            <Image
+              src="/ESBK.png"
+              alt="ESBK Campeonato de España de Superbike"
+              width={180}
+              height={60}
+              className="object-contain object-center w-auto h-[40px] sm:h-[50px] md:h-[60px]"
+              priority={false}
+            />
+          </div>
+
           {subTitle && (
             <p className="text-zinc-400 text-[15px] sm:text-[17px] lg:text-[20px] max-w-[700px] mx-auto leading-relaxed text-center pt-1">
               {subTitle}
@@ -118,10 +129,10 @@ export default function SeasonSchedule({
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               whileHover={{ y: -6, scale: 1.005 }}
-              className="group relative w-full h-[280px] sm:h-[340px] md:h-[380px] lg:h-[420px] rounded-[24px] overflow-hidden bg-zinc-950 border border-zinc-900 shadow-2xl hover:border-red-500/60 hover:shadow-red-950/40 transition-all duration-400 flex flex-col justify-between p-5 sm:p-7 md:p-8 cursor-pointer select-none"
+              className="group relative w-full h-[280px] sm:h-[340px] md:h-[380px] lg:h-[420px] rounded-[24px] overflow-hidden bg-zinc-950 border border-zinc-900 shadow-2xl hover:border-red-500/60 hover:shadow-red-950/40 transition-all duration-400 flex flex-col justify-between p-5 sm:p-7 md:p-8 cursor-pointer select-none outline-none"
             >
               {/* Full Card Background Image with Dark Overlay */}
-              <div className="absolute inset-0 z-0">
+              <div className="absolute inset-0 z-0 bg-zinc-950 overflow-hidden">
                 <Image
                   src={roundItem.image}
                   alt={roundItem.alt || roundItem.circuit}

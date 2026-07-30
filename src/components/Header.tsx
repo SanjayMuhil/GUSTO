@@ -52,8 +52,8 @@ export default function Header() {
           className="flex items-center flex-shrink-0 transition-transform duration-300 hover:scale-105"
         >
           <Image
-            src="/Johi logo 1.png"
-            alt="CUSTO Racing Logo"
+            src="/johi-logo.png"
+            alt="JOHI Racing Logo"
             width={126}
             height={90}
             priority
