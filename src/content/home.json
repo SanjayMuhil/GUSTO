@@ -24,24 +24,24 @@
         "year": "2019",
         "title": "Career Begins",
         "description": "Johann's journey started in grassroots Indian motorcycle racing, taking his first steps on the circuit in Chennai and setting the foundation for high-level international competition.",
-        "image": "/00.jpeg"
+        "image": "/car.jpeg"
       },
       {
         "year": "2024",
         "title": "Historic Qatar Hat-trick",
         "description": "Dominating the international stage with a clean sweep at Lusail International Circuit in Qatar, proving speed and composure against seasoned world contenders.",
-        "image": "/01.jpeg"
+        "image": "/qu.jpeg"
       },
       {
         "year": "2026",
         "title": "KTM Cup Champion",
         "description": "Sealing the championship title with unmatched pace, tactical brilliance, and lap records across Europe and Asia as the journey accelerates towards the World Championship.",
-        "image": "/02.jpeg"
+        "image": "/ktm.jpeg"
       }
     ]
   },
   "achievementsStats": {
-    "backgroundImage": "/images/backgrounds/achievements-bg.jpg",
+    "backgroundImage": "/hero-racer.jpg",
     "sectionLabel": "KEY NUMBERS",
     "sectionTitle": "Achievements & Targets",
     "sectionSubtitle": "A summary of Johann's racing milestones, international achievements, championship goals, and career progress.",
@@ -119,9 +119,9 @@
         "location": "Jerez de la Frontera",
         "country": "Spain",
         "countryFlag": "🇪🇸",
-        "image": "/00.jpeg",
+        "image": "/Calendar/jer.jpeg",
         "alt": "Circuito de Jerez Ángel Nieto",
-        "status": "Upcoming"
+        "status": "Complete"
       },
       {
         "round": "Round 2",
@@ -130,9 +130,9 @@
         "location": "Los Arcos",
         "country": "Spain",
         "countryFlag": "🇪🇸",
-        "image": "/01.jpeg",
+        "image": "/Calendar/navarra.jpeg",
         "alt": "Circuito de Navarra",
-        "status": "Upcoming"
+        "status": "Complete"
       },
       {
         "round": "Round 3",
@@ -141,9 +141,9 @@
         "location": "Estoril",
         "country": "Portugal",
         "countryFlag": "🇵🇹",
-        "image": "/02.jpeg",
+        "image": "/Calendar/estoril.jpeg",
         "alt": "Circuito do Estoril",
-        "status": "Upcoming"
+        "status": "Complete"
       },
       {
         "round": "Round 4",
@@ -152,9 +152,9 @@
         "location": "Alcañiz",
         "country": "Spain",
         "countryFlag": "🇪🇸",
-        "image": "/1.JPG",
+        "image": "/Calendar/moto.jpeg",
         "alt": "MotorLand Aragón",
-        "status": "Upcoming"
+        "status": "Complete"
       },
       {
         "round": "Round 5",
@@ -163,7 +163,7 @@
         "location": "Valencia",
         "country": "Spain",
         "countryFlag": "🇪🇸",
-        "image": "/2.jpeg",
+        "image": "/Calendar/ric.jpeg",
         "alt": "Circuit Ricardo Tormo",
         "status": "Upcoming"
       },
@@ -174,7 +174,7 @@
         "location": "Los Arcos",
         "country": "Spain",
         "countryFlag": "🇪🇸",
-        "image": "/3.jpeg",
+        "image": "/Calendar/navarra.jpeg",
         "alt": "Circuito de Navarra II",
         "status": "Upcoming"
       },
@@ -185,72 +185,9 @@
         "location": "Jerez de la Frontera",
         "country": "Spain",
         "countryFlag": "🇪🇸",
-        "image": "/4.jpeg",
+        "image": "/Calendar/jer.jpeg",
         "alt": "Circuito de Jerez Ángel Nieto II",
         "status": "Finale"
-      }
-    ]
-  },
-  "latestUpdates": {
-    "sectionLabel": "LATEST UPDATES",
-    "sectionTitle": "Latest News",
-    "subTitle": "Stay updated with Johann Emmanuel's latest racing achievements and championship news.",
-    "news": [
-      {
-        "image": "/images/news/save.jpg",
-        "category": "MotoGP",
-        "date": "20 July 2026",
-        "title": "Johann Emmanuel dominates qualifying in Spain",
-        "description": "Latest championship update and race highlights.",
-        "button": "Read More"
-      },
-      {
-        "image": "/images/news/save.jpg",
-        "category": "ESBK",
-        "date": "10 July 2026",
-        "title": "Round 4 completed successfully",
-        "description": "Outstanding performance at MotorLand Aragón.",
-        "button": "Read More"
-      },
-      {
-        "image": "/images/news/save.jpg",
-        "category": "Championship",
-        "date": "21 June 2026",
-        "title": "Johann moves to the top of the standings",
-        "description": "Strong championship points after Portugal.",
-        "button": "Read More"
-      },
-      {
-        "image": "/images/news/save.jpg",
-        "category": "Training",
-        "date": "15 May 2026",
-        "title": "High-intensity preparation for Round 3",
-        "description": "Behind-the-scenes training session.",
-        "button": "Read More"
-      },
-      {
-        "image": "/images/news/save.jpg",
-        "category": "Media",
-        "date": "05 May 2026",
-        "title": "International media coverage expands",
-        "description": "Featured by leading motorsport publications.",
-        "button": "Read More"
-      },
-      {
-        "image": "/images/news/save.jpg",
-        "category": "Team",
-        "date": "28 April 2026",
-        "title": "Technical partnership announced",
-        "description": "New collaboration for the 2026 season.",
-        "button": "Read More"
-      },
-      {
-        "image": "/images/news/save.jpg",
-        "category": "Race Weekend",
-        "date": "18 March 2026",
-        "title": "Season opener begins in Spain",
-        "description": "The 2026 championship starts with Round 1.",
-        "button": "Read More"
       }
     ]
   },
@@ -271,49 +208,5 @@
       "href": "/updates"
     },
     "backgroundImage": "/IMG_8541.JPG"
-  },
-  "newsItems": [
-    {
-      "image": "/5.jpeg",
-      "title": "🏆 KTM Cup Champion: Season Sealed In Style",
-      "borderColor": "#EF4444",
-      "gradient": "linear-gradient(145deg, #EF4444, #000)",
-      "url": "/updates"
-    },
-    {
-      "image": "/3.jpeg",
-      "title": "🇶🇦 Historic Hat-Trick In Qatar",
-      "borderColor": "#F97316",
-      "gradient": "linear-gradient(160deg, #F97316, #000)",
-      "url": "/updates"
-    },
-    {
-      "image": "/5.jpeg",
-      "title": "🇪🇸 Europe Tested. Experience Gained",
-      "borderColor": "#F59E0B",
-      "gradient": "linear-gradient(180deg, #F59E0B, #000)",
-      "url": "/updates"
-    },
-    {
-      "image": "/joh.png",
-      "title": "🇹🇭 Thailand Talent Cup: Learning From Asia's Best",
-      "borderColor": "#DC2626",
-      "gradient": "linear-gradient(200deg, #DC2626, #000)",
-      "url": "/updates"
-    },
-    {
-      "image": "/5.jpeg",
-      "title": "🏁 New Lap Record At Lusail",
-      "borderColor": "#EA580C",
-      "gradient": "linear-gradient(220deg, #EA580C, #000)",
-      "url": "/updates"
-    },
-    {
-      "image": "/5.jpeg",
-      "title": "🎙 Behind The Helmet: Race Weekend Reflections",
-      "borderColor": "#FB923C",
-      "gradient": "linear-gradient(240deg, #FB923C, #000)",
-      "url": "/updates"
-    }
-  ]
+  }
 }

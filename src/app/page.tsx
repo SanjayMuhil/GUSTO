@@ -5,7 +5,6 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Shuffle from "../components/Shuffle";
 import SeasonSchedule from "../components/SeasonSchedule";
-import DiagonalCarousel from "../components/DiagonalCarousel";
 import RippleDisplacementSlider from "../components/RippleDisplacementSlider";
 import TiltedCover from "../components/TiltedCover";
 import Footer from "../components/Footer";
@@ -33,7 +32,6 @@ interface AchievementsStats {
 }
 
 const champions = homeData.champions.items as Champion[];
-const newsItems = homeData.latestUpdates.news;
 const scheduleRounds = homeData.seasonSchedule.rounds;
 const achievementsStats = homeData.achievementsStats as AchievementsStats;
 
@@ -475,36 +473,6 @@ export default function Home() {
           subTitle={homeData.seasonSchedule.subtitle}
           rounds={scheduleRounds}
         />
-      </section>
-
-      {/* Latest Updates Section (3D DiagonalCarousel) */}
-      <section id="updates" className="py-16 sm:py-24 bg-gradient-to-b from-zinc-950 to-black text-white border-t border-zinc-900 overflow-hidden relative">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="mb-8 sm:mb-12 text-center space-y-2">
-            <span className="text-red-600 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase">{homeData.latestUpdates.sectionLabel}</span>
-            <Shuffle
-              text={homeData.latestUpdates.sectionTitle}
-              tag="h2"
-              className="text-2xl sm:text-3xl md:text-4xl font-black mt-2 text-white"
-              textAlign="center"
-              duration={0.4}
-            />
-            <p className="text-zinc-400 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
-              {homeData.latestUpdates.subTitle}
-            </p>
-          </div>
-        </div>
-
-        <div className="w-full relative">
-          <DiagonalCarousel
-            items={newsItems}
-            loop={true}
-            autoPlay={true}
-            autoPlayInterval={5000}
-            showControls={true}
-            showDots={true}
-          />
-        </div>
       </section>
 
       {/* KEY NUMBERS – Achievements & Targets Section (Immediately above the Footer) */}

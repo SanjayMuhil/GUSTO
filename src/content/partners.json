@@ -23,14 +23,14 @@
         "id": "honda",
         "name": "HONDA RACING",
         "logo": "/part/images.png",
-        "bgType": "white",
+        "bgType": "black",
         "description": "Honda Racing India actively participates in national and international motorsports while focusing on developing the next generation of Indian riders through professional racing programs and advanced motorcycle technology."
       },
       {
         "id": "sidvin",
         "name": "SIDVIN ENERGY",
         "logo": "",
-        "bgType": "white",
+        "bgType": "black",
         "description": "Sidvin Energy Engineering is an engineering design services company specializing in the oil & gas, petrochemical, power, and process industries, delivering innovative engineering solutions worldwide."
       },
       {
@@ -51,14 +51,14 @@
         "id": "ceat",
         "name": "CEAT",
         "logo": "/part/CEAT_Logo 1.png",
-        "bgType": "white",
+        "bgType": "black",
         "description": "CEAT is a leading global tire manufacturer engineering high-performance motorcycle tires built for exceptional grip, durability, and track precision."
       },
       {
         "id": "fettle",
         "name": "FETTLE",
         "logo": "/part/fettle_logo 1.png",
-        "bgType": "white",
+        "bgType": "black",
         "description": "Fettle is a premier performance and fitness brand dedicated to supporting elite athletes with specialized recovery, physical training, and endurance solutions."
       },
       {
@@ -79,14 +79,14 @@
         "id": "rcb",
         "name": "RCB",
         "logo": "/part/RCB.png",
-        "bgType": "white",
+        "bgType": "black",
         "description": "RCB (Racing Boy) is a premier manufacturer of high-performance motorcycle racing parts, braking systems, and aftermarket components trusted across international racing series."
       },
       {
         "id": "redhills",
         "name": "RED HILLS KTM",
         "logo": "/part/redhills 1.png",
-        "bgType": "white",
+        "bgType": "black",
         "description": "Red Hills KTM is an authorized premier dealership and racing supporter delivering high-performance READY TO RACE KTM motorcycles, factory parts, and expert service."
       },
       {

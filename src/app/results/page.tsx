@@ -30,7 +30,38 @@ interface EventItem {
   position: string;
   points: string;
   badge: string;
+  status: string;
   categories: CategoryLink[];
+}
+
+function StatusBadge({ status }: { status: string }) {
+  const lower = status.toLowerCase();
+  if (lower === "complete") {
+    return (
+      <span className="inline-flex items-center gap-1 bg-emerald-600/90 text-white font-extrabold text-[10px] sm:text-xs tracking-wider uppercase px-3 py-1 rounded-full shadow-md border border-emerald-400/30">
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+        </svg>
+        Complete
+      </span>
+    );
+  }
+  if (lower === "finale") {
+    return (
+      <span className="inline-flex items-center gap-1 bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[10px] sm:text-xs tracking-wider uppercase px-3 py-1 rounded-full shadow-md">
+        <span>🏆</span>
+        Finale
+      </span>
+    );
+  }
+  return (
+    <span className="inline-flex items-center gap-1 bg-orange-500/90 text-white font-extrabold text-[10px] sm:text-xs tracking-wider uppercase px-3 py-1 rounded-full shadow-md border border-orange-400/30">
+      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      Upcoming
+    </span>
+  );
 }
 
 export default function ResultsPage() {
@@ -42,7 +73,7 @@ export default function ResultsPage() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
       },
     },
   };
@@ -55,6 +86,8 @@ export default function ResultsPage() {
       transition: { duration: 0.5 },
     },
   };
+
+  const events = resultsData.events as EventItem[];
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
@@ -72,13 +105,22 @@ export default function ResultsPage() {
               {resultsData.hero.sectionLabel}
             </div>
 
-            <Shuffle
-              text={`${resultsData.hero.title.line1} ${resultsData.hero.title.line2}`}
-              tag="h1"
-              className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white"
-              textAlign="center"
-              duration={0.4}
-            />
+            <div className="space-y-2">
+              <Shuffle
+                text={resultsData.hero.title.line1}
+                tag="h1"
+                className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white"
+                textAlign="center"
+                duration={0.4}
+              />
+              <Shuffle
+                text={resultsData.hero.title.line2}
+                tag="h2"
+                className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-500"
+                textAlign="center"
+                duration={0.4}
+              />
+            </div>
 
             <p className="text-zinc-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed pt-1">
               {resultsData.hero.subtitle}
@@ -92,17 +134,17 @@ export default function ResultsPage() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 items-start"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 items-stretch"
           >
-            {resultsData.events.map((event: EventItem) => (
+            {events.map((event) => (
               <motion.div
                 key={event.id}
                 variants={cardVariants}
                 whileHover={shouldReduceMotion ? {} : { y: -6 }}
-                className="bg-zinc-950 border border-zinc-900 rounded-[24px] overflow-hidden shadow-2xl hover:border-red-500/50 hover:shadow-red-950/30 transition-all duration-300 flex flex-col group"
+                className="bg-zinc-950 border border-zinc-900 rounded-[24px] overflow-hidden shadow-2xl hover:border-red-500/50 hover:shadow-red-950/30 transition-all duration-300 flex flex-col group h-full"
               >
-                {/* Top Section: 16:9 Image with Overlay */}
-                <div className="relative aspect-video w-full overflow-hidden bg-zinc-900">
+                {/* Top Section: Fixed Image with Overlay */}
+                <div className="relative w-full overflow-hidden bg-zinc-900 shrink-0" style={{ height: 220 }}>
                   <Image
                     src={event.image}
                     alt={event.title}
@@ -117,29 +159,25 @@ export default function ResultsPage() {
                     <span className="bg-black/80 backdrop-blur-md border border-zinc-800 text-zinc-300 text-[9px] font-extrabold uppercase px-2.5 py-1 rounded-full tracking-widest shadow-md">
                       {event.championship}
                     </span>
-                    <span className="bg-red-600/90 text-white text-[10px] font-black uppercase px-3 py-1 rounded-full tracking-wider shadow-lg flex items-center gap-1">
-                      {event.badge}
-                    </span>
+                    <StatusBadge status={event.status} />
                   </div>
                 </div>
 
-                {/* Middle Banner: Championship Logo & Date Badge (Inspired by Yamaha format) */}
-                <div className="p-4 bg-zinc-900/60 border-b border-zinc-900 flex items-center justify-between gap-3">
-                  {/* Left: Championship Logo Title */}
+                {/* Middle Banner: Championship Logo & Date Badge */}
+                <div className="p-4 bg-zinc-900/60 border-b border-zinc-900 flex items-center justify-between gap-3 shrink-0">
                   <div className="flex items-center gap-2">
                     <span className="text-xl sm:text-2xl font-black italic tracking-tighter text-white uppercase font-mono group-hover:text-red-500 transition-colors">
                       {event.championshipLogoText}
                     </span>
                   </div>
 
-                  {/* Right: Date Badge Pill */}
                   <div className="bg-[#101b33] border border-blue-900/50 text-white font-extrabold text-xs sm:text-sm px-3.5 py-1.5 rounded-full uppercase tracking-wider shadow-md">
                     {event.date}
                   </div>
                 </div>
 
                 {/* Card Content & Details */}
-                <div className="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                <div className="p-5 space-y-4 flex-1 flex flex-col justify-between min-h-0">
                   <div>
                     <span className="text-red-500 text-[10px] tracking-[0.25em] font-black uppercase block mb-1">
                       {event.round}
@@ -159,7 +197,7 @@ export default function ResultsPage() {
                     <div className="flex items-center justify-between text-xs pt-1">
                       <div className="flex items-center gap-1.5 text-zinc-400 font-bold uppercase tracking-wider text-[11px]">
                         <span className="text-base">{event.flag}</span>
-                        <span>{event.country}</span>
+                        <span>{event.location}, {event.country}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="bg-zinc-900 text-zinc-300 px-2 py-0.5 rounded text-[10px] font-extrabold uppercase border border-zinc-800">
