@@ -54,25 +54,6 @@ function BrandLogoDisplay({ brand }: { brand: BrandPartnerItem }) {
         </div>
       );
 
-    case "honda":
-      return (
-        <div className="w-full h-full bg-[#c8102e] flex flex-col items-center justify-center p-6 text-center select-none overflow-hidden">
-          <StickerPeelLogo
-            alt={brand.name}
-            fallback={
-              <div className="flex flex-col items-center justify-center">
-                <span className="font-black text-xl sm:text-2xl tracking-tight text-white italic uppercase leading-none drop-shadow-md">
-                  Honda Racing
-                </span>
-                <span className="font-bold text-lg tracking-widest text-white italic uppercase mt-1">
-                  India
-                </span>
-              </div>
-            }
-          />
-        </div>
-      );
-
     case "kyt":
       return (
         <div className="w-full h-full bg-black flex flex-col items-center justify-center p-6 text-center select-none border-b border-zinc-800 overflow-hidden">
@@ -127,12 +108,6 @@ function MobileCircularLogo({ brand }: { brand: BrandPartnerItem }) {
       return (
         <span className="font-black text-[11px] tracking-tighter text-[#0066cc] uppercase font-sans text-center">
           SIDVIN
-        </span>
-      );
-    case "honda":
-      return (
-        <span className="font-black text-xs tracking-tight text-red-500 italic uppercase leading-none text-center">
-          HONDA
         </span>
       );
     case "kyt":

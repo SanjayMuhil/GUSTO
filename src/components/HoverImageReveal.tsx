@@ -101,8 +101,8 @@ export default function HoverImageReveal({ items }: HoverImageRevealProps) {
             y: imageY,
             translateX: "-50%",
             translateY: "-50%",
-            width: "300px",
-            height: "400px",
+            width: 420,
+            height: 520,
           }}
           animate={{
             opacity: hoveredIndex !== null ? 1 : 0,
@@ -126,9 +126,12 @@ export default function HoverImageReveal({ items }: HoverImageRevealProps) {
                   src={item.image}
                   alt={item.text}
                   fill
-                  sizes="300px"
-                  className="object-cover"
+                  sizes="420px"
+                  className="object-contain"
                   priority={idx < 3}
+                  style={{
+                    filter: "brightness(1.05) contrast(1.05) saturate(1.1)",
+                  }}
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-950" />
@@ -171,6 +174,9 @@ export default function HoverImageReveal({ items }: HoverImageRevealProps) {
                         ? "#ffffff"
                         : "#51565A"
                       : "#ffffff",
+                    textShadow: isHovered
+                      ? "0 1px 2px rgba(0,0,0,0.5)"
+                      : "none",
                   }}
                 >
                   {item.text}

@@ -12,30 +12,6 @@
     {
       "id": "round-1",
       "round": "ROUND 1",
-      "title": "Circuito de Jerez Ángel Nieto",
-      "circuit": "Circuito de Jerez Ángel Nieto",
-      "location": "Jerez de la Frontera",
-      "country": "Spain",
-      "flag": "🇪🇸",
-      "date": "19–22 March",
-      "image": "/result/IMG_4045.JPG",
-      "championship": "ESBK 2026",
-      "championshipLogoText": "ESBK",
-      "result": "COMPLETE",
-      "position": "P1",
-      "points": "25 PTS",
-      "badge": "✅ Complete",
-      "status": "complete",
-      "categories": [
-        { "name": "Free Practice", "link": "#" },
-        { "name": "Qualifying", "link": "#", "hasLaptime": true },
-        { "name": "Race 1", "link": "#", "hasLaptime": true },
-        { "name": "Race 2", "link": "#", "hasLaptime": true }
-      ]
-    },
-    {
-      "id": "round-2",
-      "round": "ROUND 2",
       "title": "Circuito de Navarra",
       "circuit": "Circuito de Navarra",
       "location": "Los Arcos",
@@ -58,8 +34,8 @@
       ]
     },
     {
-      "id": "round-3",
-      "round": "ROUND 3",
+      "id": "round-2",
+      "round": "ROUND 2",
       "title": "Circuito do Estoril",
       "circuit": "Circuito do Estoril",
       "location": "Estoril",
@@ -82,8 +58,8 @@
       ]
     },
     {
-      "id": "round-4",
-      "round": "ROUND 4",
+      "id": "round-3",
+      "round": "ROUND 3",
       "title": "MotorLand Aragón",
       "circuit": "MotorLand Aragón",
       "location": "Alcañiz",
@@ -106,8 +82,8 @@
       ]
     },
     {
-      "id": "round-5",
-      "round": "ROUND 5",
+      "id": "round-4",
+      "round": "ROUND 4",
       "title": "Circuit Ricardo Tormo",
       "circuit": "Circuit Ricardo Tormo",
       "location": "Valencia",
@@ -130,8 +106,8 @@
       ]
     },
     {
-      "id": "round-6",
-      "round": "ROUND 6",
+      "id": "round-5",
+      "round": "ROUND 5",
       "title": "Circuito de Navarra II",
       "circuit": "Circuito de Navarra II",
       "location": "Los Arcos",
@@ -154,8 +130,8 @@
       ]
     },
     {
-      "id": "round-7",
-      "round": "ROUND 7 (FINALE)",
+      "id": "round-6",
+      "round": "ROUND 6 (FINALE)",
       "title": "Circuito de Jerez Ángel Nieto II",
       "circuit": "Circuito de Jerez Ángel Nieto II",
       "location": "Jerez de la Frontera",
@@ -176,6 +152,12 @@
         { "name": "Race 1", "link": "#", "hasLaptime": true },
         { "name": "Race 2", "link": "#", "hasLaptime": true }
       ]
+    },
+    {
+      "id": "coming-soon",
+      "type": "placeholder",
+      "title": "COMING SOON",
+      "description": "New Race Update Coming Soon"
     }
   ],
   "previousResults": {

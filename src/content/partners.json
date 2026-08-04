@@ -20,13 +20,6 @@
         "description": "KYT Helmets are designed and developed in Italy and manufactured in Indonesia by PT Tara Citra Kusuma. The brand is known for combining premium safety, racing technology, and innovative helmet design trusted by professional riders worldwide."
       },
       {
-        "id": "honda",
-        "name": "HONDA RACING",
-        "logo": "/part/images.png",
-        "bgType": "black",
-        "description": "Honda Racing India actively participates in national and international motorsports while focusing on developing the next generation of Indian riders through professional racing programs and advanced motorcycle technology."
-      },
-      {
         "id": "sidvin",
         "name": "SIDVIN ENERGY",
         "logo": "",
@@ -81,13 +74,6 @@
         "logo": "/part/RCB.png",
         "bgType": "black",
         "description": "RCB (Racing Boy) is a premier manufacturer of high-performance motorcycle racing parts, braking systems, and aftermarket components trusted across international racing series."
-      },
-      {
-        "id": "redhills",
-        "name": "RED HILLS KTM",
-        "logo": "/part/redhills 1.png",
-        "bgType": "black",
-        "description": "Red Hills KTM is an authorized premier dealership and racing supporter delivering high-performance READY TO RACE KTM motorcycles, factory parts, and expert service."
       },
       {
         "id": "spnracing",
